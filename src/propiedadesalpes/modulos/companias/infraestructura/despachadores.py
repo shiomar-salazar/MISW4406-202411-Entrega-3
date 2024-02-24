@@ -1,8 +1,8 @@
 import pulsar
 from pulsar.schema import *
 
-from propiedadesalpes.modulos.compañias.infraestructura.schema.v1.eventos import EventoReservaCreada, ReservaCreadaPayload
-from propiedadesalpes.modulos.compañias.infraestructura.schema.v1.comandos import ComandoCrearReserva, ComandoCrearReservaPayload
+from propiedadesalpes.modulos.companias.infraestructura.schema.v1.eventos import EventoReservaCreada, ReservaCreadaPayload
+from propiedadesalpes.modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearReserva, ComandoCrearReservaPayload
 from propiedadesalpes.seedwork.infraestructura import utils
 
 import datetime

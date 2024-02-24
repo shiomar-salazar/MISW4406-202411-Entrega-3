@@ -8,7 +8,7 @@ del dominio de vuelos
 from abc import ABC
 from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
 
-class RepositorioReservas(Repositorio, ABC):
+class RepositorioCompanias(Repositorio, ABC):
     ...
 
 class RepositorioProveedores(Repositorio, ABC):

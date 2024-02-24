@@ -35,3 +35,8 @@ class FabricaVuelos(Fabrica):
         else:
             raise TipoObjetoNoExisteEnDominioVuelosExcepcion()
 
+@dataclass
+class FabricaCompania(Fabrica):
+    def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
+
+        return 0

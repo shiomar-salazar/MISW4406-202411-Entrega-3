@@ -1,8 +1,8 @@
 from propiedadesalpes.seedwork.aplicacion.servicios import Servicio
-from propiedadesalpes.modulos.compañias.dominio.entidades import Reserva
-from propiedadesalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
-from propiedadesalpes.modulos.compañias.infraestructura.fabricas import FabricaRepositorio
-from propiedadesalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
+from propiedadesalpes.modulos.companias.dominio.entidades import Reserva
+from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaVuelos
+from propiedadesalpes.modulos.companias.infraestructura.fabricas import FabricaRepositorio
+from propiedadesalpes.modulos.companias.infraestructura.repositorios import RepositorioCompanias
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from .mapeadores import MapeadorReserva
 
@@ -28,7 +28,7 @@ class ServicioCompanias(Servicio):
         reserva: Reserva = self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
         reserva.crear_reserva(reserva)
 
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioReservas.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, reserva)
         UnidadTrabajoPuerto.savepoint()
@@ -37,6 +37,6 @@ class ServicioCompanias(Servicio):
         return self.fabrica_vuelos.crear_objeto(reserva, MapeadorReserva())
 
     def obtener_reserva_por_id(self, id) -> ReservaDTO:
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioReservas.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
         return self.fabrica_vuelos.crear_objeto(repositorio.obtener_por_id(id), MapeadorReserva())
 

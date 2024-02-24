@@ -1,8 +1,8 @@
 from propiedadesalpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from propiedadesalpes.seedwork.dominio.repositorios import Mapeador as RepMap
-from propiedadesalpes.modulos.compañias.dominio.entidades import Reserva, Aeropuerto
-from propiedadesalpes.modulos.compañias.dominio.objetos_valor import Itinerario, Odo, Segmento, Leg
-from .dto import ReservaDTO, ItinerarioDTO, OdoDTO, SegmentoDTO, LegDTO
+from propiedadesalpes.modulos.companias.dominio.entidades import Reserva, Aeropuerto
+from propiedadesalpes.modulos.companias.dominio.objetos_valor import Itinerario, Odo, Segmento, Leg
+from .dto import ReservaDTO, ItinerarioDTO, OdoDTO, SegmentoDTO, LegDTO, CompaniaDTO
 
 from datetime import datetime
 
@@ -118,5 +118,24 @@ class MapeadorReserva(RepMap):
         
         return reserva
 
+class MapeadorCompaniaDTOJson(AppMap):
 
+    def externo_a_dto(self, externo: dict) -> CompaniaDTO:
+            compania_dto = CompaniaDTO()
 
+            return compania_dto
+
+    def dto_a_externo(self, dto: CompaniaDTO) -> dict:
+        return dto.__dict__
+
+class MapeadorCompania(RepMap):
+    _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'        
+
+    def entidad_a_dto(self, entidad: Reserva) -> CompaniaDTO:
+        
+        return CompaniaDTO()
+
+    def dto_a_entidad(self, dto: CompaniaDTO) -> Reserva:
+        compania = Reserva()
+        
+        return compania

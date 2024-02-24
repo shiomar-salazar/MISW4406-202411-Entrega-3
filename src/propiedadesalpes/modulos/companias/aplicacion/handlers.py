@@ -1,6 +1,6 @@
-from propiedadesalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaCancelada, ReservaAprobada, ReservaPagada
+from propiedadesalpes.modulos.companias.dominio.eventos import ReservaCreada, ReservaCancelada, ReservaAprobada, ReservaPagada
 from propiedadesalpes.seedwork.aplicacion.handlers import Handler
-from propiedadesalpes.modulos.compañias.infraestructura.despachadores import Despachador
+from propiedadesalpes.modulos.companias.infraestructura.despachadores import Despachador
 
 class HandlerReservaIntegracion(Handler):
 
