@@ -14,11 +14,55 @@ class ObjetoValor:
     ...
 
 @dataclass(frozen=True)
-class Codigo(ABC, ObjetoValor):
-    codigo: str
+class InformacionGeoespacial(ABC, ObjetoValor):
+    latitud: str
+    longitud: str
 
-class Ruta(ABC, ObjetoValor):
-    @abstractmethod
+@dataclass(frozen=True)
+class DatosGreograficos(ABC, ObjetoValor):
+    ciudad: str
+    pais: str
+
+@dataclass(frozen=True)
+class Direccion(ABC, ObjetoValor):
+    direccion: str
+    datos_geograficos: DatosGreograficos
+
+@dataclass(frozen=True)
+class Localizacion(ABC, ObjetoValor):
+    direccion: Direccion
+    infromacion_geoespacial: InformacionGeoespacial
+
+@dataclass(frozen=True)
+class TipoIndustria(ABC, ObjetoValor):
+    id_industria: str
+    nombre: str
+    descripcion: str
+
+@dataclass(frozen=True)
+class DocumentoIdentidad(ABC, ObjetoValor):
+    tipo: str
+    numero_identificacion: str
+    
+@dataclass(frozen=True)
+class DocumentoIdentidad(ABC, ObjetoValor):
+    tipo: str
+    numero_identificacion: str
+    
+@dataclass(frozen=True)
+class Compañia(ABC, ObjetoValor):
+    id: int
+    nombre_compañia: str
+    representante_legal: str
+    email_contacto: str
+    telefono_contacto: str
+    estado: str
+    documento_identidad: DocumentoIdentidad
+    tipo_industria: TipoIndustria
+    localizacion: Localizacion
+
+
+    """@abstractmethod
     def origen(self) -> Locacion:
         ...
     
@@ -33,16 +77,4 @@ class Ruta(ABC, ObjetoValor):
     @abstractmethod
     def fecha_llegada(self) -> datetime:
         ...
-
-@dataclass(frozen=True)
-class Pais(ObjetoValor):
-    codigo: Codigo
-    nombre: str
-
-@dataclass(frozen=True)
-class Ciudad(ObjetoValor):
-    pais: Pais
-    codigo: Codigo
-    nombre: str
-
-
+    """
