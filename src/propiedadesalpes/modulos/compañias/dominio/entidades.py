@@ -7,8 +7,8 @@ En este archivo usted encontrará las entidades del dominio de vuelos
 from __future__ import annotations
 from dataclasses import dataclass, field
 
-import aeroalpes.modulos.compañias.dominio.objetos_valor as ov
-from aeroalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaAprobada, ReservaCancelada, ReservaPagada
+import propiedadesalpes.modulos.compañias.dominio.objetos_valor as ov
+from propiedadesalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaAprobada, ReservaCancelada, ReservaPagada
 from propiedadesalpes.seedwork.dominio.entidades import Locacion, AgregacionRaiz, Entidad
 
 @dataclass

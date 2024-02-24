@@ -8,7 +8,7 @@ objetos complejos en la capa de infraestructura del dominio de vuelos
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.dominio.fabricas import Fabrica
 from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
-from aeroalpes.modulos.compañias.dominio.repositorios import RepositorioProveedores, RepositorioReservas
+from propiedadesalpes.modulos.compañias.dominio.repositorios import RepositorioProveedores, RepositorioReservas
 from .repositorios import RepositorioReservasSQLite, RepositorioProveedoresSQLite
 from .excepciones import ExcepcionFabrica
 

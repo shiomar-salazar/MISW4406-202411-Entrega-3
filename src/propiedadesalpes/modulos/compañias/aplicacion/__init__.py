@@ -2,7 +2,7 @@ from pydispatch import dispatcher
 
 from .handlers import HandlerReservaIntegracion
 
-from aeroalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaCancelada, ReservaAprobada, ReservaPagada
+from propiedadesalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaCancelada, ReservaAprobada, ReservaPagada
 
 dispatcher.connect(HandlerReservaIntegracion.handle_reserva_creada, signal=f'{ReservaCreada.__name__}Integracion')
 dispatcher.connect(HandlerReservaIntegracion.handle_reserva_cancelada, signal=f'{ReservaCancelada.__name__}Integracion')

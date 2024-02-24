@@ -1,6 +1,6 @@
 from propiedadesalpes.seedwork.aplicacion.comandos import ComandoHandler
-from aeroalpes.modulos.compañias.infraestructura.fabricas import FabricaRepositorio
-from aeroalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
+from propiedadesalpes.modulos.compañias.infraestructura.fabricas import FabricaRepositorio
+from propiedadesalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
 
 class CrearReservaBaseHandler(ComandoHandler):
     def __init__(self):

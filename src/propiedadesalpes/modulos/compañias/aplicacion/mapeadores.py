@@ -1,7 +1,7 @@
 from propiedadesalpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from propiedadesalpes.seedwork.dominio.repositorios import Mapeador as RepMap
-from aeroalpes.modulos.compañias.dominio.entidades import Reserva, Aeropuerto
-from aeroalpes.modulos.compañias.dominio.objetos_valor import Itinerario, Odo, Segmento, Leg
+from propiedadesalpes.modulos.compañias.dominio.entidades import Reserva, Aeropuerto
+from propiedadesalpes.modulos.compañias.dominio.objetos_valor import Itinerario, Odo, Segmento, Leg
 from .dto import ReservaDTO, ItinerarioDTO, OdoDTO, SegmentoDTO, LegDTO
 
 from datetime import datetime

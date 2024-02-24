@@ -1,13 +1,13 @@
 from propiedadesalpes.seedwork.aplicacion.comandos import Comando
-from aeroalpes.modulos.compañias.aplicacion.dto import ItinerarioDTO, ReservaDTO
+from propiedadesalpes.modulos.compañias.aplicacion.dto import ItinerarioDTO, ReservaDTO
 from .base import CrearReservaBaseHandler
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
-from aeroalpes.modulos.compañias.dominio.entidades import Reserva
+from propiedadesalpes.modulos.compañias.dominio.entidades import Reserva
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
-from aeroalpes.modulos.compañias.aplicacion.mapeadores import MapeadorReserva
-from aeroalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
+from propiedadesalpes.modulos.compañias.aplicacion.mapeadores import MapeadorReserva
+from propiedadesalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
 
 @dataclass
 class CrearReserva(Comando):

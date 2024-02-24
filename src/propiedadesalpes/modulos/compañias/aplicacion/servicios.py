@@ -1,8 +1,8 @@
 from propiedadesalpes.seedwork.aplicacion.servicios import Servicio
-from aeroalpes.modulos.compañias.dominio.entidades import Reserva
-from aeroalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
-from aeroalpes.modulos.compañias.infraestructura.fabricas import FabricaRepositorio
-from aeroalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
+from propiedadesalpes.modulos.compañias.dominio.entidades import Reserva
+from propiedadesalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
+from propiedadesalpes.modulos.compañias.infraestructura.fabricas import FabricaRepositorio
+from propiedadesalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from .mapeadores import MapeadorReserva
 
@@ -10,7 +10,7 @@ from .dto import ReservaDTO
 
 import asyncio
 
-class ServicioReserva(Servicio):
+class ServicioCompanias(Servicio):
 
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()
@@ -21,7 +21,7 @@ class ServicioReserva(Servicio):
         return self._fabrica_repositorio
     
     @property
-    def fabrica_vuelos(self):
+    def fabrica_companias(self):
         return self._fabrica_vuelos       
     
     def crear_reserva(self, reserva_dto: ReservaDTO) -> ReservaDTO:
