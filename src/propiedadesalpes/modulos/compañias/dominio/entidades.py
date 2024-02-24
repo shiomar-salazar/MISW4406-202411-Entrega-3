@@ -1,62 +1,36 @@
-"""Entidades del dominio de vuelos
-
-En este archivo usted encontrará las entidades del dominio de vuelos
-
-"""
-
 from __future__ import annotations
 from dataclasses import dataclass, field
 
-import aeroalpes.modulos.compañias.dominio.objetos_valor as ov
-from aeroalpes.modulos.compañias.dominio.eventos import ReservaCreada, ReservaAprobada, ReservaCancelada, ReservaPagada
-from propiedadesalpes.seedwork.dominio.entidades import Locacion, AgregacionRaiz, Entidad
+import propiedadesalpes.modulos.compañias.dominio.objetos_valor as ov
+from propiedadesalpes.modulos.compañias.dominio.eventos import CompaniaCreada
+from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
 
 @dataclass
-class Aeropuerto(Locacion):
-    codigo: ov.Codigo = field(default_factory=ov.Codigo)
-    nombre: ov.NombreAero = field(default_factory=ov.NombreAero)
-
-    def __str__(self) -> str:
-        return self.codigo.codigo.upper()
-
-@dataclass
-class Proveedor(Entidad):
-    codigo: ov.Codigo = field(default_factory=ov.Codigo)
-    nombre: ov.NombreAero = field(default_factory=ov.NombreAero)
-    itinerarios: list[ov.Itinerario] = field(default_factory=list[ov.Itinerario])
-
-    def obtener_itinerarios(self, odos: list[Odo], parametros: ParametroBusca):
-        return self.itinerarios
-
-@dataclass
-class Pasajero(Entidad):
-    clase: ov.Clase = field(default_factory=ov.Clase)
-    tipo: ov.TipoPasajero = field(default_factory=ov.TipoPasajero)
-
-@dataclass
-class Reserva(AgregacionRaiz):
-    id_cliente: uuid.UUID = field(hash=True, default=None)
-    estado: ov.EstadoReserva = field(default=ov.EstadoReserva.PENDIENTE)
-    itinerarios: list[ov.Itinerario] = field(default_factory=list[ov.Itinerario])
-
-    def crear_reserva(self, reserva: Reserva):
-        self.id_cliente = reserva.id_cliente
-        self.estado = reserva.estado
-        self.itinerarios = reserva.itinerarios
-
-        self.agregar_evento(ReservaCreada(id_reserva=self.id, id_cliente=self.id_cliente, estado=self.estado.name, fecha_creacion=self.fecha_creacion))
-
-    def aprobar_reserva(self):
-        self.estado = ov.EstadoReserva.APROBADA
-
-        self.agregar_evento(ReservaAprobada(self.id, self.fecha_actualizacion))
-
-    def cancelar_reserva(self):
-        self.estado = ov.EstadoReserva.CANCELADA
-
-        self.agregar_evento(ReservaCancelada(self.id, self.fecha_actualizacion))
+class Compania(AgregacionRaiz):
+    nombre_compania: str
+    representante_legal: str
+    email_contacto: str
+    telefono_contacto: str
+    estado: str
+    documentoIdentidad: ov.DodumentoIdentidad
+    tipoIndustria: list[ov.TipoIndustria] = field(default_factory=list)
+    # informacion: ov.RepresentanteLegal
+    # identificacion: ov.Identificacion
     
-    def pagar_reserva(self):
-        self.estado = ov.EstadoReserva.PAGADA
+    
+    def crear_compania(self, compania: Compania):
+        self.nit = compania.identificacion.nit
+        self.compania = compania.informacion.compania        
+        self.nombre_representante_legal = compania.informacion.nombre
+        self.apellido_representante_legal = compania.informacion.apellido       
+        self.tipoIndustria = list[ov.TipoIndustria]
+        self.localizacion = Localizacion
+        
+        self.agregar_evento(CompaniaCreada(nit=self.nit, compania=self.compania, fecha_creacion=self.fecha_creacion))
 
-        self.agregar_evento(ReservaPagada(self.id, self.fecha_actualizacion))
+
+@dataclass
+class Localizacion(AgregacionRaiz):
+    direccion: ov.Direccion
+    datos_geograficos: ov.DatosGeograficos
+    informacion_geoespacial: ov.InformacionGeoespacial

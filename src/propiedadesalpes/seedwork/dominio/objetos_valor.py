@@ -14,35 +14,11 @@ class ObjetoValor:
     ...
 
 @dataclass(frozen=True)
-class Codigo(ABC, ObjetoValor):
-    codigo: str
-
-class Ruta(ABC, ObjetoValor):
-    @abstractmethod
-    def origen(self) -> Locacion:
-        ...
-    
-    @abstractmethod
-    def destino(self) -> Locacion:
-        ...
-    
-    @abstractmethod
-    def fecha_salida(self) -> datetime:
-        ...
-
-    @abstractmethod
-    def fecha_llegada(self) -> datetime:
-        ...
-
-@dataclass(frozen=True)
-class Pais(ObjetoValor):
-    codigo: Codigo
+class Informacion(ABC, ObjetoValor):
     nombre: str
-
+    apellido: str    
+    compania: str # persona natural si no representa una compania    
+    
 @dataclass(frozen=True)
-class Ciudad(ObjetoValor):
-    pais: Pais
-    codigo: Codigo
-    nombre: str
-
-
+class Codigo(ABC, ObjetoValor):    
+    nit: str
