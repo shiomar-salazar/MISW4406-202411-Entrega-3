@@ -1,8 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 
-import propiedadesalpes.modulos.compañias.dominio.objetos_valor as ov
-from propiedadesalpes.modulos.compañias.dominio.eventos import CompaniaCreada
+import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
+from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
 from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
 
 @dataclass

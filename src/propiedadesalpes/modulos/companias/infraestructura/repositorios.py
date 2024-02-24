@@ -6,10 +6,10 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 """
 
 from propiedadesalpes.config.db import db
-from aeroalpes.modulos.compañias.dominio.repositorios import RepositorioReservas, RepositorioProveedores
-from aeroalpes.modulos.compañias.dominio.objetos_valor import NombreAero, Odo, Leg, Segmento, Itinerario, CodigoIATA
-from aeroalpes.modulos.compañias.dominio.entidades import Proveedor, Aeropuerto, Reserva
-from aeroalpes.modulos.compañias.dominio.fabricas import FabricaVuelos
+from propiedadesalpes.modulos.companias.dominio.repositorios import RepositorioCompanias, RepositorioProveedores
+from propiedadesalpes.modulos.companias.dominio.objetos_valor import NombreAero, Odo, Leg, Segmento, Itinerario, CodigoIATA
+from propiedadesalpes.modulos.companias.dominio.entidades import Proveedor, Aeropuerto, Reserva
+from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaVuelos
 from .dto import Reserva as ReservaDTO
 from .mapeadores import MapeadorReserva
 from uuid import UUID
@@ -44,7 +44,7 @@ class RepositorioProveedoresSQLite(RepositorioProveedores):
         raise NotImplementedError
 
 
-class RepositorioReservasSQLite(RepositorioReservas):
+class RepositorioCompaniasSQLite(RepositorioCompanias):
 
     def __init__(self):
         self._fabrica_vuelos: FabricaVuelos = FabricaVuelos()

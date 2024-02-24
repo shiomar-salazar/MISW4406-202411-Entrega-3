@@ -1,13 +1,13 @@
 from propiedadesalpes.seedwork.aplicacion.comandos import Comando
-from aeroalpes.modulos.compañias.aplicacion.dto import ItinerarioDTO, ReservaDTO
+from propiedadesalpes.modulos.companias.aplicacion.dto import ItinerarioDTO, ReservaDTO
 from .base import CrearReservaBaseHandler
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
-from aeroalpes.modulos.compañias.dominio.entidades import Reserva
+from propiedadesalpes.modulos.companias.dominio.entidades import Reserva
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
-from aeroalpes.modulos.compañias.aplicacion.mapeadores import MapeadorReserva
-from aeroalpes.modulos.compañias.infraestructura.repositorios import RepositorioReservas
+from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorReserva
+from propiedadesalpes.modulos.companias.infraestructura.repositorios import RepositorioCompanias
 
 @dataclass
 class CrearReserva(Comando):
@@ -29,7 +29,7 @@ class CrearReservaHandler(CrearReservaBaseHandler):
         reserva: Reserva = self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
         reserva.crear_reserva(reserva)
 
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioReservas.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, reserva)
         UnidadTrabajoPuerto.savepoint()

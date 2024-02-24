@@ -26,3 +26,9 @@ class ReservaDTO(DTO):
     fecha_actualizacion: str = field(default_factory=str)
     id: str = field(default_factory=str)
     itinerarios: list[ItinerarioDTO] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class CompaniaDTO(DTO):
+    id: str = field(default_factory=str)
+    
