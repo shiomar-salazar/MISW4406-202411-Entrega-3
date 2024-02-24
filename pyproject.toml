@@ -1,10 +1,14 @@
 [project]
-name = "aeroalpes"
+name = "propiedadesalpes"
 version = "1.0.0"
 authors = [
   { name="Juan Urrego", email="js.urrego110@uniandes.edu.co" },
+  { name="Shiomar Salazar", email="s.salazarc@uniandes.edu.co" },
+  { name="John Guzmán", email="jf.guzmanc1@uniandes.edu.co" },
+  { name="Jorge M. Carrillo", email="jm.carrillo@uniandes.edu.co" },
+  { name="Haiber Humberto Galindo Sánchez", email="h.galindos@uniandes.edu.co" },
 ]
-description = "Proyecto de ejemplo de AeroAlpes"
+description = "Proyecto de Entrega Semana 5 de PDA"
 readme = "README.md"
 requires-python = ">=3.10"
 
