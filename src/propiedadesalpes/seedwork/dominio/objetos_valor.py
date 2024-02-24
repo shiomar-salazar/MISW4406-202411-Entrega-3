@@ -14,11 +14,67 @@ class ObjetoValor:
     ...
 
 @dataclass(frozen=True)
-class Informacion(ABC, ObjetoValor):
+class InformacionGeoespacial(ABC, ObjetoValor):
+    latitud: str
+    longitud: str
+
+@dataclass(frozen=True)
+class DatosGreograficos(ABC, ObjetoValor):
+    ciudad: str
+    pais: str
+
+@dataclass(frozen=True)
+class Direccion(ABC, ObjetoValor):
+    direccion: str
+    datos_geograficos: DatosGreograficos
+
+@dataclass(frozen=True)
+class Localizacion(ABC, ObjetoValor):
+    direccion: Direccion
+    infromacion_geoespacial: InformacionGeoespacial
+
+@dataclass(frozen=True)
+class TipoIndustria(ABC, ObjetoValor):
+    id_industria: str
     nombre: str
-    apellido: str    
-    compania: str # persona natural si no representa una compania    
+    descripcion: str
+
+@dataclass(frozen=True)
+class DocumentoIdentidad(ABC, ObjetoValor):
+    tipo: str
+    numero_identificacion: str
     
 @dataclass(frozen=True)
-class Codigo(ABC, ObjetoValor):    
-    nit: str
+class DocumentoIdentidad(ABC, ObjetoValor):
+    tipo: str
+    numero_identificacion: str
+    
+@dataclass(frozen=True)
+class Compañia(ABC, ObjetoValor):
+    id: int
+    nombre_compañia: str
+    representante_legal: str
+    email_contacto: str
+    telefono_contacto: str
+    estado: str
+    documento_identidad: DocumentoIdentidad
+    tipo_industria: TipoIndustria
+    localizacion: Localizacion
+
+
+    """@abstractmethod
+    def origen(self) -> Locacion:
+        ...
+    
+    @abstractmethod
+    def destino(self) -> Locacion:
+        ...
+    
+    @abstractmethod
+    def fecha_salida(self) -> datetime:
+        ...
+
+    @abstractmethod
+    def fecha_llegada(self) -> datetime:
+        ...
+    """
