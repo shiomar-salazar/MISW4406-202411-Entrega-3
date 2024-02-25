@@ -1,7 +1,7 @@
 from propiedadesalpes.seedwork.aplicacion.comandos import ComandoHandler
 from propiedadesalpes.modulos.companias.infraestructura.fabricas import FabricaRepositorio
 
-class RegistrarCompañiaBaseHandler(ComandoHandler):
+class RegistrarCompaniaBaseHandler(ComandoHandler):
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()        
 

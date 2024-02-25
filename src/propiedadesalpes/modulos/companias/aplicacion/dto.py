@@ -38,7 +38,7 @@ class DocumentoIdentidadDTO(DTO):
     numero_identificacion: str
     
 @dataclass(frozen=True)
-class CompañiaDTO(DTO):
+class CompaniaDTO(DTO):
     id: int = field(default_factory=int)
     nombre_compañia: str = field(default_factory=str)
     representante_legal: str = field(default_factory=str)

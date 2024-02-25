@@ -1,6 +1,6 @@
 from propiedadesalpes.seedwork.aplicacion.comandos import Comando
-from propiedadesalpes.modulos.companias.aplicacion.dto import DocumentoIdentidadDTO, TipoIndustriaDTO, LocalizacionDTO, CompañiaDTO
-from .base import RegistrarCompañiaBaseHandler
+from propiedadesalpes.modulos.companias.aplicacion.dto import DocumentoIdentidadDTO, TipoIndustriaDTO, LocalizacionDTO, CompaniaDTO
+from .base import RegistrarCompaniaBaseHandler
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
@@ -10,7 +10,7 @@ from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorRes
 from propiedadesalpes.modulos.companias.infraestructura.repositorios import RepositorioCompanias
 
 @dataclass
-class RegistrarCompañia(Comando):
+class RegistrarCompania(Comando):
     id: int = field(default_factory=int)
     nombre_compañia: str = field(default_factory=str)
     representante_legal: str = field(default_factory=str)
@@ -22,10 +22,10 @@ class RegistrarCompañia(Comando):
     localizacion: LocalizacionDTO = field(default_factory=LocalizacionDTO)
 
 
-class RegistrarCompañiaHandler(RegistrarCompañiaBaseHandler):
+class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
     
-    def handle(self, comando: RegistrarCompañia):
-        compañia_dto = CompañiaDTO(
+    def handle(self, comando: RegistrarCompania):
+        compania_dto = CompaniaDTO(
                 id=comando.id,
                 nombre_compañia=comando.nombre_compañia,
                 representante_legal=comando.representante_legal,
@@ -46,8 +46,8 @@ class RegistrarCompañiaHandler(RegistrarCompañiaBaseHandler):
         #UnidadTrabajoPuerto.commit()
 
 
-@comando.register(RegistrarCompañia)
-def ejecutar_comando_registra_compañia(comando: RegistrarCompañia):
-    handler = RegistrarCompañiaHandler()
+@comando.register(RegistrarCompania)
+def ejecutar_comando_registra_compania(comando: RegistrarCompania):
+    handler = RegistrarCompaniaHandler()
     handler.handle(comando)
     

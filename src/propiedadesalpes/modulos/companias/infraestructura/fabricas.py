@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.dominio.fabricas import Fabrica
 from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
 from propiedadesalpes.modulos.companias.dominio.repositorios import  RepositorioCompanias
-from .repositorios import RepositorioCompaniasSQLite, RepositorioProveedoresSQLite
+from .repositorios import RepositorioCompaniasSQLite
 from .excepciones import ExcepcionFabrica
 
 @dataclass
