@@ -1,6 +1,6 @@
-"""Objetos valor del dominio de vuelos
+"""Objetos valor del dominio de Companias
 
-En este archivo usted encontrará los objetos valor del dominio de vuelos
+En este archivo usted encontrará los objetos valor del dominio de Companias
 
 """
 

@@ -6,7 +6,7 @@ from propiedadesalpes.seedwork.aplicacion.comandos import ejecutar_commando
 from propiedadesalpes.seedwork.dominio.excepciones import ExcepcionDominio
 from propiedadesalpes.modulos.companias.aplicacion.comandos.registrar_compania import RegistrarCompania
 import json
-from flask import redirect, render_template, request, session, url_for
+from flask import request
 from flask import Response
 
 
@@ -20,7 +20,7 @@ def dar_compania_usando_query():
 
 
 @bp.route('/compania-comando', methods=('POST',))
-def reservar_asincrona():
+def registrar_asincrona():
     try:
         compania_dict = request.json
 
