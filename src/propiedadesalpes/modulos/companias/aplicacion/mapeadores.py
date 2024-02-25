@@ -1,9 +1,9 @@
 from propiedadesalpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from propiedadesalpes.seedwork.dominio.repositorios import Mapeador as RepMap
-from propiedadesalpes.seedwork.dominio.objetos_valor import Compania_ov
-from .dto import  CompaniaDTO
-
-
+from propiedadesalpes.modulos.companias.dominio.entidades import Compania
+from propiedadesalpes.seedwork.dominio.objetos_valor import InformacionGeoespacial, DatosGreograficos, Direccion, Localizacion, TipoIndustria, DocumentoIdentidad, Compania_ov
+from .dto import CompaniaDTO
+from datetime import datetime
 
 class MapeadorCompaniaDTOJson(AppMap):
 
@@ -15,6 +15,7 @@ class MapeadorCompaniaDTOJson(AppMap):
     def dto_a_externo(self, dto: CompaniaDTO) -> dict:
         return dto.__dict__
 
+
 class MapeadorCompania(RepMap):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'        
 
@@ -22,7 +23,7 @@ class MapeadorCompania(RepMap):
         
         return CompaniaDTO()
 
-    def dto_a_entidad(self, dto: CompaniaDTO) -> Compania_ov:
-        compania = Compania_ov()
+    def dto_a_entidad(self, dto: CompaniaDTO) -> Compania:
+        compania = Compania()
         
         return compania

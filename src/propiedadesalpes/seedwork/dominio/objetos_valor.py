@@ -44,10 +44,6 @@ class DocumentoIdentidad(ABC, ObjetoValor):
     tipo: str
     numero_identificacion: str
     
-@dataclass(frozen=True)
-class DocumentoIdentidad(ABC, ObjetoValor):
-    tipo: str
-    numero_identificacion: str
     
 @dataclass(frozen=True)
 class Compania_ov(ABC, ObjetoValor):
