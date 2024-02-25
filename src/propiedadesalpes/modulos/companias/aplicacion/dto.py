@@ -2,33 +2,49 @@ from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.aplicacion.dto import DTO
 
 @dataclass(frozen=True)
-class LegDTO(DTO):
-    fecha_salida: str
-    fecha_llegada: str
-    origen: dict
-    destino: dict
+class InformacionGeoespacialDTO(DTO):
+    latitud: str
+    longitud: str
 
 @dataclass(frozen=True)
-class SegmentoDTO(DTO):
-    legs: list[LegDTO]
+class DatosGreograficosDTO(DTO):
+    ciudad: str
+    pais: str
 
 @dataclass(frozen=True)
-class OdoDTO(DTO):
-    segmentos: list[SegmentoDTO]
+class DireccionDTO(DTO):
+    direccion: str
+    datos_geograficos: DatosGreograficosDTO
 
 @dataclass(frozen=True)
-class ItinerarioDTO(DTO):
-    odos: list[OdoDTO]
+class LocalizacionDTO(DTO):
+    direccion: DireccionDTO
+    infromacion_geoespacial: InformacionGeoespacialDTO
 
 @dataclass(frozen=True)
-class ReservaDTO(DTO):
-    fecha_creacion: str = field(default_factory=str)
-    fecha_actualizacion: str = field(default_factory=str)
-    id: str = field(default_factory=str)
-    itinerarios: list[ItinerarioDTO] = field(default_factory=list)
-
+class TipoIndustriaDTO(DTO):
+    id_industria: str
+    nombre: str
+    descripcion: str
 
 @dataclass(frozen=True)
-class CompaniaDTO(DTO):
-    id: str = field(default_factory=str)
+class DocumentoIdentidadDTO(DTO):
+    tipo: str
+    numero_identificacion: str
     
+@dataclass(frozen=True)
+class DocumentoIdentidadDTO(DTO):
+    tipo: str
+    numero_identificacion: str
+    
+@dataclass(frozen=True)
+class CompañiaDTO(DTO):
+    id: int = field(default_factory=int)
+    nombre_compañia: str = field(default_factory=str)
+    representante_legal: str = field(default_factory=str)
+    email_contacto: str = field(default_factory=str)
+    telefono_contacto: str = field(default_factory=str)
+    estado: str = field(default_factory=str)
+    documento_identidad: DocumentoIdentidadDTO = field(default_factory=DocumentoIdentidadDTO)
+    tipo_industria: TipoIndustriaDTO = field(default_factory=TipoIndustriaDTO)
+    localizacion: LocalizacionDTO = field(default_factory=LocalizacionDTO)

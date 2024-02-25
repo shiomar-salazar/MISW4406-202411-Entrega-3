@@ -10,6 +10,3 @@ from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
 
 class RepositorioCompanias(Repositorio, ABC):
     ...
-
-class RepositorioProveedores(Repositorio, ABC):
-    ...
