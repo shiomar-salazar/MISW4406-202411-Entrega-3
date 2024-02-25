@@ -39,11 +39,11 @@ class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
         compania: Compania = self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())       
         compania.crear_compania(compania)
 
-        #repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
 
-        #UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, reserva)
-        #UnidadTrabajoPuerto.savepoint()
-        #UnidadTrabajoPuerto.commit()
+        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, compania)
+        UnidadTrabajoPuerto.savepoint()
+        UnidadTrabajoPuerto.commit()
 
 
 @comando.register(RegistrarCompania)
