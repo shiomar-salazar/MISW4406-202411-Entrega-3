@@ -1,30 +1,14 @@
 version: '3'
-
 networks:
   pulsar:
     driver: bridge
-
+  sidecar:
+    driver: bridge
 services:
-  # Servicios de propiedadesalpes
-  propiedadesalpes:
-    container_name: propiedadesalpes
-    hostname: propiedadesalpes
-    # image: propiedadesalpes/flask 
-    build:
-      context: .
-      dockerfile: propiedadesalpes.Dockerfile
-    networks:
-      - pulsar
-    depends_on:
-      - broker
-    environment:
-      - PULSAR_ADDRESS=broker
-    ports:
-      - "5000:5000"
-
 # Start zookeeper
   zookeeper:
     image: apachepulsar/pulsar:latest
+    profiles: ["pulsar"]
     container_name: zookeeper
     restart: on-failure
     networks:
@@ -48,6 +32,7 @@ services:
     container_name: pulsar-init
     hostname: pulsar-init
     image: apachepulsar/pulsar:latest
+    profiles: ["pulsar"]
     networks:
       - pulsar
     command: >
@@ -56,7 +41,7 @@ services:
                --zookeeper zookeeper:2181 \
                --configuration-store zookeeper:2181 \
                --web-service-url http://broker:8080 \
-               --broker-service-url pulsar://127.0.0.1:6650
+               --broker-service-url pulsar://broker:6650
     depends_on:
       zookeeper:
         condition: service_healthy
@@ -64,6 +49,7 @@ services:
 # Start bookie
   bookie:
     image: apachepulsar/pulsar:latest
+    profiles: ["pulsar"]
     container_name: bookie
     restart: on-failure
     networks:
@@ -86,6 +72,7 @@ services:
 # Start broker
   broker:
     image: apachepulsar/pulsar:latest
+    profiles: ["pulsar"]
     container_name: broker
     hostname: broker
     restart: on-failure
@@ -99,7 +86,7 @@ services:
       - managedLedgerDefaultWriteQuorum=1
       - managedLedgerDefaultAckQuorum=1
       - advertisedAddress=broker
-      - advertisedListeners=external:pulsar://broker:6650
+      - advertisedListeners=external:pulsar://127.0.0.1:6650
     depends_on:
       zookeeper:
         condition: service_healthy
@@ -108,8 +95,69 @@ services:
     ports:
       - "6650:6650"
       - "8080:8080"
-    volumes:
-      - ./connectors/pulsar:/pulsar/connectors
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf
       &&  exec bin/pulsar broker"
   
+  # Servicios de AeroAlpes
+  aeroalpes:
+    container_name: aeroalpes
+    hostname: aeroalpes
+    image: aeroalpes/flask 
+    profiles: ["aeroalpes", "monolito"]
+    networks:
+      - sidecar
+      - pulsar
+    labels:
+      SidecarDiscover: "false"
+    depends_on:
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - PULSAR_ADDRESS=broker
+    ports:
+      - "5000:5000"
+  adaptador:
+    image: "aeroalpes/adaptador"
+    profiles: ["aeroalpes", "monolito"]
+    container_name: adaptador
+    hostname: adaptador
+    depends_on:
+      - aeroalpes
+    networks:
+      - sidecar
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - PULSAR_ADDRESS=broker
+    ports:
+      - "50051:50051"
+  
+  # Servicios de Notificación
+  notificacion:
+    container_name: notificacion
+    hostname: notificacion
+    image: aeroalpes/notificacion 
+    profiles: ["aeroalpes", "notificacion"]
+    depends_on:
+      - aeroalpes
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - PULSAR_ADDRESS=broker
+    networks:
+      - pulsar
+  # Servicio UI
+  ui:
+    container_name: ui
+    hostname: ui
+    image: aeroalpes/ui 
+    profiles: ["aeroalpes", "ui"]
+    depends_on:
+      - aeroalpes
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - PULSAR_ADDRESS=broker
+    networks:
+      - pulsar
+    ports:
+      - "5678:5678"
