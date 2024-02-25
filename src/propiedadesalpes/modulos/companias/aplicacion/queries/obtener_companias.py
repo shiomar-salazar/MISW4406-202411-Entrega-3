@@ -14,7 +14,7 @@ class ObtenerCompaniasHandler(CompaniasQueryBaseHandler):
 
     def handle(self, query: ObtenerCompanias) -> QueryResultado:
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
-        companias =  self.fabrica_compania.crear_objeto(repositorio, MapeadorCompania())
+        companias =  self.fabrica_compania.crear_objeto(repositorio.obtener_por_id(query.id), MapeadorCompania())
         return QueryResultado(resultado=companias)
 
 @query.register(ObtenerCompanias)

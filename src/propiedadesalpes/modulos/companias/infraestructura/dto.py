@@ -25,6 +25,12 @@ class Compania(db.Model):
     tipo_industria_id = db.Column(db.Integer, db.ForeignKey('tipo_industria.id'), unique=True)
     tipo_industria = db.relationship('TipoIndustria', back_populates='compania')
     
+    # Método para convertir objeto SQLAlchemy a diccionario
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
+    
+    
 # Tabla documento identidad
 class DocumentoIdentidad(db.Model):
     __tablename__ = 'documento_identidad'
@@ -32,6 +38,10 @@ class DocumentoIdentidad(db.Model):
     numero_documento = db.Column(db.String, nullable=False)
     tipo_documento = db.Column(db.String, nullable=False)
     compania = db.relationship('Compania', uselist=False, back_populates='documento_identidad')
+    
+    # Método para convertir objeto SQLAlchemy a diccionario
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 # Tabla tipo industria    
 class TipoIndustria(db.Model):
@@ -40,3 +50,7 @@ class TipoIndustria(db.Model):
     nombre = db.Column(db.String, nullable=False)
     descripcion = db.Column(db.String, nullable=False)  
     compania = db.relationship('Compania', uselist=False, back_populates='tipo_industria')
+    
+    # Método para convertir objeto SQLAlchemy a diccionario
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}

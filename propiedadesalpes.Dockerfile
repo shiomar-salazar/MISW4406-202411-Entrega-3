@@ -1,5 +1,6 @@
 FROM python:3.10
 
+ENV PYTHONUNBUFFERED 1
 EXPOSE 5000/tcp
 
 COPY requirements.txt ./

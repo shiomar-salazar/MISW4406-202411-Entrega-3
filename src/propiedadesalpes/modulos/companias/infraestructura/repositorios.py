@@ -24,6 +24,9 @@ class RepositorioCompaniasSQLite(RepositorioCompanias):
 
     def obtener_por_id(self, id: UUID) -> Compania:
         compania_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.id == id).join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).first()
+        print('==========================================')
+        print(compania_dto.to_dict())
+        print('==========================================')
         return self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())
 
     def obtener_registradas(self) -> Compania:

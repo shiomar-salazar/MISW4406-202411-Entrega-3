@@ -26,3 +26,6 @@ class MapeadorCompania(RepMap):
         compania = Compania()
         
         return compania
+    
+    def obtener_tipo(self) -> type:
+        return Compania.__class__
