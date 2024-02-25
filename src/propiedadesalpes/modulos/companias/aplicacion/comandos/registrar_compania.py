@@ -4,9 +4,9 @@ from .base import RegistrarCompaniaBaseHandler
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
 
-from propiedadesalpes.modulos.companias.dominio.entidades import Reserva
+from propiedadesalpes.modulos.companias.dominio.entidades import Compania
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
-from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorReserva
+from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorCompania
 from propiedadesalpes.modulos.companias.infraestructura.repositorios import RepositorioCompanias
 
 @dataclass
@@ -36,8 +36,8 @@ class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
                 tipo_industria=comando.tipo_industria,
                 localizacion=comando.localizacion)
 
-        #reserva: Reserva = self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
-        #reserva.crear_reserva(reserva)
+        compania: Compania = self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())       
+        compania.crear_compania(compania)
 
         #repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
 
