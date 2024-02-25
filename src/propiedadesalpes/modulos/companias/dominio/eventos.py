@@ -5,6 +5,6 @@ from datetime import datetime
 
 @dataclass
 class CompaniaCreada(EventoDominio):
-    nit: str = None    
-    compania: str = None
+    id: str = None    
+    nombre_compania: str = None
     fecha_creacion: datetime = None

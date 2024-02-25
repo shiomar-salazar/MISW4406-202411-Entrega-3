@@ -4,33 +4,27 @@ from dataclasses import dataclass, field
 import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
 from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
 from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
+from propiedadesalpes.seedwork.dominio.objetos_valor import Compañia
+
 
 @dataclass
-class Compania(AgregacionRaiz):
-    nombre_compania: str
-    representante_legal: str
-    email_contacto: str
-    telefono_contacto: str
-    estado: str
-    documentoIdentidad: ov.DodumentoIdentidad
-    tipoIndustria: list[ov.TipoIndustria] = field(default_factory=list)
-    # informacion: ov.RepresentanteLegal
-    # identificacion: ov.Identificacion
-    
+class Compania(AgregacionRaiz, Compañia):    
     
     def crear_compania(self, compania: Compania):
-        self.nit = compania.identificacion.nit
-        self.compania = compania.informacion.compania        
-        self.nombre_representante_legal = compania.informacion.nombre
-        self.apellido_representante_legal = compania.informacion.apellido       
-        self.tipoIndustria = list[ov.TipoIndustria]
-        self.localizacion = Localizacion
-        
-        self.agregar_evento(CompaniaCreada(nit=self.nit, compania=self.compania, fecha_creacion=self.fecha_creacion))
+        self.id = compania.id
+        self.nombre_compañia = compania.nombre_compañia       
+        self.representante_legal = compania.representante_legal
+        self.email_contacto = compania.email_contacto      
+        self.telefono_contacto = compania.telefono_contacto
+        self.estado = compania.estado
+        self.documento_identidad_tipo = compania.documento_identidad.tipo
+        self.documento_identidad_numero_identificacion = compania.documento_identidad.numero_identificacion
+        self.tipo_industria = compania.tipo_industria
+        self.direccion = compania.localizacion.direccion.direccion
+        self.ciudad = compania.localizacion.direccion.datos_geograficos.ciudad
+        self.pais = compania.localizacion.direccion.datos_geograficos.pais
+        self.latitud = compania.localizacion.infromacion_geoespacial.latitud
+        self.longitud = compania.localizacion.infromacion_geoespacial.longitud
 
+        self.agregar_evento(CompaniaCreada(id=self.id, nombre_compania=self.nombre_compañia, fecha_creacion=self.fecha_creacion))
 
-@dataclass
-class Localizacion(AgregacionRaiz):
-    direccion: ov.Direccion
-    datos_geograficos: ov.DatosGeograficos
-    informacion_geoespacial: ov.InformacionGeoespacial
