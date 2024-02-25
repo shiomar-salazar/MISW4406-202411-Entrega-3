@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from propiedadesalpes.seedwork.dominio.eventos import (EventoDominio)
+from propiedadesalpes.seedwork.dominio.eventos import EventoDominio
 from datetime import datetime
 
 
