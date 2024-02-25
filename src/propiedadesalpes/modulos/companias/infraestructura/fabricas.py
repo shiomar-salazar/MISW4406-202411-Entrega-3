@@ -5,7 +5,7 @@ objetos complejos en la capa de infraestructura del dominio de vuelos
 
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from propiedadesalpes.seedwork.dominio.fabricas import Fabrica
 from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
 from propiedadesalpes.modulos.companias.dominio.repositorios import  RepositorioCompanias
