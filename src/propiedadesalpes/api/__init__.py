@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, url_for, redirect, jsonify, session
+from flask import Flask, jsonify
 from flask_swagger import swagger
 
 # Identifica el directorio base
@@ -20,13 +20,13 @@ def comenzar_consumidor():
     """
 
     import threading
-    import propiedadesalpes.modulos.companias.infraestructura.consumidores as vuelos
+    import propiedadesalpes.modulos.companias.infraestructura.consumidores as companias
 
     # Suscripción a eventos
-    threading.Thread(target=vuelos.suscribirse_a_eventos).start()
+    threading.Thread(target=companias.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
-    threading.Thread(target=vuelos.suscribirse_a_comandos).start()
+    threading.Thread(target=companias.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
     # Init la aplicacion de Flask

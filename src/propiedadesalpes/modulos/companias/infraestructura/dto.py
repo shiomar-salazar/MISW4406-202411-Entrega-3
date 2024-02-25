@@ -1,13 +1,11 @@
-"""DTOs para la capa de infrastructura del dominio de vuelos
+"""DTOs para la capa de infrastructura del dominio de Companias
 
 En este archivo usted encontrará los DTOs (modelos anémicos) de
-la infraestructura del dominio de vuelos
+la infraestructura del dominio de Companias
 
 """
 
 from propiedadesalpes.config.db import db
-from sqlalchemy.orm import declarative_base, relationship
-from sqlalchemy import Column, ForeignKey, Integer, Table
 
 import uuid
 

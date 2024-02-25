@@ -4,11 +4,11 @@ from dataclasses import dataclass, field
 import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
 from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
 from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
-from propiedadesalpes.seedwork.dominio.objetos_valor import Compania
+from propiedadesalpes.seedwork.dominio.objetos_valor import Compania_ov
 
 
 @dataclass
-class Compania(AgregacionRaiz, Compania):    
+class Compania(AgregacionRaiz, Compania_ov):    
     
     def crear_compania(self, compania: Compania):
         self.id = compania.id

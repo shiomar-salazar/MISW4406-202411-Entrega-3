@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from dataclasses import dataclass, field
 from propiedadesalpes.seedwork.dominio.objetos_valor import ObjetoValor
 from datetime import datetime

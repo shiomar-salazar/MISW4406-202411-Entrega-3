@@ -1,12 +1,12 @@
-""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de vuelos
+""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de Companias
 
 En este archivo usted encontrará las diferentes repositorios para
-persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de vuelos
+persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de Companias
 
 """
 from sqlalchemy.orm import joinedload
 from propiedadesalpes.config.db import db
-from propiedadesalpes.modulos.companias.dominio.repositorios import RepositorioCompanias, RepositorioProveedores
+from propiedadesalpes.modulos.companias.dominio.repositorios import RepositorioCompanias
 from propiedadesalpes.modulos.companias.dominio.entidades import Compania
 from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaCompanias
 from .dto import Compania as CompaniaDTO, DocumentoIdentidad, TipoIndustria
@@ -23,22 +23,22 @@ class RepositorioCompaniasSQLite(RepositorioCompanias):
         return self._fabrica_companias
 
     def obtener_por_id(self, id: UUID) -> Compania:
-        compania_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.id == id).join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).first()
+        compania_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.id == id).join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).first()
         return self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())
 
     def obtener_registradas(self) -> Compania:
-        companias_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Registrado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
+        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Registrado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
         return [_procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
 
     def obtener_procesadas(self) -> Compania:
-        companias_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Procesado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
+        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Procesado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
         return [_procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
 
     def obtener_todos(self) -> list[Compania]:
         # TODO
         raise NotImplementedError
 
-    def agregar(self, compania: Compania):
+    def agregar(self, compania: CompaniaDTO):
         compania_dto = self.fabrica_companias.crear_objeto(compania, MapeadorCompania())
         db.session.add(compania_dto)
 

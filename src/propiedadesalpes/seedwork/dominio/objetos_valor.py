@@ -50,7 +50,7 @@ class DocumentoIdentidad(ABC, ObjetoValor):
     numero_identificacion: str
     
 @dataclass(frozen=True)
-class Compania(ABC, ObjetoValor):
+class Compania_ov(ABC, ObjetoValor):
     id: int
     nombre_compania: str
     representante_legal: str
