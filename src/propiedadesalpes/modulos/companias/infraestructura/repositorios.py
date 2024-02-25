@@ -4,71 +4,48 @@ En este archivo usted encontrará las diferentes repositorios para
 persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de vuelos
 
 """
-
+from sqlalchemy.orm import joinedload
 from propiedadesalpes.config.db import db
 from propiedadesalpes.modulos.companias.dominio.repositorios import RepositorioCompanias, RepositorioProveedores
-from propiedadesalpes.modulos.companias.dominio.objetos_valor import NombreAero, Odo, Leg, Segmento, Itinerario, CodigoIATA
-from propiedadesalpes.modulos.companias.dominio.entidades import Proveedor, Aeropuerto, Reserva
-from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaVuelos
-from .dto import Reserva as ReservaDTO
-from .mapeadores import MapeadorReserva
+from propiedadesalpes.modulos.companias.dominio.entidades import Compania
+from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaCompanias
+from .dto import Compania as CompaniaDTO, DocumentoIdentidad, TipoIndustria
+from .mapeadores import MapeadorCompania, _procesar_compania_dto
 from uuid import UUID
-
-class RepositorioProveedoresSQLite(RepositorioProveedores):
-
-    def obtener_por_id(self, id: UUID) -> Reserva:
-        # TODO
-        raise NotImplementedError
-
-    def obtener_todos(self) -> list[Reserva]:
-        origen=Aeropuerto(codigo="CPT", nombre="Cape Town International")
-        destino=Aeropuerto(codigo="JFK", nombre="JFK International Airport")
-        legs=[Leg(origen=origen, destino=destino)]
-        segmentos = [Segmento(legs)]
-        odos=[Odo(segmentos=segmentos)]
-
-        proveedor = Proveedor(codigo=CodigoIATA(codigo="AV"), nombre=NombreAero(nombre= "Avianca"))
-        proveedor.itinerarios = [Itinerario(odos=odos, proveedor=proveedor)]
-        return [proveedor]
-
-    def agregar(self, entity: Reserva):
-        # TODO
-        raise NotImplementedError
-
-    def actualizar(self, entity: Reserva):
-        # TODO
-        raise NotImplementedError
-
-    def eliminar(self, entity_id: UUID):
-        # TODO
-        raise NotImplementedError
-
 
 class RepositorioCompaniasSQLite(RepositorioCompanias):
 
     def __init__(self):
-        self._fabrica_vuelos: FabricaVuelos = FabricaVuelos()
+        self._fabrica_companias: FabricaCompanias = FabricaCompanias()
 
     @property
-    def fabrica_vuelos(self):
-        return self._fabrica_vuelos
+    def fabrica_companias(self):
+        return self._fabrica_companias
 
-    def obtener_por_id(self, id: UUID) -> Reserva:
-        reserva_dto = db.session.query(ReservaDTO).filter_by(id=str(id)).one()
-        return self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
+    def obtener_por_id(self, id: UUID) -> Compania:
+        compania_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.id == id).join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).first()
+        return self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())
 
-    def obtener_todos(self) -> list[Reserva]:
+    def obtener_registradas(self) -> Compania:
+        companias_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Registrado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
+        return [_procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
+
+    def obtener_procesadas(self) -> Compania:
+        companias_dto = db.session.query(Compania, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Procesado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
+        return [_procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
+
+    def obtener_todos(self) -> list[Compania]:
         # TODO
         raise NotImplementedError
 
-    def agregar(self, reserva: Reserva):
-        reserva_dto = self.fabrica_vuelos.crear_objeto(reserva, MapeadorReserva())
-        db.session.add(reserva_dto)
+    def agregar(self, compania: Compania):
+        compania_dto = self.fabrica_companias.crear_objeto(compania, MapeadorCompania())
+        db.session.add(compania_dto)
 
-    def actualizar(self, reserva: Reserva):
+    def actualizar(self, compania: Compania):
         # TODO
         raise NotImplementedError
 
-    def eliminar(self, reserva_id: UUID):
+    def eliminar(self, compania_id: UUID):
         # TODO
         raise NotImplementedError

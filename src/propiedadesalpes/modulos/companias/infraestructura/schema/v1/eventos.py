@@ -1,11 +1,10 @@
 from pulsar.schema import *
 from propiedadesalpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 
-class ReservaCreadaPayload(Record):
-    id_reserva = String()
-    id_cliente = String()
+class CompaniaCreadaPayload(Record):
+    id_compania = String()
     estado = String()
     fecha_creacion = Long()
 
-class EventoReservaCreada(EventoIntegracion):
-    data = ReservaCreadaPayload()
+class EventoCompaniaCreada(EventoIntegracion):
+    data = CompaniaCreadaPayload()

@@ -12,7 +12,7 @@ from propiedadesalpes.modulos.companias.infraestructura.repositorios import Repo
 @dataclass
 class RegistrarCompania(Comando):
     id: int = field(default_factory=int)
-    nombre_compañia: str = field(default_factory=str)
+    nombre_compania: str = field(default_factory=str)
     representante_legal: str = field(default_factory=str)
     email_contacto: str = field(default_factory=str)
     telefono_contacto: str = field(default_factory=str)
@@ -27,7 +27,7 @@ class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
     def handle(self, comando: RegistrarCompania):
         compania_dto = CompaniaDTO(
                 id=comando.id,
-                nombre_compañia=comando.nombre_compañia,
+                nombre_compania=comando.nombre_compania,
                 representante_legal=comando.representante_legal,
                 email_contacto=comando.email_contacto,
                 telefono_contacto=comando.telefono_contacto,

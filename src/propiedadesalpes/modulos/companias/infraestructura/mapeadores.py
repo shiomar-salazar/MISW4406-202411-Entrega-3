@@ -1,4 +1,4 @@
-""" Mapeadores para la capa de infrastructura del dominio de vuelos
+""" Mapeadores para la capa de infrastructura del dominio de companias
 
 En este archivo usted encontrará los diferentes mapeadores
 encargados de la transformación entre formatos de dominio y DTOs
@@ -6,81 +6,81 @@ encargados de la transformación entre formatos de dominio y DTOs
 """
 
 from propiedadesalpes.seedwork.dominio.repositorios import Mapeador
-from propiedadesalpes.modulos.companias.dominio.objetos_valor import NombreAero, Odo, Leg, Segmento, Itinerario, CodigoIATA
-from propiedadesalpes.modulos.companias.dominio.entidades import Proveedor, Aeropuerto, Reserva
-from .dto import Reserva as ReservaDTO
-from .dto import Itinerario as ItinerarioDTO
+from propiedadesalpes.modulos.companias.dominio.entidades import Compania
+from .dto import Compania as CompaniaDTO, DocumentoIdentidad, TipoIndustria
 
-class MapeadorReserva(Mapeador):
+class MapeadorCompania(Mapeador):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
 
-    def _procesar_itinerario_dto(self, itinerarios_dto: list) -> list[Itinerario]:
-        itin_dict = dict()
-        
-        for itin in itinerarios_dto:
-            destino = Aeropuerto(codigo=itin.destino_codigo, nombre=None)
-            origen = Aeropuerto(codigo=itin.origen_codigo, nombre=None)
-            fecha_salida = itin.fecha_salida
-            fecha_llegada = itin.fecha_llegada
+    # Función para convertir una lista de DTO a Entidad
+    def _procesar_compania_dto(self, companias_dto: list) -> list[Compania]:
+        companias = []
+        for dto in companias_dto:
+            entidad = Compania()
+            entidad.id = dto.id
+            entidad.nombre_compania = dto.nombre_compania
+            entidad.representante_legal = dto.representante_legal
+            entidad.email_contacto = dto.email_contacto
+            entidad.telefono_contacto = dto.telefono_contacto
+            entidad.estado = dto.estado
 
-            itin_dict.setdefault(str(itin.odo_orden),{}).setdefault(str(itin.segmento_orden), {}).setdefault(str(itin.leg_orden), Leg(fecha_salida, fecha_llegada, origen, destino))
+            # DocumentoIdentidad
+            if dto.documento_identidad:
+                entidad.documento_identidad_tipo = dto.documento_identidad.tipo_documento
+                entidad.documento_identidad_numero_identificacion = dto.documento_identidad.numero_documento
 
-        odos = list()
-        for k, odos_dict in itin_dict.items():
-            segmentos = list()
-            for k, seg_dict in odos_dict.items():
-                legs = list()
-                for k, leg in seg_dict.items():
-                    legs.append(leg)
-                segmentos.append(Segmento(legs))
-            odos.append(Odo(segmentos))
+            # TipoIndustria
+            if dto.tipo_industria:
+                entidad.tipo_industria = dto.tipo_industria.nombre
 
-        return [Itinerario(odos)]
+            companias.append(entidad)
 
-    def _procesar_itinerario(self, itinerario: any) -> list[ItinerarioDTO]:
-        itinerarios_dto = list()
+        return companias
 
-        for i, odo in enumerate(itinerario.odos):
-            for j, seg in enumerate(odo.segmentos):
-                for k, leg in enumerate(seg.legs):
-                    itinerario_dto = ItinerarioDTO()
-                    itinerario_dto.destino_codigo = leg.destino.codigo
-                    itinerario_dto.origen_codigo = leg.origen.codigo
-                    itinerario_dto.fecha_salida = leg.fecha_salida
-                    itinerario_dto.fecha_llegada = leg.fecha_llegada
-                    itinerario_dto.leg_orden = k
-                    itinerario_dto.segmento_orden = j
-                    itinerario_dto.odo_orden = i
-
-                    itinerarios_dto.append(itinerario_dto)
-
-        return itinerarios_dto
-
+    # Función para obtener la clase
     def obtener_tipo(self) -> type:
-        return Reserva.__class__
+        return Compania.__class__
 
-    def entidad_a_dto(self, entidad: Reserva) -> ReservaDTO:
-        
-        reserva_dto = ReservaDTO()
-        reserva_dto.fecha_creacion = entidad.fecha_creacion
-        reserva_dto.fecha_actualizacion = entidad.fecha_actualizacion
-        reserva_dto.id = str(entidad.id)
+    # Función para convertir de Entidad a DTO
+    def entidad_a_dto(entidad: Compania) -> Compania:
+        compania_dto = Compania()
+        compania_dto.id = entidad.id
+        compania_dto.nombre_compania = entidad.nombre_compania
+        compania_dto.representante_legal = entidad.representante_legal
+        compania_dto.email_contacto = entidad.email_contacto
+        compania_dto.telefono_contacto = entidad.telefono_contacto
+        compania_dto.estado = entidad.estado
 
-        itinerarios_dto = list()
-        
-        for itinerario in entidad.itinerarios:
-            itinerarios_dto.extend(self._procesar_itinerario(itinerario))
+        # DocumentoIdentidad
+        if entidad.documento_identidad_tipo and entidad.documento_identidad_numero_identificacion:
+            compania_dto.documento_identidad = DocumentoIdentidad(
+                tipo_documento=entidad.documento_identidad_tipo,
+                numero_documento=entidad.documento_identidad_numero_identificacion
+            )
 
-        reserva_dto.itinerarios = itinerarios_dto
+        # TipoIndustria
+        if entidad.tipo_industria:
+            compania_dto.tipo_industria = TipoIndustria(nombre=entidad.tipo_industria, descripcion="")
 
-        return reserva_dto
+        return compania_dto
 
-    def dto_a_entidad(self, dto: ReservaDTO) -> Reserva:
-        reserva = Reserva(dto.id, dto.fecha_creacion, dto.fecha_actualizacion)
-        reserva.itinerarios = list()
+    # Función para convertir de DTO a Entidad
+    def dto_a_entidad(self, dto: CompaniaDTO) -> Compania:
+        compania = Compania()
+        compania.id = dto.id
+        compania.nombre_compania = dto.nombre_compania
+        compania.representante_legal = dto.representante_legal
+        compania.email_contacto = dto.email_contacto
+        compania.telefono_contacto = dto.telefono_contacto
+        compania.estado = dto.estado
 
-        itinerarios_dto: list[ItinerarioDTO] = dto.itinerarios
+        # DocumentoIdentidad
+        if dto.documento_identidad:
+            compania.documento_identidad_tipo = dto.documento_identidad.tipo_documento
+            compania.documento_identidad_numero_identificacion = dto.documento_identidad.numero_documento
 
-        reserva.itinerarios.extend(self._procesar_itinerario_dto(itinerarios_dto))
-        
-        return reserva
+        # TipoIndustria
+        if dto.tipo_industria:
+            compania.tipo_industria = dto.tipo_industria.nombre
+
+        return compania

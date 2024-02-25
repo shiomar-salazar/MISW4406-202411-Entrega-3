@@ -16,14 +16,10 @@ from dataclasses import dataclass
 
 
 @dataclass
-class FabricaCompania(Fabrica):
+class FabricaCompanias(Fabrica):
     def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
         if isinstance(obj, Entidad):
             return mapeador.entidad_a_dto(obj)
         else:
             compania: Compania = mapeador.dto_a_entidad(obj)
-
-            #self.validar_regla(MinimoUnItinerario(reserva.itinerarios))
-            #[self.validar_regla(RutaValida(ruta)) for itin in reserva.itinerarios for odo in itin.odos for segmento in odo.segmentos for ruta in segmento.legs]
-            
             return compania

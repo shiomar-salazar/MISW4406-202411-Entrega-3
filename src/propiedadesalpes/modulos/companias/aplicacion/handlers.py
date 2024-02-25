@@ -1,4 +1,4 @@
-from propiedadesalpes.modulos.companias.dominio.eventos import ReservaCreada, ReservaCancelada, ReservaAprobada, ReservaPagada
+from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
 from propiedadesalpes.seedwork.aplicacion.handlers import Handler
 from propiedadesalpes.modulos.companias.infraestructura.despachadores import Despachador
 

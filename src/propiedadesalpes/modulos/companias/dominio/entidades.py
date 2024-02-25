@@ -4,15 +4,15 @@ from dataclasses import dataclass, field
 import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
 from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
 from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
-from propiedadesalpes.seedwork.dominio.objetos_valor import Compañia
+from propiedadesalpes.seedwork.dominio.objetos_valor import Compania
 
 
 @dataclass
-class Compania(AgregacionRaiz, Compañia):    
+class Compania(AgregacionRaiz, Compania):    
     
     def crear_compania(self, compania: Compania):
         self.id = compania.id
-        self.nombre_compañia = compania.nombre_compañia       
+        self.nombre_compania = compania.nombre_compania       
         self.representante_legal = compania.representante_legal
         self.email_contacto = compania.email_contacto      
         self.telefono_contacto = compania.telefono_contacto
@@ -26,5 +26,5 @@ class Compania(AgregacionRaiz, Compañia):
         self.latitud = compania.localizacion.infromacion_geoespacial.latitud
         self.longitud = compania.localizacion.infromacion_geoespacial.longitud
 
-        self.agregar_evento(CompaniaCreada(id=self.id, nombre_compania=self.nombre_compañia, fecha_creacion=self.fecha_creacion))
+        self.agregar_evento(CompaniaCreada(id=self.id, nombre_compania=self.nombre_compania, fecha_creacion=self.fecha_creacion))
 

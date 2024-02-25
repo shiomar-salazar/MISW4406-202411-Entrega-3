@@ -27,7 +27,7 @@ def reservar_asincrona():
         map_compania = MapeadorCompaniaDTOJson()
         compania_dto = map_compania.externo_a_dto(compania_dict)
 
-        comando = RegistrarCompania(compania_dto.id, compania_dto.nombre_compañia, compania_dto.representante_legal,
+        comando = RegistrarCompania(compania_dto.id, compania_dto.nombre_compania, compania_dto.representante_legal,
                                     compania_dto.email_contacto, compania_dto.telefono_contacto, compania_dto.estado,
                                     compania_dto.documento_identidad, compania_dto.tipo_industria, compania_dto.localizacion)
         

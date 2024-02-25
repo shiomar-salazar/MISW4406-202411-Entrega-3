@@ -13,38 +13,32 @@ import uuid
 
 Base = db.declarative_base()
 
-# Tabla intermedia para tener la relación de muchos a muchos entre la tabla reservas e itinerarios
-reservas_itinerarios = db.Table(
-    "reservas_itinerarios",
-    db.Model.metadata,
-    db.Column("reserva_id", db.String, db.ForeignKey("reservas.id")),
-    db.Column("odo_orden", db.Integer),
-    db.Column("segmento_orden", db.Integer),
-    db.Column("leg_orden", db.Integer),
-    db.Column("fecha_salida", db.DateTime),
-    db.Column("fecha_llegada", db.DateTime),
-    db.Column("origen_codigo", db.String),
-    db.Column("destino_codigo", db.String),
-    db.ForeignKeyConstraint(
-        ["odo_orden", "segmento_orden", "leg_orden", "fecha_salida", "fecha_llegada", "origen_codigo", "destino_codigo"],
-        ["itinerarios.odo_orden", "itinerarios.segmento_orden", "itinerarios.leg_orden", "itinerarios.fecha_salida", "itinerarios.fecha_llegada", "itinerarios.origen_codigo", "itinerarios.destino_codigo"]
-    )
-)
+# Tabla compania
+class Compania(db.Model):
+    __tablename__ = "compania"
+    id = db.Column(db.String, primary_key=True, nullable=False)
+    nombre_compania = db.Column(db.String, nullable=False)
+    representante_legal = db.Column(db.String, nullable=False)
+    email_contacto = db.Column(db.String, nullable=False)
+    telefono_contacto = db.Column(db.String, nullable=False)
+    estado = db.Column(db.Enum('Registrado', 'Procesado'), nullable=False)
+    documento_identidad_id = db.Column(db.Integer, db.ForeignKey('documento_identidad.id'), unique=True)
+    documento_identidad = db.relationship('DocumentoIdentidad', back_populates='compania')
+    tipo_industria_id = db.Column(db.Integer, db.ForeignKey('tipo_industria.id'), unique=True)
+    tipo_industria = db.relationship('TipoIndustria', back_populates='compania')
+    
+# Tabla documento identidad
+class DocumentoIdentidad(db.Model):
+    __tablename__ = 'documento_identidad'
+    id = db.Column(db.Integer, primary_key=True)
+    numero_documento = db.Column(db.String, nullable=False)
+    tipo_documento = db.Column(db.String, nullable=False)
+    compania = db.relationship('Compania', uselist=False, back_populates='documento_identidad')
 
-class Itinerario(db.Model):
-    __tablename__ = "itinerarios"
-    odo_orden = db.Column(db.Integer, primary_key=True, nullable=False)
-    segmento_orden = db.Column(db.Integer, primary_key=True, nullable=False)
-    leg_orden = db.Column(db.Integer, primary_key=True, nullable=False)
-    fecha_salida = db.Column(db.DateTime, nullable=False, primary_key=True)
-    fecha_llegada = db.Column(db.DateTime, nullable=False, primary_key=True)
-    origen_codigo = db.Column(db.String, nullable=False, primary_key=True)
-    destino_codigo= db.Column(db.String, nullable=False, primary_key=True)
-
-
-class Reserva(db.Model):
-    __tablename__ = "reservas"
-    id = db.Column(db.String, primary_key=True)
-    fecha_creacion = db.Column(db.DateTime, nullable=False)
-    fecha_actualizacion = db.Column(db.DateTime, nullable=False)
-    itinerarios = db.relationship('Itinerario', secondary=reservas_itinerarios, backref='reservas')
+# Tabla tipo industria    
+class TipoIndustria(db.Model):
+    __tablename__ = 'tipo_industria'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String, nullable=False)
+    descripcion = db.Column(db.String, nullable=False)  
+    compania = db.relationship('Compania', uselist=False, back_populates='tipo_industria')
