@@ -136,6 +136,14 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 
 ### Escenarios de Calidad Seleccionados
 
+#### Esceneario de Calidad #1: Desempeño
+![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/52eff4a1-20c8-40da-85b9-d627c5c3b4f9)
+
+#### Esceneario de Calidad #2: Disponibilidad
+![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/c6d25f10-3638-4dbf-9768-8f69655add90)
+
+#### Esceneario de Calidad #2: Seguridad
+![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/42f7a336-0f69-44de-a43c-f2adaed72240)
 
 ### Pasos para la Ejecucion de la Aplicación
 
@@ -156,3 +164,5 @@ En caso de querer desplegar dicha topología en el background puede usar el para
 ```bash
 docker-compose up -d
 ```
+
+### Video de la Entrega 3
