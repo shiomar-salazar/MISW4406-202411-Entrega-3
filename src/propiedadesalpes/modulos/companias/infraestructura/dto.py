@@ -7,6 +7,7 @@ la infraestructura del dominio de Companias
 
 from propiedadesalpes.config.db import db
 
+
 import uuid
 
 Base = db.declarative_base()
@@ -19,7 +20,7 @@ class Compania(db.Model):
     representante_legal = db.Column(db.String, nullable=False)
     email_contacto = db.Column(db.String, nullable=False)
     telefono_contacto = db.Column(db.String, nullable=False)
-    estado = db.Column(db.Enum('Registrado', 'Procesado'), nullable=False)
+    estado = db.Column(db.Enum('Registrado', 'Procesado', name="estado"))
     documento_identidad_id = db.Column(db.Integer, db.ForeignKey('documento_identidad.id'), unique=True)
     documento_identidad = db.relationship('DocumentoIdentidad', back_populates='compania')
     tipo_industria_id = db.Column(db.Integer, db.ForeignKey('tipo_industria.id'), unique=True)

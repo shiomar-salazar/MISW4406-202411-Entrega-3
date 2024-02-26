@@ -14,6 +14,9 @@ bp = api.crear_blueprint('companias', '/companias')
 
 @bp.route('/compania-query/<string:id>', methods=('GET',))
 def dar_compania_usando_query(id):
+    print('<================ dar_compania_usando_query ================>')
+    print(id)
+    print('<================ dar_compania_usando_query ================>')
     query_resultado = ejecutar_query(ObtenerCompanias(id))
     map_compania = MapeadorCompaniaDTOJson()
     return map_compania.dto_a_externo(query_resultado.resultado)
