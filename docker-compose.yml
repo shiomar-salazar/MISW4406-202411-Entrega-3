@@ -1,21 +1,45 @@
 version: '3'
+# Redes
 networks:
   pulsar:
     driver: bridge
+  propiedadesalpes:
+    driver: bridge
+# Servicios
 services:
+  # Servicios de db
+  propiedadesalpesdb:
+    container_name: propiedadesalpesdb
+    image: postgres:14.1-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: propiedadesalpesdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    restart: always
+    networks:
+      - propiedadesalpes   
+
   # Servicios de propiedadesalpes
   propiedadesalpes:
     container_name: propiedadesalpes
     hostname: propiedadesalpes
-    # image: propiedadesalpes/flask 
     build:
       context: .
       dockerfile: propiedadesalpes.Dockerfile
     networks:
       - pulsar
+      - propiedadesalpes
     depends_on:
+      - propiedadesalpesdb
       - broker
     environment:
+      - DB_NAME=propiedadesalpesdb
+      - DB_HOST=propiedadesalpesdb
+      - DB_PORT=5432
+      - DB_USER=admin
+      - DB_PASSWORD=admin
       - PULSAR_ADDRESS=broker
     ports:
       - "5000:5000"
@@ -112,3 +136,18 @@ services:
       - "6650:6650"
       - "8080:8080"
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
+
+  # Servicios de Notificación
+  notificacion:
+    container_name: notificacion
+    hostname: notificacion
+    image: aeroalpes/notificacion 
+    profiles: ["propiedadesalpes", "notificacion"]
+    depends_on:
+      - propiedadesalpes
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=propiedadesalpes
+      - PULSAR_ADDRESS=broker
+    networks:
+      - pulsar    
