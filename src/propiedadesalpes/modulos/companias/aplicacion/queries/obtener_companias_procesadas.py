@@ -7,20 +7,19 @@ from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorCom
 import uuid
 
 @dataclass
-class ObtenerCompanias(Query):
-    id: str
-
+class ObtenerCompaniasProcesadas(Query):
+    ...
 class ObtenerCompaniasHandler(CompaniasQueryBaseHandler):
 
-    def handle(self, query: ObtenerCompanias) -> QueryResultado:
+    def handle(self, query: ObtenerCompaniasProcesadas) -> QueryResultado:
+        print('<================ ObtenerCompaniasProcesadas.ObtenerCompaniasHandler.handle ================>')
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
-        print('<================ ObtenerCompaniasHandler.handle ================>')
-        companias =  self.fabrica_compania.crear_objeto(repositorio.obtener_por_id(query.id), MapeadorCompania())
+        companias =  self.fabrica_compania.crear_objeto(repositorio.obtener_procesadas(), MapeadorCompania())
         print(companias)
-        print('<================ ObtenerCompaniasHandler.handle ================>')
+        print('<================ ObtenerCompaniasProcesadas.ObtenerCompaniasHandler.handle ================>')
         return QueryResultado(resultado=companias)
 
-@query.register(ObtenerCompanias)
-def ejecutar_query_obtener_reserva(query: ObtenerCompanias):
+@query.register(ObtenerCompaniasProcesadas)
+def ejecutar_query_obtener_reserva(query: ObtenerCompaniasProcesadas):
     handler = ObtenerCompaniasHandler()
     return handler.handle(query)

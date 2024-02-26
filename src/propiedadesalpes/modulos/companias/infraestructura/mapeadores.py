@@ -66,24 +66,10 @@ class MapeadorCompania(Mapeador):
 
     # Función para convertir de DTO a Entidad
     def dto_a_entidad(self, dto: CompaniaDTO) -> Compania:
-        print('<================ dto_a_entidad ================>')
-        print(dto.to_dict())
-        print('<================ dto_a_entidad ================>')
+        print('<================ Infraestructura.MapeadorCompania.dto_a_entidad ================>')
+        print(dto)
         compania = Compania()
-        compania.id = dto.id
-        compania.nombre_compania = dto.nombre_compania
-        compania.representante_legal = dto.representante_legal
-        compania.email_contacto = dto.email_contacto
-        compania.telefono_contacto = dto.telefono_contacto
-        compania.estado = dto.estado
-
-        # DocumentoIdentidad
-        if dto.documento_identidad:
-            compania.documento_identidad_tipo = dto.documento_identidad.tipo_documento
-            compania.documento_identidad_numero_identificacion = dto.documento_identidad.numero_documento
-
-        # TipoIndustria
-        if dto.tipo_industria:
-            compania.tipo_industria = dto.tipo_industria.nombre
-
-        return compania
+        conpania_entidad = compania.crear_compania(dto)
+        print(conpania_entidad)
+        print('<================ Infraestructura.MapeadorCompania.dto_a_entidad ================>')
+        return conpania_entidad

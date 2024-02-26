@@ -13,7 +13,7 @@ from .dto import Compania as CompaniaDTO, DocumentoIdentidad, TipoIndustria
 from .mapeadores import MapeadorCompania
 from uuid import UUID
 
-class RepositorioCompaniasSQLite(RepositorioCompanias):
+class RepositorioCompaniasPostgresql(RepositorioCompanias):
 
     def __init__(self):
         self._fabrica_companias: FabricaCompanias = FabricaCompanias()
@@ -23,20 +23,25 @@ class RepositorioCompaniasSQLite(RepositorioCompanias):
         return self._fabrica_companias
 
     def obtener_por_id(self, id: UUID) -> Compania:
-        compania_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.id == id).join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).first()
-        print('==========================================')
-        print('<================ RepositorioCompaniasSQLite.obtener_por_id ================>')
-        print(compania_dto.to_dict())
-        print('<================ RepositorioCompaniasSQLite.obtener_por_id ================>')
-        return self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())
+        print('<================ RepositorioCompaniasPostgresql.obtener_por_id ================>')
+        compania_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(CompaniaDTO.id == id).join(DocumentoIdentidad, CompaniaDTO.documento_identidad).join(TipoIndustria, CompaniaDTO.tipo_industria).options(joinedload(CompaniaDTO.documento_identidad), joinedload(CompaniaDTO.tipo_industria)).first()
+        print(compania_dto)
+        print('<================ RepositorioCompaniasPostgresql.obtener_por_id ================>')
+        return compania_dto
 
     def obtener_registradas(self) -> Compania:
-        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Registrado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
-        return [MapeadorCompania._procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
+        print('<================ RepositorioCompaniasPostgresql.obtener_registradas ================>')
+        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(CompaniaDTO.estado == 'Registrado').join(DocumentoIdentidad, CompaniaDTO.documento_identidad).join(TipoIndustria, CompaniaDTO.tipo_industria).options(joinedload(CompaniaDTO.documento_identidad), joinedload(CompaniaDTO.tipo_industria)).all()
+        print(companias_dto)
+        print('<================ RepositorioCompaniasPostgresql.obtener_registradas ================>')
+        return companias_dto
 
     def obtener_procesadas(self) -> Compania:
-        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(Compania.estado == 'Procesado').join(DocumentoIdentidad, Compania.documento_identidad).join(TipoIndustria, Compania.tipo_industria).options(joinedload(Compania.documento_identidad), joinedload(Compania.tipo_industria)).all()
-        return [MapeadorCompania._procesar_compania_dto(self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())) for compania_dto in companias_dto]
+        print('<================ RepositorioCompaniasPostgresql.obtener_procesadas ================>')
+        companias_dto = db.session.query(CompaniaDTO, DocumentoIdentidad, TipoIndustria).filter(CompaniaDTO.estado == 'Procesado').join(DocumentoIdentidad, CompaniaDTO.documento_identidad).join(TipoIndustria, CompaniaDTO.tipo_industria).options(joinedload(CompaniaDTO.documento_identidad), joinedload(CompaniaDTO.tipo_industria)).all()
+        print(companias_dto)
+        print('<================ RepositorioCompaniasPostgresql.obtener_procesadas ================>')
+        return companias_dto
 
     def obtener_todos(self) -> list[Compania]:
         # TODO

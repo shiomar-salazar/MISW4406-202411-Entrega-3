@@ -9,13 +9,13 @@ from dataclasses import dataclass
 from propiedadesalpes.seedwork.dominio.fabricas import Fabrica
 from propiedadesalpes.seedwork.dominio.repositorios import Repositorio
 from propiedadesalpes.modulos.companias.dominio.repositorios import  RepositorioCompanias
-from .repositorios import RepositorioCompaniasSQLite
+from .repositorios import RepositorioCompaniasPostgresql
 from .excepciones import ExcepcionFabrica
 
 @dataclass
 class FabricaRepositorio(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
         if obj == RepositorioCompanias.__class__:
-            return RepositorioCompaniasSQLite()
+            return RepositorioCompaniasPostgresql()
         else:
             raise ExcepcionFabrica()
