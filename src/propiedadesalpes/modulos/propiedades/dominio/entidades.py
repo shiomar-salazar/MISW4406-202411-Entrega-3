@@ -1,67 +1,53 @@
-import array
-from datetime import datetime
-import uuid
-from seedwork.dominio.entidades import AgregacionRaiz
-from dataclasses import dataclass, field
+from __future__ import annotations
+from dataclasses import dataclass
 
-from .eventos import PropiedadCreada
+import sqlalchemy
 
-
+import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
+from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
+from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
+from propiedadesalpes.seedwork.dominio.objetos_valor import Compania_ov
 
 
 @dataclass
-class Propiedad(AgregacionRaiz):
-    id_propiedad: uuid.UUID = field(hash=True, default=uuid.uuid4())
-    nombre: str = field(default_factory=str)
-    descripcion: str = field(default_factory=str)
-    direccion: str = field(default_factory=str)
-    precio: float = field(default_factory=float)
-    fecha_creacion: datetime = field(default_factory=datetime.now)
-    fecha_actualizacion: datetime = field(default_factory=datetime.now)
-    fecha_publicacion: datetime = field(default_factory=datetime.now)
-    fecha_baja: datetime = field(default_factory=datetime.now)
-    estado: int = field(default_factory=int)
-    tipo: int = field(default_factory=int)
-    habitaciones: int = field(default_factory=int)
-    banos: int = field(default_factory=int)
-    estacionamientos: int = field(default_factory=int)
-    superficie: int = field(default_factory=int)
-    imagen: str= field(default_factory=str)
+class Compania(AgregacionRaiz, Compania_ov):    
     
-
-    def crear_propiedad(self, propiedad: "Propiedad"):
-        self.nombre = propiedad.nombre
-        self.descripcion = propiedad.descripcion
-        self.direccion = propiedad.direccion
-        self.precio = propiedad.precio
-        self.fecha_creacion = datetime.now()
-        self.fecha_actualizacion = datetime.now()
-        self.fecha_publicacion = datetime.now()
-        self.fecha_baja = datetime.now()
-        self.estado = propiedad.estado
-        self.tipo = propiedad.tipo
-        self.habitaciones = propiedad.habitaciones
-        self.banos = propiedad.banos
-        self.estacionamientos = propiedad.estacionamientos
-        self.superficie = propiedad.superficie
-        self.imagen = propiedad.imagen
-
-        self.agregar_evento(PropiedadCreada(
-            id_propiedad= str(self.id_propiedad), 
-            nombre= str(self.nombre), 
-            descripcion= str(self.descripcion), 
-            direccion= str(self.direccion), 
-            precio= str(self.precio), 
-            fecha_creacion= str(self.fecha_creacion), 
-            fecha_actualizacion= str(self.fecha_actualizacion),
-            fecha_publicacion= str(self.fecha_publicacion),
-            fecha_baja= str(self.fecha_baja),
-            estado= str(self.estado),
-            tipo= str(self.tipo),
-            habitaciones= str(self.habitaciones),
-            banos= str(self.banos),
-            estacionamientos= str(self.estacionamientos),
-            superficie= str(self.superficie),
-            imagen= str(self.imagen)))
-
+    def crear_compania(self, compania: Compania):
+        print('<================ Compania.crear_compania ================>')
+        print(type(compania))
+        print(compania)
+        if isinstance(compania, sqlalchemy.engine.row.Row):
+            self.id = compania[0].id
+            self.nombre_compania = compania[0].nombre_compania       
+            self.representante_legal = compania[0].representante_legal
+            self.email_contacto = compania[0].email_contacto      
+            self.telefono_contacto = compania[0].telefono_contacto
+            self.estado = compania[0].estado
+            self.documento_identidad_tipo = compania[1].tipo_documento
+            self.documento_identidad_numero_identificacion = compania[1].numero_documento
+            self.tipo_industria = compania[2].nombre
+            self.direccion = None
+            self.ciudad = None
+            self.pais = None
+            self.latitud = None
+            self.longitud = None
+        else:
+            self.id = compania.id
+            self.nombre_compania = compania.nombre_compania       
+            self.representante_legal = compania.representante_legal
+            self.email_contacto = compania.email_contacto      
+            self.telefono_contacto = compania.telefono_contacto
+            self.estado = compania.estado
+            self.documento_identidad_tipo = compania.documento_identidad.tipo
+            self.documento_identidad_numero_identificacion = compania.documento_identidad.numero_identificacion
+            self.tipo_industria = compania.tipo_industria
+            self.direccion = compania.localizacion.direccion.direccion
+            self.ciudad = compania.localizacion.direccion.datos_geograficos.ciudad
+            self.pais = compania.localizacion.direccion.datos_geograficos.pais
+            self.latitud = compania.localizacion.infromacion_geoespacial.latitud
+            self.longitud = compania.localizacion.infromacion_geoespacial.longitud
+            self.agregar_evento(CompaniaCreada(id=self.id, nombre_compania=self.nombre_compania, fecha_creacion=self.fecha_creacion))
+        
+        print('<================ Compania.crear_compania ================>')
+        return self
 
