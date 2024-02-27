@@ -8,5 +8,5 @@ del dominio de companias
 from abc import ABC
 from seedwork.dominio.repositorios import Repositorio
 
-class RepositorioPropiedades(Repositorio, ABC):
+class RepositorioCompanias(Repositorio, ABC):
     ...
