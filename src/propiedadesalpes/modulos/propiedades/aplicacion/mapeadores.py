@@ -8,16 +8,19 @@ from datetime import datetime
 class MapeadorCompaniaDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> CompaniaDTO:
         compania_dto = CompaniaDTO()
-        compania_dto.nombre = externo.get("nombre")
-        compania_dto.descripcion = externo.get("descripcion")
-        compania_dto.direccion = externo.get("direccion")
-        compania_dto.precio = externo.get("precio")
-        compania_dto.estado = externo.get("estado")
-        compania_dto.imagen = externo.get("imagen")
-        compania_dto.fecha_creacion = datetime.now()
-        compania_dto.fecha_actualizacion = datetime.now()
-        compania_dto.habitaciones = externo.get("habitaciones")
-        compania_dto.banos = externo.get("banos")
+        compania_dto.nombre_compania  = externo.get("nombre_compania")
+        compania_dto.representante_legal  = externo.get("representante_legal")
+        compania_dto.email_contacto  = externo.get("email_contacto")
+        compania_dto.telefono_contacto  = externo.get("telefono_contacto")
+        compania_dto.estado  = externo.get("estado")
+        compania_dto.documento_identidad_tipo  = externo.get("documento_identidad_tipo")
+        compania_dto.documento_identidad_numero_identificacion  = externo.get("documento_identidad_numero_identificacion")
+        compania_dto.tipo_industria  = externo.get("tipo_industria")
+        compania_dto.direccion  = externo.get("direccion")
+        compania_dto.ciudad  = externo.get("ciudad")
+        compania_dto.pais  = externo.get("pais")
+        compania_dto.latitud  = externo.get("latitud")
+        compania_dto.longitud  = externo.get("longitud")
         return compania_dto
     
     def dto_a_externo(self, dto: CompaniaDTO) -> dict:
@@ -31,42 +34,53 @@ class MapeadorCompania(RepMap):
     
     def entidad_a_dto(self, entidad: Compania) -> CompaniaDTO:
         compania_dto = CompaniaDTO()
-        compania_dto.id_compania = entidad.id
-        compania_dto.nombre = entidad.nombre
-        compania_dto.descripcion = entidad.descripcion
-        compania_dto.tipo = entidad.tipo
-        compania_dto.estado = entidad.estado
-        compania_dto.imagen = entidad.imagen
-        compania_dto.fecha_creacion = entidad.fecha_creacion
-        compania_dto.fecha_actualizacion = entidad.fecha_actualizacion
-        compania_dto.habitaciones = entidad.habitaciones
-        compania_dto.banos = entidad.banos
-        compania_dto.precio = entidad.precio
-        compania_dto.superficie = entidad.superficie
-        compania_dto.direccion = entidad.direccion
+        compania_dto.id_compania = entidad.id_compania
+        compania_dto.nombre_compania  = entidad.nombre_compania
+        compania_dto.representante_legal  = entidad.representante_legal
+        compania_dto.email_contacto  = entidad.email_contacto
+        compania_dto.telefono_contacto  = entidad.telefono_contacto
+        compania_dto.estado  = entidad.estado
+        compania_dto.documento_identidad_tipo  = entidad.documento_identidad_tipo
+        compania_dto.documento_identidad_numero_identificacion  = entidad.documento_identidad_numero_identificacion
+        compania_dto.tipo_industria  = entidad.tipo_industria
+        compania_dto.direccion  = entidad.direccion
+        compania_dto.ciudad  = entidad.ciudad
+        compania_dto.pais  = entidad.pais
+        compania_dto.latitud  = entidad.latitud
+        compania_dto.longitud  = entidad.longitud
+        
         return compania_dto
     
     def dto_a_entidad(self, dto: CompaniaDTO) -> Compania:
         compania = Compania()
-        compania.nombre=dto.nombre
-        compania.descripcion=dto.descripcion
-        compania.tipo=dto.tipo 
-        compania.estado=dto.estado 
-        compania.fecha_creacion=dto.fecha_creacion 
-        compania.fecha_actualizacion=dto.fecha_actualizacion 
-        compania.habitaciones=dto.habitaciones 
-        compania.precio= dto.precio 
-        compania.superficie= dto.superficie
-        compania.direccion=dto.direccion
-        compania.imagen=dto.imagen
-        compania.banos =dto.banos
+        compania.nombre_compania  = dto.nombre_compania
+        compania.representante_legal  = dto.representante_legal
+        compania.email_contacto  = dto.email_contacto
+        compania.telefono_contacto  = dto.telefono_contacto
+        compania.estado  = dto.estado
+        compania.documento_identidad_tipo  = dto.documento_identidad_tipo
+        compania.documento_identidad_numero_identificacion  = dto.documento_identidad_numero_identificacion
+        compania.tipo_industria  = dto.tipo_industria
+        compania.direccion  = dto.direccion
+        compania.ciudad  = dto.ciudad
+        compania.pais  = dto.pais
+        compania.latitud  = dto.latitud
+        compania.longitud  = dto.longitud
         return compania
     
     def entidad_a_externo(self, dto: Compania) -> dict:
         dto._id = str(dto._id)
-        dto.id_compania = str(dto.id_compania)
-        dto.fecha_creacion = str(dto.fecha_creacion)
-        dto.fecha_actualizacion = str(dto.fecha_actualizacion)
-        dto.fecha_baja = str(dto.fecha_baja)
-        dto.fecha_publicacion = str(dto.fecha_publicacion)
+        dto.nombre_compania  = str(dto.nombre_compania)
+        dto.representante_legal  = str(dto.representante_legal)
+        dto.email_contacto  = str(dto.email_contacto)
+        dto.telefono_contacto  = str(dto.telefono_contacto)
+        dto.estado  = str(dto.estado)
+        dto.documento_identidad_tipo  = str(dto.documento_identidad_tipo)
+        dto.documento_identidad_numero_identificacion  = str(dto.documento_identidad_numero_identificacion)
+        dto.tipo_industria  = str(dto.tipo_industria)
+        dto.direccion  = str(dto.direccion)
+        dto.ciudad  = str(dto.ciudad)
+        dto.pais  = str(dto.pais)
+        dto.latitud  = str(dto.latitud)
+        dto.longitud  = str(dto.longitud)
         return dto.__dict__
