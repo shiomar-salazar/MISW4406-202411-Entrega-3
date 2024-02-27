@@ -1,8 +1,8 @@
 from .entidades import Compania
 from .excepciones import TipoObjetoNoExisteEnDominioCompaniasExcepcion
-from propiedadesalpes.seedwork.dominio.repositorios import Mapeador, Repositorio
-from propiedadesalpes.seedwork.dominio.fabricas import Fabrica
-from propiedadesalpes.seedwork.dominio.entidades import Entidad
+from seedwork.dominio.repositorios import Mapeador, Repositorio
+from seedwork.dominio.fabricas import Fabrica
+from seedwork.dominio.entidades import Entidad
 from dataclasses import dataclass
 
 

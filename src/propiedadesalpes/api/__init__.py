@@ -60,10 +60,10 @@ def create_app(configuracion={}):
             comenzar_consumidor()
 
      # Importa Blueprints
-    from . import companias
+    from . import compania
 
     # Registro de Blueprints
-    app.register_blueprint(companias.bp)
+    app.register_blueprint(compania.bp)
 
     @app.route("/spec")
     def spec():

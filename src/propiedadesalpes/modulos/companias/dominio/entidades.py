@@ -3,9 +3,9 @@ from dataclasses import dataclass
 from dataclasses import dataclass, field
 import sqlalchemy
 import uuid
-import propiedadesalpes.modulos.companias.dominio.objetos_valor as ov
-from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
-from propiedadesalpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
+import modulos.companias.dominio.objetos_valor as ov
+from modulos.companias.dominio.eventos import CompaniaCreada
+from seedwork.dominio.entidades import AgregacionRaiz, Entidad
 
 
 from .eventos import CompaniaCreada

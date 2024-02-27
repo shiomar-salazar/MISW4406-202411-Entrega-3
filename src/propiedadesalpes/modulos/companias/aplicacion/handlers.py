@@ -1,6 +1,6 @@
 
 
-from modulos.companias.dominio.eventos import companiaCreada
+from modulos.companias.dominio.eventos import CompaniaCreada
 from seedwork.aplicacion.handlers import Handler
 from modulos.companias.infraestructura.despachadores import Despachador
 

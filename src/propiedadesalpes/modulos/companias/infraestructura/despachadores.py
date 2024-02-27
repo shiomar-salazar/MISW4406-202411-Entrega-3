@@ -2,8 +2,8 @@ import pulsar
 from pulsar.schema import *
 import pika
 
-from modulos.companiaes.infraestructura.schema.v1.eventos import EventoCompaniaCreada, CompaniaCreadaPayload
-from modulos.companiaes.infraestructura.schema.v1.comandos import ComandoCrearcompania, ComandoCrearcompaniaPayload
+from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada, CompaniaCreadaPayload
+from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania, ComandoCrearCompaniaPayload
 from seedwork.infraestructura import utils
 
 import datetime
@@ -43,11 +43,11 @@ class Despachador:
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoCompaniaCreada))
 
     def publicar_comando(self, comando, topico):
-        payload = ComandoCrearcompaniaPayload(
+        payload = ComandoCrearCompaniaPayload(
             id_compania=str(comando.id_compania)
         )
-        comando_integracion = ComandoCrearcompania(data=payload)
-        self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearcompania))
+        comando_integracion = ComandoCrearCompania(data=payload)
+        self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearCompania))
 
 
 
