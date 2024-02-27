@@ -1,8 +1,8 @@
 import seedwork.presentacion.api as api
 from seedwork.dominio.excepciones import ExcepcionDominio
-from modulos.propiedades.aplicacion.mapeadores import MapeadorCompaniaDTOJson
-from modulos.propiedades.aplicacion.comandos.crear_compania import CrearCompania
-from modulos.propiedades.aplicacion.queries.obtener_todas_companias import ObtenerTodasCompanias
+from modulos.companias.aplicacion.mapeadores import MapeadorCompaniaDTOJson
+from modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
+from modulos.companias.aplicacion.queries.obtener_todas_companias import ObtenerTodasCompanias
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
 import json
