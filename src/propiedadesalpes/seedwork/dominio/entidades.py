@@ -1,3 +1,9 @@
+"""Entidades reusables parte del seedwork del proyecto
+
+En este archivo usted encontrará las entidades reusables parte del seedwork del proyecto
+
+"""
+
 from dataclasses import dataclass, field
 from .eventos import EventoDominio
 from .mixins import ValidarReglasMixin
@@ -24,9 +30,7 @@ class Entidad:
     @id.setter
     def id(self, id: uuid.UUID) -> None:
         if not IdEntidadEsInmutable(self).es_valido():
-            # raise IdDebeSerInmutableExcepcion()
-            True
-            
+            raise IdDebeSerInmutableExcepcion()
         self._id = self.siguiente_id()
         
 
