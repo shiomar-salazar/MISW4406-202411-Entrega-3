@@ -1,10 +1,16 @@
-from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
-from propiedadesalpes.seedwork.aplicacion.handlers import Handler
-from propiedadesalpes.modulos.companias.infraestructura.despachadores import Despachador
 
-class HandlerCompaniaIntegracion(Handler):
+
+from modulos.companias.dominio.eventos import CompaniaCreada
+from seedwork.aplicacion.handlers import Handler
+from modulos.companias.infraestructura.despachadores import Despachador
+
+class HandlerCompaniaDominio(Handler):
 
     @staticmethod
     def handle_compania_creada(evento):
-        despachador = Despachador()
-        despachador.publicar_evento(evento, 'eventos-compania')
+        try:
+            despachador = Despachador()
+            despachador.publicar_evento_rabbit(evento, 'eventos-compania')
+        except Exception as e:
+            print(f"ERROR AL PUBLICAR {e}")
+        

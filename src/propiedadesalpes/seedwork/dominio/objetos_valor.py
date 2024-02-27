@@ -1,9 +1,3 @@
-"""Objetos valor reusables parte del seedwork del proyecto
-
-En este archivo usted encontrará los objetos valor reusables parte del seedwork del proyecto
-
-"""
-
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 from .entidades import Locacion
@@ -56,21 +50,3 @@ class Compania_ov(ABC, ObjetoValor):
     documento_identidad: DocumentoIdentidad
     tipo_industria: TipoIndustria
     localizacion: Localizacion
-
-
-    """@abstractmethod
-    def origen(self) -> Locacion:
-        ...
-    
-    @abstractmethod
-    def destino(self) -> Locacion:
-        ...
-    
-    @abstractmethod
-    def fecha_salida(self) -> datetime:
-        ...
-
-    @abstractmethod
-    def fecha_llegada(self) -> datetime:
-        ...
-    """

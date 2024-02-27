@@ -1,6 +1,6 @@
 from pulsar.schema import *
 from dataclasses import dataclass, field
-from propiedadesalpes.seedwork.infraestructura.schema.v1.comandos import (ComandoIntegracion)
+from seedwork.infraestructura.schema.v1.comandos import (ComandoIntegracion)
 
 class ComandoCrearCompaniaPayload(ComandoIntegracion):
     id_usuario = String()

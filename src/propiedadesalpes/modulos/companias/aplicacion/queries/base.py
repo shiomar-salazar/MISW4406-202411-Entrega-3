@@ -1,16 +1,16 @@
-from propiedadesalpes.seedwork.aplicacion.queries import QueryHandler
-from propiedadesalpes.modulos.companias.infraestructura.fabricas import FabricaRepositorio
-from propiedadesalpes.modulos.companias.dominio.fabricas import FabricaCompanias
+from seedwork.aplicacion.queries import QueryHandler
+from modulos.companias.infraestructura.fabricas import FabricaVista
+from modulos.companias.dominio.fabricas import FabricaCompanias
 
-class CompaniasQueryBaseHandler(QueryHandler):
+class CompaniaQueryBaseHandler(QueryHandler):
     def __init__(self):
-        self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()
-        self._fabrica_compania: FabricaCompanias = FabricaCompanias()
+        self._fabrica_vista: FabricaVista = FabricaVista()
+        self._fabrica_companias: FabricaCompanias = FabricaCompanias()
 
     @property
-    def fabrica_repositorio(self):
-        return self._fabrica_repositorio
+    def fabrica_vista(self):
+        return self._fabrica_vista
     
     @property
-    def fabrica_compania(self):
-        return self._fabrica_compania 
+    def fabrica_vuelos(self):
+        return self._fabrica_companias    

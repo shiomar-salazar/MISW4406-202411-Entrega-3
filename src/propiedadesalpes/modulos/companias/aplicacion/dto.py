@@ -1,44 +1,19 @@
 from dataclasses import dataclass, field
-from propiedadesalpes.seedwork.aplicacion.dto import DTO
+from seedwork.aplicacion.dto import DTO
 
-
-class InformacionGeoespacialDTO(DTO):
-    latitud: str
-    longitud: str
-
-
-class DatosGreograficosDTO(DTO):
-    ciudad: str
-    pais: str
-
-
-class DireccionDTO(DTO):
-    direccion: str
-    datos_geograficos: DatosGreograficosDTO
-
-
-class LocalizacionDTO(DTO):
-    direccion: DireccionDTO
-    infromacion_geoespacial: InformacionGeoespacialDTO
-
-
-class TipoIndustriaDTO(DTO):
-    id_industria: str
-    nombre: str
-    descripcion: str
-
-
-class DocumentoIdentidadDTO(DTO):
-    tipo: str
-    numero_identificacion: str
-
+@dataclass(frozen=False)
 class CompaniaDTO(DTO):
-    id: str
-    nombre_compania: str
-    representante_legal: str
-    email_contacto: str
-    telefono_contacto: str
-    estado: str
-    # documento_identidad: DocumentoIdentidadDTO
-    # tipo_industria: TipoIndustriaDTO
-    # localizacion: LocalizacionDTO
+    id_compania: str = field(default_factory=str)
+    nombre_compania: str = field(default_factory=str)   
+    representante_legal: str = field(default_factory=str)
+    email_contacto: str = field(default_factory=str)    
+    telefono_contacto: str = field(default_factory=str)
+    estado: str = field(default_factory=str)
+    documento_identidad_tipo: str = field(default_factory=str)
+    documento_identidad_numero_identificacion: str = field(default_factory=str)
+    tipo_industria: str = field(default_factory=str)
+    direccion : str = field(default_factory=str)
+    ciudad : str = field(default_factory=str)
+    pais : str = field(default_factory=str)
+    latitud : str = field(default_factory=str)
+    longitud: str = field(default_factory=str)

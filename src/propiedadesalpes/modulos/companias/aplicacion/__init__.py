@@ -1,7 +1,4 @@
 from pydispatch import dispatcher
+from .handlers import HandlerCompaniaDominio
 
-from .handlers import HandlerCompaniaIntegracion
-
-from propiedadesalpes.modulos.companias.dominio.eventos import CompaniaCreada
-
-dispatcher.connect(HandlerCompaniaIntegracion.handle_compania_creada, signal=f'{CompaniaCreada.__name__}Integracion')
+dispatcher.connect(HandlerCompaniaDominio.handle_compania_creada, signal='CompaniaCreadaDominio')
