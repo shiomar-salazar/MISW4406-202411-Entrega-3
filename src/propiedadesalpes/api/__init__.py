@@ -6,11 +6,11 @@ from flask_swagger import swagger
 # Identifica el directorio base
 basedir = os.path.abspath(os.path.dirname(__file__))
 # Constantes
-DB_USER = os.environ["DB_USER"]
-DB_PASSWORD = os.environ["DB_PASSWORD"]
-DB_HOST = os.environ["DB_HOST"]
-DB_PORT = os.environ["DB_PORT"]
-DB_NAME =  os.environ["DB_NAME"]
+DB_USER = os.environ["POSTGRES_USER"]
+DB_PASSWORD = os.environ["POSTGRES_PASSWORD"]
+DB_HOST = os.environ["POSTGRES_HOST"]
+DB_PORT = os.environ["POSTGRES_PORT"]
+DB_NAME =  os.environ["POSTGRES_DB"]
 
 def registrar_handlers():
     import propiedadesalpes.modulos.companias.aplicacion
