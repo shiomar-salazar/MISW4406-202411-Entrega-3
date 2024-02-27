@@ -68,6 +68,6 @@ class CrearCacheCompaniaHandler(CrearCompaniaBaseHandler):
         redis.lpush("companias", str(compania_ext))
 
 @comando.register(CrearCacheCompania)
-def ejecutar_comando_crear_reserva_cache(comando: CrearCacheCompania):
+def ejecutar_comando_crear_compania_cache(comando: CrearCacheCompania):
     handler = CrearCacheCompaniaHandler()
     handler.handle(comando)
