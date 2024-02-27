@@ -1,24 +1,22 @@
 from pulsar.schema import *
 from seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 
-class PropiedadCreadaPayload(Record):
-    id_propiedad = String()
-    nombre = String()
+class CompaniaCreadaPayload(Record):
+    id = String()
+    nombre_compania = String()
+    representante_legal = String()
+    email_contacto = String()
+    telefono_contacto = String()
     estado = String()
-    fecha_creacion = String()
-    fecha_actualizacion = String()
+    documento_identidad_numero_identificacion = String()
+    documento_identidad_tipo = String()
+    tipo_industria = String()
     direccion = String()
-    tipo = String()
-    precio = String()
-    imagen = String()
-    habitaciones = String()
-    banos = String()
-    superficie = String()
-    estacionamientos = String()
-    fecha_publicacion = String()
-    fecha_baja = String()
-    descripcion = String()
+    latitud = String()
+    longitud = String()
+    ciudad = String()
+    pais = String()
 
 
-class EventoPropiedadCreada(EventoIntegracion):
-    data = PropiedadCreadaPayload()
+class EventoCompaniaCreada(EventoIntegracion):
+    data = CompaniaCreadaPayload()

@@ -3,10 +3,10 @@ import pulsar,_pulsar
 from pulsar.schema import *
 import logging
 import traceback
-from modulos.propiedades.aplicacion.comandos.crear_cache_propiedad import CrearCachePropiedad
+from modulos.propiedades.aplicacion.comandos.crear_cache_propiedad import CrearCacheCompania
 
-from modulos.propiedades.infraestructura.schema.v1.eventos import EventoPropiedadCreada
-from modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad
+from modulos.propiedades.infraestructura.schema.v1.eventos import EventoCompaniaCreada
+from modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearCompania
 from seedwork.aplicacion.comandos import ejecutar_commando
 from seedwork.infraestructura import utils
 
@@ -14,30 +14,28 @@ def suscribirse_a_eventos():
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        consumidor = cliente.subscribe('eventos-propiedad', consumer_type=_pulsar.ConsumerType.Shared,subscription_name='propiedadesalpes-sub-eventos', schema=AvroSchema(EventoPropiedadCreada))
+        consumidor = cliente.subscribe('eventos-compania', consumer_type=_pulsar.ConsumerType.Shared,subscription_name='propiedadesalpes-sub-eventos', schema=AvroSchema(EventoCompaniaCreada))
 
         while True:
             mensaje = consumidor.receive()
             ex = mensaje.value()
-            propiedad_dto = ex.data
-            comando = CrearCachePropiedad(
-                id_propiedad= propiedad_dto.id_propiedad,
-                nombre= propiedad_dto.nombre,
-                descripcion= propiedad_dto.descripcion,
-                direccion= propiedad_dto.direccion,
-                precio= propiedad_dto.precio,
-                fecha_creacion= propiedad_dto.fecha_creacion,
-                fecha_actualizacion= propiedad_dto.fecha_actualizacion,
-                fecha_publicacion= propiedad_dto.fecha_publicacion,
-                fecha_baja= propiedad_dto.fecha_baja,
-                estado= propiedad_dto.estado,
-                tipo= propiedad_dto.tipo,
-                habitaciones= propiedad_dto.habitaciones,
-                banos= propiedad_dto.banos,
-                estacionamientos=  propiedad_dto.estacionamientos,
-                superficie= propiedad_dto.superficie,
-                imagen= propiedad_dto.imagen
-                )
+            compania_dto = ex.data
+            comando = CrearCacheCompania(
+                id = compania_dto.id,
+                nombre_compania = compania_dto.nombre_compania,
+                representante_legal = compania_dto.representante_legal,
+                email_contacto = compania_dto.email_contacto,
+                telefono_contacto = compania_dto.telefono_contacto,
+                estado = compania_dto.estado,
+                documento_identidad_numero_identificacion = compania_dto.documento_identidad_numero_identificacion,
+                documento_identidad_tipo = compania_dto.documento_identidad_tipo,
+                tipo_industria = compania_dto.tipo_industria,
+                direccion = compania_dto.direccion,
+                latitud = compania_dto.tipo_industria,
+                longitud = compania_dto.tipo_industria,
+                ciudad = compania_dto.ciudad,
+                pais = compania_dto.pais
+            )
             ejecutar_commando(comando)
             consumidor.acknowledge(mensaje)     
 
@@ -52,7 +50,7 @@ def suscribirse_a_comandos():
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        consumidor = cliente.subscribe('comandos-propiedad', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='propiedadesalpes-sub-comandos', schema=AvroSchema(ComandoCrearPropiedad))
+        consumidor = cliente.subscribe('comandos-compania', consumer_type=_pulsar.ConsumerType.Shared, subscription_name='propiedadesalpes-sub-comandos', schema=AvroSchema(ComandoCrearCompania))
 
         while True:
             mensaje = consumidor.receive()
@@ -70,27 +68,27 @@ def suscribirse_a_comandos():
 import pika
 def suscribirse_a_eventos_rabbit():
     def callback(ch, method, properties, body):
-            propiedad_dto = json.loads(body)
-            comando = CrearCachePropiedad(
-                id_propiedad= propiedad_dto['id_propiedad'],
-                nombre= propiedad_dto['nombre'],
-                descripcion= propiedad_dto['descripcion'],
-                direccion= propiedad_dto['direccion'],
-                precio= propiedad_dto['precio'],
-                fecha_creacion= propiedad_dto['fecha_creacion'],
-                fecha_actualizacion= propiedad_dto['fecha_actualizacion'],
-                fecha_publicacion= propiedad_dto['fecha_publicacion'],
-                fecha_baja= propiedad_dto['fecha_baja'],
-                estado= propiedad_dto['estado'],
-                tipo= propiedad_dto['tipo'],
-                habitaciones= propiedad_dto['habitaciones'],
-                banos= propiedad_dto['banos'],
-                estacionamientos=  propiedad_dto['estacionamientos'],
-                superficie= propiedad_dto['superficie'],
-                imagen= propiedad_dto['imagen'])
+            compania_dto = json.loads(body)
+            comando = CrearCacheCompania(
+                id = compania_dto['id'],
+                nombre_compania = compania_dto['nombre_compania'],
+                representante_legal = compania_dto['representante_legal'],
+                email_contacto = compania_dto['email_contacto'],
+                telefono_contacto = compania_dto['telefono_contacto'],
+                estado = compania_dto['estado'],
+                documento_identidad_numero_identificacion = compania_dto['documento_identidad_numero_identificacion'],
+                documento_identidad_tipo = compania_dto['documento_identidad_tipo'],
+                tipo_industria = compania_dto['tipo_industria'],
+                direccion = compania_dto['direccion'],
+                latitud = compania_dto['latitud'],
+                longitud = compania_dto['longitud'],
+                ciudad = compania_dto['ciudad'],
+                pais = compania_dto['pais']
+                
+                )
             ejecutar_commando(comando)
 
-    topico = 'eventos-propiedad'
+    topico = 'eventos-compania'
     credentials = pika.PlainCredentials(username=f'{utils.broker_rabbit_user()}', password=f'{utils.broker_rabbit_password()}')
     connection = pika.BlockingConnection(pika.ConnectionParameters(f'{utils.broker_rabbit_host()}', port=utils.broker_rabbit_port(), credentials= credentials))
     channel = connection.channel()

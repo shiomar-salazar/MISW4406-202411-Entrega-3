@@ -6,37 +6,37 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 """
 
 from config.db import db
-from modulos.propiedades.dominio.repositorios import RepositorioPropiedades
-from modulos.propiedades.dominio.entidades import Propiedad
-from modulos.propiedades.dominio.fabricas import FabricaPropiedades
-from .dto import Propiedad as PropiedadDTO
-from .mapeadores import MappeadorPropiedad
+from modulos.companias.dominio.repositorios import RepositorioCompaniaes
+from modulos.companias.dominio.entidades import Compania
+from modulos.companias.dominio.fabricas import FabricaCompaniaes
+from .dto import Compania as CompaniaDTO
+from .mapeadores import MappeadorCompania
 from uuid import UUID
 
-class RepositorioPropiedadesPostgresSQL(RepositorioPropiedades):
+class RepositorioCompaniaesPostgresSQL(RepositorioCompaniaes):
     def __init__(self):
-        self._fabrica_propiedades: FabricaPropiedades = FabricaPropiedades()
+        self._fabrica_companias: FabricaCompaniaes = FabricaCompaniaes()
 
-    def agregar(self, propiedad: Propiedad):
-            propiedad_dto = self._fabrica_propiedades.crear_objeto(propiedad, MappeadorPropiedad())
-            db.session.add(propiedad_dto)
+    def agregar(self, compania: Compania):
+            compania_dto = self._fabrica_companias.crear_objeto(compania, MappeadorCompania())
+            db.session.add(compania_dto)
 
     
-    def obtener_todos(self) -> list[Propiedad]:
-        propiedades_list = db.session.query(Propiedad).all()
-        return propiedades_list
+    def obtener_todos(self) -> list[Compania]:
+        companias_list = db.session.query(Compania).all()
+        return companias_list
     
     def obtener_tipo(self) -> type:
-        return Propiedad.__class__
+        return Compania.__class__
     
-    def obtener_por_id(self, id: UUID) -> Propiedad:
-        propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
-        return self._fabrica_propiedades.crear_objeto(propiedad_dto, MappeadorPropiedad())
+    def obtener_por_id(self, id: UUID) -> Compania:
+        compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id)).one()
+        return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())
     
-class RepositorioPropiedadesRedis(RepositorioPropiedades):
+class RepositorioCompaniaesRedis(RepositorioCompaniaes):
     def __init__(self):
-        self._fabrica_propiedades: FabricaPropiedades = FabricaPropiedades()
+        self._fabrica_companias: FabricaCompaniaes = FabricaCompaniaes()
 
-    def agregar(self, propiedad: Propiedad):
+    def agregar(self, compania: Compania):
         ...
         

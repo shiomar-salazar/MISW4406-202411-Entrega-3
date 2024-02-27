@@ -1,41 +1,39 @@
 from seedwork.infraestructura.vistas import Vista
-from modulos.propiedades.infraestructura.redis import RedisRepositorio
-from modulos.propiedades.dominio.entidades import Propiedad
+from modulos.companias.infraestructura.redis import RedisRepositorio
+from modulos.companias.dominio.entidades import Compania
 from config.db import db
-from .dto import Propiedad as PropeidadDTO
+from .dto import Compania as CompaniaDTO
 import json
 
 
 
-class VistaPropiedad(Vista):
+class VistaCompania(Vista):
     def obtener_todos(self):
-        propiedades = list()
+        companias = list()
         redis = RedisRepositorio()
-        propiedadesRedis = redis.lrange('propiedades', 0, -1)
-        for propiedad_dto in propiedadesRedis:
-            fixed = propiedad_dto.decode('utf-8')
+        companiasRedis = redis.lrange('companias', 0, -1)
+        for compania_dto in companiasRedis:
+            fixed = compania_dto.decode('utf-8')
             fixed = fixed.replace("'", '"')
-            propiedad_dto = json.loads(fixed)
+            compania_dto = json.loads(fixed)
 
-            propiedades.append(PropeidadDTO(id=propiedad_dto['id_propiedad'],
-                                         nombre= propiedad_dto['nombre'],
-                                         descripcion= propiedad_dto['descripcion'],
-                                         direccion= propiedad_dto['direccion'],
-                                         precio= propiedad_dto['precio'],
-                                         fecha_creacion= propiedad_dto['fecha_creacion'],
-                                         fecha_actualizacion= propiedad_dto['fecha_actualizacion'],
-                                         fecha_publicacion = propiedad_dto['fecha_publicacion'],
-                                         fecha_baja= propiedad_dto['fecha_baja'],
-                                         estado= propiedad_dto['estado'],
-                                         tipo= propiedad_dto['tipo'],
-                                         habitaciones= propiedad_dto['habitaciones'],
-                                         banos= propiedad_dto['banos'],
-                                         estacionamientos= propiedad_dto['estacionamientos'],
-                                         superficie= propiedad_dto['superficie'],
-                                         imagen= propiedad_dto['imagen']
+            companias.append(CompaniaDTO(id = compania_dto['id'],
+                                        nombre_compania = compania_dto['nombre_compania'],
+                                        representante_legal = compania_dto['representante_legal'],
+                                        email_contacto = compania_dto['email_contacto'],
+                                        telefono_contacto = compania_dto['telefono_contacto'],
+                                        estado = compania_dto['estado'],
+                                        documento_identidad_numero_identificacion = compania_dto['documento_identidad_numero_identificacion'],
+                                        documento_identidad_tipo = compania_dto['documento_identidad_tipo'],
+                                        tipo_industria = compania_dto['tipo_industria'],
+                                        direccion = compania_dto['direccion'],
+                                        latitud = compania_dto['latitud'],
+                                        longitud = compania_dto['longitud'],
+                                        ciudad = compania_dto['ciudad'],
+                                        pais = compania_dto['pais']
                                         ))
 
-        return propiedades
+        return companias
     
     def obtener_por(self, id=None, estado=None, id_cliente=None, **kwargs):
         raise NotImplementedError('Método no implementado')
