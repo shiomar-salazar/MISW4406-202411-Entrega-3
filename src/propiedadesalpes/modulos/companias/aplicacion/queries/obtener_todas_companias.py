@@ -3,14 +3,14 @@ from seedwork.aplicacion.queries import Query, QueryHandler, QueryResultado
 from seedwork.aplicacion.queries import ejecutar_query as query
 from modulos.companias.dominio.entidades import Compania
 from modulos.companias.aplicacion.dto import CompaniaDTO
-from .base import ReservaQueryBaseHandler
+from .base import CompaniaQueryBaseHandler
 
 
 @dataclass
 class ObtenerTodasCompanias(Query):
     ...
 
-class ObtenerTodasCompaniasHandler(ReservaQueryBaseHandler):
+class ObtenerTodasCompaniasHandler(CompaniaQueryBaseHandler):
 
     FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
 

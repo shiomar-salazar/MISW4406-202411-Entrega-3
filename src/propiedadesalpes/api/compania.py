@@ -41,7 +41,7 @@ def crear():
         return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
     
 @bp.route('', methods=('GET',))
-def dar_reserva_usando_query():
+def dar_compania_usando_query():
     map_compania = MapeadorCompaniaDTOJson()
     query_resultado = ejecutar_query(ObtenerTodasCompanias())
     resultados = []

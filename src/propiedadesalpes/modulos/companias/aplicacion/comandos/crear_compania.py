@@ -56,6 +56,6 @@ class CrearCompaniaHandler(CrearCompaniaBaseHandler):
         UnidadTrabajoPuerto.commit()
 
 @comando.register(CrearCompania)
-def ejecutar_comando_crear_reserva(comando: CrearCompania):
+def ejecutar_comando_crear_compania(comando: CrearCompania):
     handler = CrearCompaniaHandler()
     handler.handle(comando)
