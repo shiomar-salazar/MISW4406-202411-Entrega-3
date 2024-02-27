@@ -49,21 +49,20 @@ class CrearCacheCompaniaHandler(CrearCompaniaBaseHandler):
 
         compania_ext = {
             "id_compania": comando.id_compania,
-            "nombre": comando.nombre,
-            "descripcion": comando.descripcion,
-            "direccion": comando.direccion,
-            "precio": comando.precio,
-            "fecha_creacion": comando.fecha_creacion,
-            "fecha_actualizacion": comando.fecha_actualizacion,
-            "fecha_publicacion": comando.fecha_publicacion,
-            "fecha_baja": comando.fecha_baja,
+            "nombre_compania": comando.nombre_compania,
+            "representante_legal": comando.representante_legal,
+            "email_contacto": comando.email_contacto,
+            "telefono_contacto": comando.telefono_contacto,
             "estado": comando.estado,
-            "tipo": comando.tipo,
-            "habitaciones": comando.habitaciones,
-            "banos": comando.banos,
-            "estacionamientos": comando.estacionamientos,
-            "superficie": comando.superficie,
-            "imagen": comando.imagen
+            "documento_identidad_tipo": comando.documento_identidad_tipo,
+            "documento_identidad_numero_identificacion": comando.documento_identidad_numero_identificacion,
+            "tipo_industria": comando.tipo_industria,
+            "direccion": comando.direccion,
+            "ciudad": comando.ciudad,
+            "pais": comando.pais,
+            "latitud": comando.latitud,
+            "longitud": comando.longitud
+
         }
         redis = RedisRepositorio()
         redis.lpush("companias", str(compania_ext))
