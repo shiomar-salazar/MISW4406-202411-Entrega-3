@@ -28,6 +28,6 @@ class FabricaRepositorio(Fabrica):
 class FabricaVista(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Vista:
         if obj == Compania:
-            return VistaCompania()
+            return RepositorioCompaniasPostgresSQL()
         else:
             raise ExcepcionFabrica(f'No existe fábrica para el objeto {obj}')

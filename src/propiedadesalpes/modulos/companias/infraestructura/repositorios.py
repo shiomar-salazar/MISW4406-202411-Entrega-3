@@ -1,6 +1,6 @@
 from config.db import db
 from modulos.companias.dominio.repositorios import RepositorioCompanias
-from modulos.companias.dominio.entidades import Compania
+from modulos.companias.infraestructura.dto import Compania
 from modulos.companias.dominio.fabricas import FabricaCompanias
 from .dto import Compania as CompaniaDTO
 from .mapeadores import MappeadorCompania
@@ -17,6 +17,8 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
     
     def obtener_todos(self) -> list[Compania]:
         companias_list = db.session.query(Compania).all()
+        print("=================== obtener_todos =========================")
+        print(companias_list)
         return companias_list
     
     def obtener_tipo(self) -> type:
