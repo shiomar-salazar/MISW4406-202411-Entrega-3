@@ -2,16 +2,16 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 from seedwork.aplicacion.comandos import Comando
-from modulos.propiedades.aplicacion.dto import PropiedadDTO
-from modulos.propiedades.dominio.entidades import Propiedad
-from modulos.propiedades.aplicacion.comandos.base import CrearPropiedadBaseHandler
-from modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedad
-from modulos.propiedades.infraestructura.repositorios import RepositorioPropiedades
+from modulos.propiedades.aplicacion.dto import CompaniaDTO
+from modulos.propiedades.dominio.entidades import Compania
+from modulos.propiedades.aplicacion.comandos.base import CrearCompaniaBaseHandler
+from modulos.propiedades.aplicacion.mapeadores import MapeadorCompania
+from modulos.propiedades.infraestructura.repositorios import RepositorioCompanias
 from seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from seedwork.aplicacion.comandos import ejecutar_commando as comando
 
 @dataclass
-class CrearPropiedad(Comando):
+class CrearCompania(Comando):
     nombre: str = field(default_factory=str)
     descripcion: str = field(default_factory=str)
     direccion: str = field(default_factory=str)
@@ -28,9 +28,9 @@ class CrearPropiedad(Comando):
     superficie: int = field(default_factory=int)
     imagen: str = field(default_factory=str)
 
-class CrearPropiedadHandler(CrearPropiedadBaseHandler):
-    def handle(self, comando: CrearPropiedad):
-        propiedad_dto = PropiedadDTO(
+class CrearCompaniaHandler(CrearCompaniaBaseHandler):
+    def handle(self, comando: CrearCompania):
+        compania_dto = CompaniaDTO(
             nombre=comando.nombre,
             descripcion=comando.descripcion,
             direccion=comando.direccion,
@@ -47,15 +47,15 @@ class CrearPropiedadHandler(CrearPropiedadBaseHandler):
             superficie=comando.superficie,
             imagen=comando.imagen)
         
-        propiedad : Propiedad = self._fabrica_propiedades.crear_objeto(propiedad_dto, MapeadorPropiedad())
-        propiedad.crear_propiedad(propiedad)
+        compania : Compania = self._fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())
+        compania.crear_compania(compania)
 
-        repositorio = self._fabrica_repositorio.crear_objeto(RepositorioPropiedades.__class__)
+        repositorio = self._fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
 
-        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, propiedad)
+        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, compania)
         UnidadTrabajoPuerto.commit()
 
-@comando.register(CrearPropiedad)
-def ejecutar_comando_crear_reserva(comando: CrearPropiedad):
-    handler = CrearPropiedadHandler()
+@comando.register(CrearCompania)
+def ejecutar_comando_crear_reserva(comando: CrearCompania):
+    handler = CrearCompaniaHandler()
     handler.handle(comando)
