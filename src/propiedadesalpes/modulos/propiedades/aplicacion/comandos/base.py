@@ -12,6 +12,6 @@ class CrearCompaniaBaseHandler(ComandoHandler):
         return self._fabrica_repositorio
     
     @property
-    def fabrica_vuelos(self):
+    def fabrica_companias(self):
         return self._fabrica_companias    
     
