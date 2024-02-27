@@ -11,7 +11,7 @@ services:
     networks:
       - pulsar
     environment:
-      POSTGRES_DB: propiedades
+      POSTGRES_DB: companias
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     healthcheck:
@@ -57,7 +57,7 @@ services:
       - "15672:15672"  # Puerto para la interfaz de gestión web (opcional)
     environment:
       RABBITMQ_DEFAULT_USER: rabbitmq
-      RABBITMQ_DEFAULT_PASS: LosAndes1234
+      RABBITMQ_DEFAULT_PASS: companias2024
     networks:
       - pulsar
  
@@ -77,7 +77,7 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=rabbitmq
-      - RABBITMQ_PASS=LosAndes1234
+      - RABBITMQ_PASS=companias2024
     ports:
       - "5000:5000"
     networks:
