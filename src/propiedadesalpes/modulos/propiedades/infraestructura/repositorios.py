@@ -1,10 +1,3 @@
-""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de vuelos
-
-En este archivo usted encontrará las diferentes repositorios para
-persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de vuelos
-
-"""
-
 from config.db import db
 from modulos.companias.dominio.repositorios import RepositorioCompaniaes
 from modulos.companias.dominio.entidades import Compania

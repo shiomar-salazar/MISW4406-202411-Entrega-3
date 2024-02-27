@@ -8,10 +8,10 @@ objetos complejos en la capa de infraestructura del dominio de vuelos
 from dataclasses import dataclass
 from seedwork.dominio.fabricas import Fabrica
 from seedwork.dominio.repositorios import Repositorio
-from modulos.propiedades.dominio.repositorios import RepositorioCompanias
+from modulos.companias.dominio.repositorios import RepositorioCompanias
 from seedwork.infraestructura.vistas import Vista
-from modulos.propiedades.dominio.entidades import Compania
-from modulos.propiedades.infraestructura.vistas import VistaCompania
+from modulos.companias.dominio.entidades import Compania
+from modulos.companias.infraestructura.vistas import VistaCompania
 
 from .repositorios import RepositorioCompaniasPostgresSQL
 from .excepciones import ExcepcionFabrica
