@@ -8,25 +8,32 @@ from propiedadesalpes.modulos.companias.dominio.entidades import Compania
 from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from propiedadesalpes.modulos.companias.aplicacion.mapeadores import MapeadorCompania
 from propiedadesalpes.modulos.companias.infraestructura.repositorios import RepositorioCompanias
+import uuid
+
 
 @dataclass
 class RegistrarCompania(Comando):
-    id: int = field(default_factory=int)
-    nombre_compania: str = field(default_factory=str)
-    representante_legal: str = field(default_factory=str)
-    email_contacto: str = field(default_factory=str)
-    telefono_contacto: str = field(default_factory=str)
-    estado: str = field(default_factory=str)
-    documento_identidad: DocumentoIdentidadDTO = field(default_factory=DocumentoIdentidadDTO)
-    tipo_industria: TipoIndustriaDTO = field(default_factory=TipoIndustriaDTO)
-    localizacion: LocalizacionDTO = field(default_factory=LocalizacionDTO)
+    id: str
+    nombre_compania: str 
+    representante_legal: str 
+    email_contacto: str 
+    telefono_contacto: str 
+    estado: str 
+    documento_identidad: DocumentoIdentidadDTO 
+    tipo_industria: TipoIndustriaDTO
+    localizacion: LocalizacionDTO
 
 
 class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
     
     def handle(self, comando: RegistrarCompania):
+        print("================================== handle antes =================================")
+        print("================================")
+        print(comando)
+        print("================================")
+        print("================================== handle antes =================================")
         compania_dto = CompaniaDTO(
-                id=comando.id,
+                id=str(uuid.uuid4()),
                 nombre_compania=comando.nombre_compania,
                 representante_legal=comando.representante_legal,
                 email_contacto=comando.email_contacto,
@@ -35,6 +42,12 @@ class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
                 documento_identidad=comando.documento_identidad,
                 tipo_industria=comando.tipo_industria,
                 localizacion=comando.localizacion)
+
+        print("================================== Handler =================================")
+        print("================================")
+        print(comando)
+        print("================================")
+        print("================================== Handler =================================")
 
         compania: Compania = self.fabrica_companias.crear_objeto(compania_dto, MapeadorCompania())       
         compania.crear_compania(compania)

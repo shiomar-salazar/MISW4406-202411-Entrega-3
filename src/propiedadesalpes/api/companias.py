@@ -45,6 +45,7 @@ def registrar_asincrona():
         
         # TODO Reemplaze es todo código sincrono y use el broker de eventos para propagar este comando de forma asíncrona
         # Revise la clase Despachador de la capa de infraestructura
+
         ejecutar_commando(comando)
         
         return Response('{}', status=202, mimetype='application/json')
