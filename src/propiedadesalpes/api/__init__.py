@@ -13,10 +13,10 @@ DB_PORT = os.environ["POSTGRES_PORT"]
 DB_NAME =  os.environ["POSTGRES_DB"]
 
 def registrar_handlers():
-    import propiedadesalpes.modulos.companias.aplicacion
+    import modulos.companias.aplicacion
 
 def importar_modelos_alchemy():
-    import propiedadesalpes.modulos.companias.infraestructura.dto
+    import modulos.companias.infraestructura.dto
 
 def comenzar_consumidor():
     """
@@ -26,7 +26,7 @@ def comenzar_consumidor():
     """
 
     import threading
-    import propiedadesalpes.modulos.companias.infraestructura.consumidores as companias
+    import modulos.companias.infraestructura.consumidores as companias
 
     # Suscripción a eventos
     threading.Thread(target=companias.suscribirse_a_eventos).start()
@@ -46,10 +46,10 @@ def create_app(configuracion={}):
     app.config['TESTING'] = configuracion.get('TESTING')
 
      # Inicializa la DB
-    from propiedadesalpes.config.db import init_db
+    from config.db import init_db
     init_db(app)
 
-    from propiedadesalpes.config.db import db
+    from config.db import db
 
     importar_modelos_alchemy()
     registrar_handlers()
