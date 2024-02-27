@@ -21,22 +21,21 @@ class ObtenerTodasCompaniasHandler(ReservaQueryBaseHandler):
 
         for compania in companias:
             dto = CompaniaDTO(
-                fecha_creacion=compania.fecha_creacion,
-                fecha_actualizacion=compania.fecha_actualizacion,
-                id_compania = compania.id,
-                nombre = compania.nombre,
-                descripcion = compania.descripcion,
-                precio = compania.precio,
-                fecha_publicacion = compania.fecha_publicacion,
-                fecha_baja= compania.fecha_baja,
-                estado= compania.estado,
-                tipo= compania.tipo,
-                habitaciones= compania.habitaciones,
-                banos= compania.banos,
-                estacionamientos= compania.estacionamientos,
-                superficie= compania.superficie,
-                imagen= compania.imagen,
-                direccion=compania.direccion)
+                id_compania = compania.id_compania,
+                nombre_compania  = compania.nombre_compania,
+                representante_legal  = compania.representante_legal,
+                email_contacto  = compania.email_contacto,
+                telefono_contacto  = compania.telefono_contacto,
+                estado  = compania.estado,
+                documento_identidad_tipo  = compania.documento_identidad_tipo,
+                documento_identidad_numero_identificacion  = compania.documento_identidad_numero_identificacion,
+                tipo_industria  = compania.tipo_industria,
+                direccion  = compania.direccion,
+                ciudad  = compania.ciudad,
+                pais  = compania.pais,
+                latitud  = compania.latitud,
+                longitud  = compania.longitud
+                )
             companias_dto.append(dto)
         
         return QueryResultado(resultado=companias_dto)

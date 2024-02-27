@@ -17,7 +17,7 @@ class Compania(AgregacionRaiz, Compania_ov):
         print(type(compania))
         print(compania)
         if isinstance(compania, sqlalchemy.engine.row.Row):
-            self.id = compania[0].id
+            self.id_compania = compania[0].id_compania
             self.nombre_compania = compania[0].nombre_compania       
             self.representante_legal = compania[0].representante_legal
             self.email_contacto = compania[0].email_contacto      
@@ -32,7 +32,7 @@ class Compania(AgregacionRaiz, Compania_ov):
             self.latitud = None
             self.longitud = None
         else:
-            self.id = compania.id
+            self.id_compania = compania.id_compania
             self.nombre_compania = compania.nombre_compania       
             self.representante_legal = compania.representante_legal
             self.email_contacto = compania.email_contacto      
