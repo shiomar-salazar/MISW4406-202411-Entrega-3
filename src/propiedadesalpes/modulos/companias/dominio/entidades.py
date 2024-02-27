@@ -12,7 +12,7 @@ from .eventos import CompaniaCreada
 
 @dataclass
 class Compania(AgregacionRaiz):
-    id: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
     nombre_compania:str = field(default_factory=str)       
     representante_legal:str = field(default_factory=str)
     email_contacto:str = field(default_factory=str)      
@@ -29,22 +29,22 @@ class Compania(AgregacionRaiz):
     
 
     def crear_compania(self, compania: "Compania"):
-        self.nombre_compania = compania.nombre
-        self.representante_legal = compania.nombre
-        self.email_contacto = compania.nombre
-        self.telefono_contacto = compania.nombre
-        self.estado = compania.nombre
-        self.documento_identidad_tipo = compania.nombre
-        self.documento_identidad_numero_identificacion = compania.nombre
-        self.tipo_industria = compania.nombre
-        self.direccion = compania.nombre
-        self.ciudad = compania.nombre
-        self.pais = compania.nombre
-        self.latitud = compania.nombre
-        self.longitud = compania.nombre
+        self.nombre_compania = compania.nombre_compania
+        self.representante_legal = compania.representante_legal
+        self.email_contacto = compania.email_contacto
+        self.telefono_contacto = compania.telefono_contacto
+        self.estado = compania.estado
+        self.documento_identidad_tipo = compania.documento_identidad_tipo
+        self.documento_identidad_numero_identificacion = compania.documento_identidad_numero_identificacion
+        self.tipo_industria = compania.tipo_industria
+        self.direccion = compania.direccion
+        self.ciudad = compania.ciudad
+        self.pais = compania.pais
+        self.latitud = compania.latitud
+        self.longitud = compania.longitud
 
         self.agregar_evento(CompaniaCreada(
-            id = str(self.nombre), 
+            id_compania = str(self.id_compania), 
             nombre_compania = str(self.nombre_compania),
             representante_legal = str(self.representante_legal),
             email_contacto = str(self.email_contacto),
