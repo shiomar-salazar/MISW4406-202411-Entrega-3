@@ -13,7 +13,7 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 
 ## Lanzar Gitpod
 
-<a href="https://shiomarsala-misw4406202-41tvrrfj7bl.ws-us108.gitpod.io/" style="padding: 10px;">
+<a href="https://shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io/" style="padding: 10px;">
     <img src="https://gitpod.io/button/open-in-gitpod.svg" width="150" alt="Push" align="center">
 </a>
 <br/><br/>
@@ -27,20 +27,12 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 ```
 ├── .gitignore
 ├── .gitpod.yml
-├── adaptador.Dockerfile
 ├── docker-compose.Dockerfile
-├── notificacion.Dockerfile
-├── notificacion-requirements.txt
-├── propiedadesalpes.Dockerfile
+├── Dockerfile
 ├── pyproject.toml
 ├── README.md
 ├── requirements.txt
-├── sidecar-requirements.yml
-├── ui-requirements.yml
-├── ui.Dockerfile
 └── src
-    ├── ui
-    ├── sidecar
     ├── propiedadesalpes
         ├── __init__.py
         ├── api
@@ -49,6 +41,7 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
         ├── config
             ├── __init__.py
             ├── db.py
+            ├── config.py
             └── uow.py
         ├── modulos
             ├── __init__.py
@@ -63,22 +56,20 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
                     ├── comandos
                         ├── __init__.py
                         ├── base.py
-                        └── registrar_comapnias.py
+                        ├── crear_cache_compania.py
+                        └── crear_companias.py
                     └── queries
                         ├── __init__.py
                         ├── base.py
-                        └── obtener_companias.py
+                        └── obtener_todas_companias.py
                 ├── dominio
                     ├── __init__.py
                     ├── entidades.py
                     ├── eventos.py
                     ├── excepciones.py
                     ├── fabricas.py
-                    ├── mixins.py
                     ├── objetos_valor.py
-                    ├── reglas.py
-                    ├── repositorios.py
-                    └── servicios.py
+                    └── repositorios.py
                 └── infraestructura
                     ├── __init__.py
                     ├── consumidores.py
@@ -87,12 +78,15 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
                     ├── excepciones.py
                     ├── fabricas.py
                     ├── mapeadores.py
+                    ├── redis.py
+                    ├── vistas.py
                     ├── repositorios.py
                     └── schema
                         ├── __init__.py
                         └── v1
                             ├── __init__.py
                             ├── comandos.py
+                            ├── mensajes.py
                             └── eventos.py          
         └── seedwork
             ├── __init__.py
@@ -115,10 +109,11 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
                 ├── reglas.py
                 ├── repositorios.py
                 └── servicios.py
-            ├── infraestructura
+            └── infraestructura
                 ├── __init__.py
                 ├── uow.py
                 ├── utils.py
+                ├── vistas.py
                 └── schema
                     ├── __init__.py
                     └── v1
@@ -129,9 +124,6 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
             └── presentacion
                 ├── __init__.py
                 └── api.py
-    └── notificaciones
-        ├── __init__.py
-        └── main.py
 ```
 
 ### Escenarios de Calidad Seleccionados
