@@ -47,7 +47,7 @@ class DocumentoIdentidad(ABC, ObjetoValor):
     
 #@dataclass(frozen=True)
 class Compania_ov(ABC, ObjetoValor):
-    id: str
+    id_comp: str
     nombre_compania: str
     representante_legal: str
     email_contacto: str

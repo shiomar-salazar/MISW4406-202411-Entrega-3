@@ -2,6 +2,7 @@ import json
 from propiedadesalpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from propiedadesalpes.seedwork.dominio.repositorios import Mapeador as RepMap
 from propiedadesalpes.modulos.companias.dominio.entidades import Compania
+from propiedadesalpes.seedwork.dominio.objetos_valor import Compania_ov
 from .dto import CompaniaDTO, DocumentoIdentidadDTO, TipoIndustriaDTO, LocalizacionDTO, InformacionGeoespacialDTO, DireccionDTO, DatosGreograficosDTO
 from datetime import datetime
 import uuid
@@ -54,9 +55,9 @@ class MapeadorCompaniaDTOJson(AppMap):
 class MapeadorCompania(RepMap):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'        
 
-    def entidad_a_dto(self, entidad: Compania) -> CompaniaDTO:
+    def entidad_a_dto(self, entidad: Compania_ov) -> CompaniaDTO:
         compania_dto = CompaniaDTO()
-        compania_dto.id = entidad.id
+        compania_dto.id = entidad.id_comp
         compania_dto.nombre_compania = entidad.nombre_compania
         compania_dto.representante_legal = entidad.representante_legal
         compania_dto.email_contacto = entidad.email_contacto
@@ -64,12 +65,12 @@ class MapeadorCompania(RepMap):
         compania_dto.estado = entidad.estado
         
         # DocumentoIdentidad
-        if entidad.documento_identidad:
-            compania_dto.documento_identidad.tipo = entidad.documento_identidad_tipo
-            compania_dto.documento_identidad.numero_identificacion = entidad.documento_identidad_numero_identificacion
+        # if entidad.documento_identidad:
+        #     compania_dto.documento_identidad.tipo = entidad.documento_identidad_tipo
+        #     compania_dto.documento_identidad.numero_identificacion = entidad.documento_identidad_numero_identificacion
         # TipoIndustria
-        if entidad.tipo_industria:
-            compania_dto.tipo_industria = entidad.tipo_industria.nombre
+        # if entidad.tipo_industria:
+        #     compania_dto.tipo_industria = entidad.tipo_industria.nombre
         
         return compania_dto
 

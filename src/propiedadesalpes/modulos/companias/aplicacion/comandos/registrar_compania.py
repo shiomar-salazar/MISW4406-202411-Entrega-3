@@ -19,9 +19,9 @@ class RegistrarCompania(Comando):
     email_contacto: str 
     telefono_contacto: str 
     estado: str 
-    documento_identidad: DocumentoIdentidadDTO 
-    tipo_industria: TipoIndustriaDTO
-    localizacion: LocalizacionDTO
+    # documento_identidad: DocumentoIdentidadDTO 
+    # tipo_industria: TipoIndustriaDTO
+    # localizacion: LocalizacionDTO
 
 
 class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
@@ -32,16 +32,16 @@ class RegistrarCompaniaHandler(RegistrarCompaniaBaseHandler):
         print(comando)
         print("================================")
         print("================================== handle antes =================================")
-        compania_dto = CompaniaDTO(
-                id=str(uuid.uuid4()),
-                nombre_compania=comando.nombre_compania,
-                representante_legal=comando.representante_legal,
-                email_contacto=comando.email_contacto,
-                telefono_contacto=comando.telefono_contacto,
-                estado=comando.estado,
-                documento_identidad=comando.documento_identidad,
-                tipo_industria=comando.tipo_industria,
-                localizacion=comando.localizacion)
+        compania_dto = CompaniaDTO()
+        compania_dto.id=comando.id, #str(uuid.uuid4()),
+        compania_dto.nombre_compania=comando.nombre_compania,
+        compania_dto.representante_legal=comando.representante_legal,
+        compania_dto.email_contacto=comando.email_contacto,
+        compania_dto.telefono_contacto=comando.telefono_contacto,
+        compania_dto.estado=comando.estado
+                # documento_identidad=comando.documento_identidad,
+                # tipo_industria=comando.tipo_industria,
+                # localizacion=comando.localizacion)
 
         print("================================== Handler =================================")
         print("================================")
