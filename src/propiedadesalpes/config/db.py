@@ -6,4 +6,3 @@ db = None
 def init_db(app: Flask):
     global db 
     db = SQLAlchemy(app)
-

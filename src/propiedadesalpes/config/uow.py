@@ -1,5 +1,5 @@
-from config.db import db
-from seedwork.infraestructura.uow import UnidadTrabajo, Batch
+from propiedadesalpes.config.db import db
+from propiedadesalpes.seedwork.infraestructura.uow import UnidadTrabajo, Batch
 
 class UnidadTrabajoSQLAlchemy(UnidadTrabajo):
 
@@ -24,16 +24,13 @@ class UnidadTrabajoSQLAlchemy(UnidadTrabajo):
         return self._batches             
 
     def commit(self):
-        try:
-            for batch in self.batches:
-                lock = batch.lock
-                batch.operacion(*batch.args, **batch.kwargs)
+        for batch in self.batches:
+            lock = batch.lock
+            batch.operacion(*batch.args, **batch.kwargs)
 
-            db.session.commit()
+        db.session.commit()
 
-            super().commit()
-        except Exception as e:
-            print(f"ERROR DE UOW {e}")
+        super().commit()
 
     def rollback(self, savepoint=None):
         if savepoint:

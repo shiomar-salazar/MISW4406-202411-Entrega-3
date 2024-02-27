@@ -1,53 +1,55 @@
 import os
-from flask import Flask, render_template, request, url_for, redirect, jsonify, session
-from flask import Flask
 
-from modulos.propiedades.infraestructura.despachadores import Despachador
+from flask import Flask, jsonify
+from flask_swagger import swagger
 
 # Identifica el directorio base
 basedir = os.path.abspath(os.path.dirname(__file__))
+# Constantes
+DB_USER = os.environ["DB_USER"]
+DB_PASSWORD = os.environ["DB_PASSWORD"]
+DB_HOST = os.environ["DB_HOST"]
+DB_PORT = os.environ["DB_PORT"]
+DB_NAME =  os.environ["DB_NAME"]
 
 def registrar_handlers():
-    import modulos.propiedades.aplicacion
+    import propiedadesalpes.modulos.companias.aplicacion
 
 def importar_modelos_alchemy():
-    import modulos.propiedades.infraestructura.dto
-
+    import propiedadesalpes.modulos.companias.infraestructura.dto
 
 def comenzar_consumidor():
+    """
+    Este es un código de ejemplo. Aunque esto sea funcional puede ser un poco peligroso tener 
+    threads corriendo por si solos. Mi sugerencia es en estos casos usar un verdadero manejador
+    de procesos y threads como Celery.
+    """
 
     import threading
-    import modulos.propiedades.infraestructura.consumidores as propiedad
-
+    import propiedadesalpes.modulos.companias.infraestructura.consumidores as companias
 
     # Suscripción a eventos
-    threading.Thread(target=propiedad.suscribirse_a_eventos_rabbit).start()
-    #threading.Thread(target=propiedad.suscribirse_a_eventos).start()
+    threading.Thread(target=companias.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
-    #threading.Thread(target=propiedad.suscribirse_a_comandos).start()
-    
+    threading.Thread(target=companias.suscribirse_a_comandos).start()
 
-
-def create_app():
+def create_app(configuracion={}):
     # Init la aplicacion de Flask
     app = Flask(__name__, instance_relative_config=True)
     
-    app.config['SQLALCHEMY_DATABASE_URI'] = \
-        f"postgresql://postgres:postgres@{os.getenv('DATABASE_HOST', default='127.0.0.1')}:5432/propiedades"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     app.secret_key = '9d58f98f-3ae8-4149-a09f-3a8c2012e32c'
     app.config['SESSION_TYPE'] = 'filesystem'
-    #app.config['TESTING'] = configuracion.get('TESTING')
+    app.config['TESTING'] = configuracion.get('TESTING')
 
      # Inicializa la DB
-
-
-    from config.db import init_db
+    from propiedadesalpes.config.db import init_db
     init_db(app)
 
-    from config.db import db
+    from propiedadesalpes.config.db import db
 
     importar_modelos_alchemy()
     registrar_handlers()
@@ -58,10 +60,11 @@ def create_app():
             comenzar_consumidor()
 
      # Importa Blueprints
-    from . import propiedad
+    from . import companias
+
     # Registro de Blueprints
-    app.register_blueprint(propiedad.bp)
-    from flask_swagger import swagger
+    app.register_blueprint(companias.bp)
+
     @app.route("/spec")
     def spec():
         swag = swagger(app)
@@ -74,4 +77,3 @@ def create_app():
         return {"status": "up"}
 
     return app
-
