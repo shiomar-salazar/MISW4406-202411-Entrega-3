@@ -3,10 +3,10 @@ import pulsar,_pulsar
 from pulsar.schema import *
 import logging
 import traceback
-from modulos.propiedades.aplicacion.comandos.crear_cache_compania import CrearCacheCompania
+from modulos.companias.aplicacion.comandos.crear_cache_compania import CrearCacheCompania
 
-from modulos.propiedades.infraestructura.schema.v1.eventos import EventoCompaniaCreada
-from modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearCompania
+from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada
+from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania
 from seedwork.aplicacion.comandos import ejecutar_commando
 from seedwork.infraestructura import utils
 

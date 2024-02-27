@@ -1,8 +1,8 @@
 
 
-from modulos.propiedades.dominio.eventos import companiaCreada
+from modulos.companias.dominio.eventos import companiaCreada
 from seedwork.aplicacion.handlers import Handler
-from modulos.propiedades.infraestructura.despachadores import Despachador
+from modulos.companias.infraestructura.despachadores import Despachador
 
 class HandlerCompaniaDominio(Handler):
 

@@ -2,11 +2,11 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 from seedwork.aplicacion.comandos import Comando
-from modulos.propiedades.aplicacion.dto import CompaniaDTO
-from modulos.propiedades.dominio.entidades import Compania
-from modulos.propiedades.aplicacion.comandos.base import CrearCompaniaBaseHandler
-from modulos.propiedades.aplicacion.mapeadores import MapeadorCompania
-from modulos.propiedades.infraestructura.repositorios import RepositorioCompanias
+from modulos.companias.aplicacion.dto import CompaniaDTO
+from modulos.companias.dominio.entidades import Compania
+from modulos.companias.aplicacion.comandos.base import CrearCompaniaBaseHandler
+from modulos.companias.aplicacion.mapeadores import MapeadorCompania
+from modulos.companias.infraestructura.repositorios import RepositorioCompanias
 from seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from seedwork.aplicacion.comandos import ejecutar_commando as comando
 

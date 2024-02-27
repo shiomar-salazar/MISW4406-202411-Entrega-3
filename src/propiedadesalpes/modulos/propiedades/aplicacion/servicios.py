@@ -1,8 +1,8 @@
 from seedwork.aplicacion.servicios import Servicio
-from modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
-from modulos.propiedades.dominio.fabricas import FabricaCompanias
-from modulos.propiedades.dominio.entidades import Compania
-from modulos.propiedades.infraestructura.repositorios import RepositorioCompanias
+from modulos.companias.infraestructura.fabricas import FabricaRepositorio
+from modulos.companias.dominio.fabricas import FabricaCompanias
+from modulos.companias.dominio.entidades import Compania
+from modulos.companias.infraestructura.repositorios import RepositorioCompanias
 from seedwork.infraestructura.uow import UnidadTrabajoPuerto
 
 from .dto import CompaniaDTO

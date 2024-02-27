@@ -1,6 +1,6 @@
 from seedwork.aplicacion.queries import QueryHandler
-from modulos.propiedades.infraestructura.fabricas import FabricaVista
-from modulos.propiedades.dominio.fabricas import FabricaCompanias
+from modulos.companias.infraestructura.fabricas import FabricaVista
+from modulos.companias.dominio.fabricas import FabricaCompanias
 
 class ReservaQueryBaseHandler(QueryHandler):
     def __init__(self):

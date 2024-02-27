@@ -1,6 +1,6 @@
 from seedwork.aplicacion.comandos import ComandoHandler
-from modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
-from modulos.propiedades.dominio.fabricas import FabricaCompanias
+from modulos.companias.infraestructura.fabricas import FabricaRepositorio
+from modulos.companias.dominio.fabricas import FabricaCompanias
 
 class CrearCompaniaBaseHandler(ComandoHandler):
     def __init__(self):

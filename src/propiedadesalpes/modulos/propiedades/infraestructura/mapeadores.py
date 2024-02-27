@@ -1,4 +1,4 @@
-""" Mapeadores para la capa de infrastructura del dominio de vuelos
+""" Mapeadores para la capa de infrastructura del dominio de companias
 
 En este archivo usted encontrará los diferentes mapeadores
 encargados de la transformación entre formatos de dominio y DTOs
