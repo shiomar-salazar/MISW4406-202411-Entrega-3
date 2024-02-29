@@ -1,6 +1,5 @@
 
 from dataclasses import dataclass, field
-from datetime import datetime
 
 from seedwork.aplicacion.comandos import Comando
 from modulos.companias.aplicacion.dto import CompaniaDTO
@@ -15,17 +14,17 @@ class CrearCacheCompania(Comando):
     id_compania: str = field(default_factory=str)
     nombre_compania: str = field(default_factory=str)
     representante_legal: str = field(default_factory=str)
-    email_contacto: float = field(default_factory=str)
-    telefono_contacto: datetime = field(default_factory=str)
-    estado: datetime = field(default_factory=str)
-    documento_identidad_tipo: datetime = field(default_factory=str)
-    documento_identidad_numero_identificacion: datetime = field(default_factory=str)
-    tipo_industria: int = field(default_factory=str)
-    direccion: int = field(default_factory=str)
-    ciudad: int = field(default_factory=str)
-    pais: int = field(default_factory=str)
-    latitud: int = field(default_factory=str)
-    longitud: int = field(default_factory=str)
+    email_contacto: str = field(default_factory=str)
+    telefono_contacto: str = field(default_factory=str)
+    estado: str = field(default_factory=str)
+    documento_identidad_tipo: str = field(default_factory=str)
+    documento_identidad_numero_identificacion: str = field(default_factory=str)
+    tipo_industria: str = field(default_factory=str)
+    direccion: str = field(default_factory=str)
+    ciudad: str = field(default_factory=str)
+    pais: str = field(default_factory=str)
+    latitud: str = field(default_factory=str)
+    longitud: str = field(default_factory=str)
 
 class CrearCacheCompaniaHandler(CrearCompaniaBaseHandler):
     def handle(self, comando: CrearCacheCompania):

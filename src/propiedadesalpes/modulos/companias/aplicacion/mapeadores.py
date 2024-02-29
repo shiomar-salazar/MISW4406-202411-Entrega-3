@@ -3,8 +3,6 @@ from seedwork.dominio.repositorios import Mapeador as RepMap
 from modulos.companias.dominio.entidades import Compania
 from .dto import CompaniaDTO
 
-from datetime import datetime
-
 class MapeadorCompaniaDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> CompaniaDTO:
         compania_dto = CompaniaDTO()
