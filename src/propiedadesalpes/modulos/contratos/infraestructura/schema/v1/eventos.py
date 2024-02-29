@@ -8,7 +8,7 @@ class ContratoCreadoPayload(Record):
     fecha_inicio = String()
     telefono_contacto = String()
     fecha_ejecucion = String()
-    monto = Int()
+    monto = String()
     tipo = String()
 
 

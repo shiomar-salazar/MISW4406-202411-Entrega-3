@@ -14,9 +14,12 @@ DB_NAME =  os.environ["POSTGRES_DB"]
 
 def registrar_handlers():
     import modulos.companias.aplicacion
+    import modulos.contratos.aplicacion
+
 
 def importar_modelos_alchemy():
     import modulos.companias.infraestructura.dto
+    import modulos.contratos.infraestructura.dto
 
 def comenzar_consumidor():
     """
@@ -27,12 +30,15 @@ def comenzar_consumidor():
 
     import threading
     import modulos.companias.infraestructura.consumidores as companias
+    import modulos.contratos.infraestructura.consumidores as contratos
 
     # Suscripción a eventos
     threading.Thread(target=companias.suscribirse_a_eventos).start()
+    threading.Thread(target=contratos.suscribirse_a_eventos).start()
 
     # Suscripción a comandos
     threading.Thread(target=companias.suscribirse_a_comandos).start()
+    threading.Thread(target=contratos.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
     # Init la aplicacion de Flask

@@ -11,7 +11,7 @@ services:
     networks:
       - pulsar
     environment:
-      POSTGRES_DB: companias
+      POSTGRES_DB: propiedadesalpes
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost
@@ -61,16 +61,16 @@ services:
     networks:
       - pulsar
  
-  # Servicios de PDA_companias
-  PDA_companias:
-    container_name: PDA_companias
-    hostname: PDA_companias
+  # Servicios de pda_companias
+  pda_companias:
+    container_name: pda_companias
+    hostname: pda_companias
     restart: on-failure
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - PDA_companias_ADDRESS=PDA_companias
+      - PDA_COMPANIAS_ADDRESS=pda_companias
       - DATABASE_HOST=postgres
       - REDIS_HOST=redis_prop
       - BROKER_HOST=broker
@@ -78,7 +78,7 @@ services:
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=rabbitmq
       - RABBITMQ_PASS=propiedadesalpes2024
-      - POSTGRES_DB=companias
+      - POSTGRES_DB=propiedadesalpes
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgres
@@ -95,16 +95,16 @@ services:
       redis_prop:
         condition: service_healthy
 
-  # Servicios de PDA_contratos
-  PDA_contratos:
-    container_name: PDA_contratos
-    hostname: PDA_contratos
+  # Servicios de pda_contratos
+  pda_contratos:
+    container_name: pda_contratos
+    hostname: pda_contratos
     restart: on-failure
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - PDA_contratos_ADDRESS=PDA_contratos
+      - PDA_CONTRATOS_ADDRESS=pda_contratos
       - DATABASE_HOST=postgres
       - REDIS_HOST=redis_prop
       - BROKER_HOST=broker
@@ -112,13 +112,13 @@ services:
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=rabbitmq
       - RABBITMQ_PASS=propiedadesalpes2024
-      - POSTGRES_DB=contratos
+      - POSTGRES_DB=propiedadesalpes
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
     ports:
-      - "5001:5000"
+      - "5001:5001"
     networks:
       - pulsar
     depends_on:
