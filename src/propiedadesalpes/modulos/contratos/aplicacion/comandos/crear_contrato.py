@@ -24,11 +24,7 @@ class CrearContrato(Comando):
 
 class CrearContratoHandler(CrearContratoBaseHandler):
     def handle(self, comando: CrearContrato):
-        print("================= handle ===========================")
-        print("================= ")
-        print(comando.id_propiedad)
-        print("================= ")
-        print("================= handle ===========================")
+
         contrato_dto = ContratoDTO(
             id_contrato=comando.id_contrato,
             id_propiedad=comando.id_propiedad,
@@ -39,12 +35,6 @@ class CrearContratoHandler(CrearContratoBaseHandler):
             monto=comando.monto,
             tipo=comando.tipo,
             )
-
-        print("================= handle ===========================")
-        print("================= ")
-        print(contrato_dto.id_propiedad)
-        print("================= ")
-        print("================= handle ===========================")
         
         contrato : Contrato = self._fabrica_contratos.crear_objeto(contrato_dto, MapeadorContrato())
         contrato.crear_contrato(contrato)
@@ -56,10 +46,5 @@ class CrearContratoHandler(CrearContratoBaseHandler):
 
 @comando.register(CrearContrato)
 def ejecutar_comando_crear_contrato(comando: CrearContrato):
-    print("================= ejecutar_comando_crear_contrato ===========================")
-    print("================= ")
-    print(comando)
-    print("================= ")
-    print("================= ejecutar_comando_crear_contrato ===========================")
     handler = CrearContratoHandler()
     handler.handle(comando)

@@ -5,11 +5,6 @@ from .dto import ContratoDTO
 
 class MapeadorContratoDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> ContratoDTO:
-        print("================= externo_a_dto ===========================")
-        print("================= ")
-        print(externo.get("id_propiedad"))
-        print("================= ")
-        print("================= externo_a_dto ===========================")
         contrato_dto = ContratoDTO()
         contrato_dto.id_propiedad  = externo.get("id_propiedad")
         contrato_dto.id_compania  = externo.get("id_compania")
@@ -18,12 +13,6 @@ class MapeadorContratoDTOJson(AppMap):
         contrato_dto.fecha_ejecucion  = externo.get("fecha_ejecucion")
         contrato_dto.monto  = externo.get("monto")
         contrato_dto.tipo  = externo.get("tipo")
-
-        print("================= externo_a_dto ===========================")
-        print("================= ")
-        print(contrato_dto.id_propiedad)
-        print("================= ")
-        print("================= externo_a_dto ===========================")
 
         return contrato_dto
     
