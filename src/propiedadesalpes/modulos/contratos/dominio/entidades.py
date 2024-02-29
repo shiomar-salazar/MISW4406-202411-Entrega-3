@@ -6,6 +6,7 @@ import uuid
 import modulos.contratos.dominio.objetos_valor as ov
 from modulos.contratos.dominio.eventos import ContratoCreado
 from seedwork.dominio.entidades import AgregacionRaiz, Entidad
+import uuid
 
 
 from .eventos import ContratoCreado
@@ -13,8 +14,8 @@ from .eventos import ContratoCreado
 @dataclass
 class Contrato(AgregacionRaiz):
     id_contrato: uuid.UUID = field(hash=True, default=uuid.uuid4())
-    id_propiedad:str = field(default_factory=str)       
-    id_compania:str = field(default_factory=str)
+    id_propiedad:uuid.UUID = field(hash=True, default=uuid.uuid4())     
+    id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
     fecha_inicio:str = field(default_factory=str)      
     fecha_fin:str = field(default_factory=str)
     fecha_ejecucion:str = field(default_factory=str)

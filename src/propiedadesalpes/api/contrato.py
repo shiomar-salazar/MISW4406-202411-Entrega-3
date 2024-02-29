@@ -16,6 +16,11 @@ bp = api.crear_blueprint('contrato', '/contrato')
 def crear():
     try:
         contrato_dict = request.json
+        print("================= API ===========================")
+        print("================= ")
+        print(contrato_dict)
+        print("================= ")
+        print("================= API ===========================")
         map_contrato = MapeadorContratoDTOJson()
         contrato_dto = map_contrato.externo_a_dto(contrato_dict)
 
@@ -28,6 +33,12 @@ def crear():
             monto = contrato_dto.monto,
             tipo = contrato_dto.tipo,
         )
+
+        print("================= API ===========================")
+        print("================= ")
+        print(comando.id_propiedad)
+        print("================= ")
+        print("================= API ===========================")
 
         ejecutar_commando(comando)
         return Response('{}', status=202, mimetype='application/json')

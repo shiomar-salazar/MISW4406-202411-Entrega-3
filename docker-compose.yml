@@ -118,7 +118,7 @@ services:
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
     ports:
-      - "5001:5001"
+      - "5001:5000"
     networks:
       - pulsar
     depends_on:

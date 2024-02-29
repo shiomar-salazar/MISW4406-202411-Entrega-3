@@ -6,8 +6,8 @@ from seedwork.dominio.eventos import (EventoDominio)
 @dataclass
 class ContratoCreado(EventoDominio):
     id_contrato: uuid.UUID = None    
-    id_propiedad: str = None
-    id_compania: str = None    
+    id_propiedad: uuid.UUID = None
+    id_compania: uuid.UUID = None    
     fecha_inicio: str = None
     fecha_fin: str = None
     fecha_ejecucion: str = None

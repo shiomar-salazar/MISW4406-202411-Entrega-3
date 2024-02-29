@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass, field
-
+import uuid
 from seedwork.aplicacion.comandos import Comando
 from modulos.contratos.aplicacion.dto import ContratoDTO
 from modulos.contratos.dominio.entidades import Contrato
@@ -11,9 +11,9 @@ from modulos.contratos.infraestructura.redis import RedisRepositorio
 
 @dataclass
 class CrearCacheContrato(Comando):
-    id_contrato: str = field(default_factory=str)
-    id_propiedad: str = field(default_factory=str)
-    id_compania: str = field(default_factory=str)
+    id_contrato: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_propiedad: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
     fecha_inicio: str = field(default_factory=str)
     fecha_fin: str = field(default_factory=str)
     fecha_ejecucion: str = field(default_factory=str)

@@ -8,12 +8,14 @@ from modulos.contratos.aplicacion.mapeadores import MapeadorContrato
 from modulos.contratos.infraestructura.repositorios import RepositorioContratos
 from seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from seedwork.aplicacion.comandos import ejecutar_commando as comando
+import uuid
+
 
 @dataclass
 class CrearContrato(Comando):
-    id_contrato: str = field(default_factory=str)
-    id_propiedad: str = field(default_factory=str)
-    id_compania: str = field(default_factory=str)
+    id_contrato: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_propiedad: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
     fecha_inicio: str = field(default_factory=str)
     fecha_fin: str = field(default_factory=str)
     fecha_ejecucion: str = field(default_factory=str)
@@ -22,6 +24,11 @@ class CrearContrato(Comando):
 
 class CrearContratoHandler(CrearContratoBaseHandler):
     def handle(self, comando: CrearContrato):
+        print("================= handle ===========================")
+        print("================= ")
+        print(comando.id_propiedad)
+        print("================= ")
+        print("================= handle ===========================")
         contrato_dto = ContratoDTO(
             id_contrato=comando.id_contrato,
             id_propiedad=comando.id_propiedad,
@@ -32,6 +39,12 @@ class CrearContratoHandler(CrearContratoBaseHandler):
             monto=comando.monto,
             tipo=comando.tipo,
             )
+
+        print("================= handle ===========================")
+        print("================= ")
+        print(contrato_dto.id_propiedad)
+        print("================= ")
+        print("================= handle ===========================")
         
         contrato : Contrato = self._fabrica_contratos.crear_objeto(contrato_dto, MapeadorContrato())
         contrato.crear_contrato(contrato)
@@ -43,5 +56,10 @@ class CrearContratoHandler(CrearContratoBaseHandler):
 
 @comando.register(CrearContrato)
 def ejecutar_comando_crear_contrato(comando: CrearContrato):
+    print("================= ejecutar_comando_crear_contrato ===========================")
+    print("================= ")
+    print(comando)
+    print("================= ")
+    print("================= ejecutar_comando_crear_contrato ===========================")
     handler = CrearContratoHandler()
     handler.handle(comando)
