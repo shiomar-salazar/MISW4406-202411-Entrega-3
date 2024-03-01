@@ -1,99 +1,158 @@
 {
 	"info": {
-		"_postman_id": "0b37afd5-ae55-458c-8154-d2299af436ea",
+		"_postman_id": "a12f4ef9-4632-4197-a7eb-2c0c7c00f569",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24449657",
-		"_collection_link": "https://planetary-water-212881.postman.co/workspace/MISW4304-DevOps~d3c8a8af-f51c-4b53-91e5-7c70c6ef1744/collection/24449657-0b37afd5-ae55-458c-8154-d2299af436ea?action=share&source=collection_link&creator=24449657"
+		"_exporter_id": "5238096",
+		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-a12f4ef9-4632-4197-a7eb-2c0c7c00f569?action=share&source=collection_link&creator=5238096"
 	},
 	"item": [
 		{
-			"name": "Obtener todas las Compañias",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST_COMPANIAS}}/compania",
-					"host": [
-						"{{HOST_COMPANIAS}}"
-					],
-					"path": [
-						"compania"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Compania",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"ciudad\": \"Bogota\",\r\n    \"direccion\": \"calle 25\",\r\n    \"documento_identidad_numero_identificacion\": \"10189832943\",\r\n    \"documento_identidad_tipo\": \"NIT\",\r\n    \"email_contacto\": \"pepito@gmail.com\",\r\n    \"estado\": \"Registrado\",\r\n    \"latitud\": null,\r\n    \"longitud\": null,\r\n    \"nombre_compania\": \"Starbuks 122\",\r\n    \"pais\": \"Colombia\",\r\n    \"representante_legal\": \"Pepit Peleaz\",\r\n    \"telefono_contacto\": \"695587569\",\r\n    \"tipo_industria\": \"Laboratorio\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Compañias",
+			"item": [
+				{
+					"name": "Obtener todas las Compañias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_COMPANIAS}}/compania",
+							"host": [
+								"{{HOST_COMPANIAS}}"
+							],
+							"path": [
+								"compania"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{HOST_COMPANIAS}}/compania/crear",
-					"host": [
-						"{{HOST_COMPANIAS}}"
-					],
-					"path": [
-						"compania",
-						"crear"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener todos los Contratos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{HOST_CONTRATOS}}/contrato",
-					"host": [
-						"{{HOST_CONTRATOS}}"
-					],
-					"path": [
-						"contrato"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Contrato",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear Compania",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ciudad\": \"Bogota\",\r\n    \"direccion\": \"calle 25\",\r\n    \"documento_identidad_numero_identificacion\": \"10189832943\",\r\n    \"documento_identidad_tipo\": \"NIT\",\r\n    \"email_contacto\": \"pepito@gmail.com\",\r\n    \"estado\": \"Registrado\",\r\n    \"latitud\": null,\r\n    \"longitud\": null,\r\n    \"nombre_compania\": \"Starbuks 122\",\r\n    \"pais\": \"Colombia\",\r\n    \"representante_legal\": \"Pepit Peleaz\",\r\n    \"telefono_contacto\": \"695587569\",\r\n    \"tipo_industria\": \"Laboratorio\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_COMPANIAS}}/compania/crear",
+							"host": [
+								"{{HOST_COMPANIAS}}"
+							],
+							"path": [
+								"compania",
+								"crear"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "{{HOST_CONTRATOS}}/contrato/crear",
-					"host": [
-						"{{HOST_CONTRATOS}}"
-					],
-					"path": [
-						"contrato",
-						"crear"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Contratos",
+			"item": [
+				{
+					"name": "Obtener todos los Contratos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_CONTRATOS}}/contrato",
+							"host": [
+								"{{HOST_CONTRATOS}}"
+							],
+							"path": [
+								"contrato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Contrato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_CONTRATOS}}/contrato/crear",
+							"host": [
+								"{{HOST_CONTRATOS}}"
+							],
+							"path": [
+								"contrato",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propiedades",
+			"item": [
+				{
+					"name": "Obtener todas las Propiedades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_PROPIEDADES}}/propiedad",
+							"host": [
+								"{{HOST_PROPIEDADES}}"
+							],
+							"path": [
+								"propiedad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Propiedad",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega\",\r\n    \"pais\": \"Colombia\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"ciudad\": \"Bogotá D.C\",\r\n    \"direccion\": \"Calle 132 # 39-50\",\r\n    \"latitud\": 123.456,\r\n    \"longitud\": -78.910,\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"fecha_ultimo_contrato\": \"2024-02-20\",\r\n    \"fecha_expiracion_contrato_actual\": \"2025-02-20\",\r\n    \"estado\": \"Activo\",\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_contrato\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_PROPIEDADES}}/propiedad/crear",
+							"host": [
+								"{{HOST_PROPIEDADES}}"
+							],
+							"path": [
+								"propiedad",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -125,6 +184,11 @@
 		{
 			"key": "HOST_CONTRATOS",
 			"value": "https://5001-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"type": "string"
+		},
+		{
+			"key": "HOST_PROPIEDADES",
+			"value": "https://5002-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
 			"type": "string"
 		}
 	]

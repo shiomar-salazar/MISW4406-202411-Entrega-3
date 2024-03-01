@@ -129,6 +129,40 @@ services:
       redis_prop:
         condition: service_healthy
 
+  # Servicios de pda_contratos
+  pda_propiedades:
+    container_name: pda_propiedades
+    hostname: pda_propiedades
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PDA_CONTRATOS_ADDRESS=pda_propiedades
+      - DATABASE_HOST=postgres
+      - REDIS_HOST=redis_prop
+      - BROKER_HOST=broker
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=rabbitmq
+      - RABBITMQ_PASS=propiedadesalpes2024
+      - POSTGRES_DB=propiedadesalpes
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+    ports:
+      - "5002:5000"
+    networks:
+      - pulsar
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+      redis_prop:
+        condition: service_healthy
+
 # Start zookeeper
   zookeeper:
     image: apachepulsar/pulsar:latest

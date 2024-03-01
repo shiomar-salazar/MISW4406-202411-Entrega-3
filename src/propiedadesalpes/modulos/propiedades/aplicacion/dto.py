@@ -1,0 +1,27 @@
+from dataclasses import dataclass, field
+from seedwork.aplicacion.dto import DTO
+
+@dataclass(frozen=False)
+class PropiedadDTO(DTO):
+    id_propiedad: str = field(default_factory=str)
+    nombre_propiedad: str = field(default_factory=str)   
+    tipo_propiedad: str = field(default_factory=str)
+    pais: str = field(default_factory=str)
+    departamento: str = field(default_factory=str)
+    ciudad: str = field(default_factory=str)
+    direccion: str = field(default_factory=str)   
+    latitud : str = field(default_factory=str)
+    longitud: str = field(default_factory=str)
+    codigo_postal: str = field(default_factory=str)
+    area_lote: str = field(default_factory=str)
+    estrato_socioeconomico: str = field(default_factory=str)
+    valor_venta : str = field(default_factory=str)
+    valor_arriendo_mensual : str = field(default_factory=str)
+    moneda : str = field(default_factory=str)
+    propietario : str = field(default_factory=str)
+    arrendatario : str = field(default_factory=str)
+    fecha_ultimo_contrato : str = field(default_factory=str)
+    fecha_expiracion_contrato_actual : str = field(default_factory=str)
+    estado : str = field(default_factory=str)
+    id_compania : str = field(default_factory=str)
+    id_contrato : str = field(default_factory=str)  
