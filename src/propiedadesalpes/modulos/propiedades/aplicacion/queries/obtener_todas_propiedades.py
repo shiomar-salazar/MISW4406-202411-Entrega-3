@@ -18,31 +18,32 @@ class ObtenerTodasPropiedadesHandler(PropiedadQueryBaseHandler):
         propiedades_dto = []
         vista = self.fabrica_vista.crear_objeto(Propiedad)
         propiedades = vista.obtener_todos()
-        print("=================== ObtenerTodasPropiedadesHandler =========================")
-        print(propiedades)
-
         for propiedad in propiedades:
             dto = PropiedadDTO(
-                id_propiedad = propiedad.id,
-                nombre_propiedad  = propiedad.nombre_propiedad,
-                representante_legal  = propiedad.representante_legal,
-                email_contacto  = propiedad.email_contacto,
-                telefono_contacto  = propiedad.telefono_contacto,
-                estado  = propiedad.estado,
-                documento_identidad_tipo  = propiedad.documento_identidad_tipo,
-                documento_identidad_numero_identificacion  = propiedad.documento_identidad_numero_identificacion,
-                tipo_industria  = propiedad.tipo_industria,
-                direccion  = propiedad.direccion,
-                ciudad  = propiedad.ciudad,
-                pais  = propiedad.pais,
-                latitud  = propiedad.latitud,
-                longitud  = propiedad.longitud
-                )
+                nombre_propiedad = propiedad.nombre_propiedad,
+                tipo_propiedad = propiedad.tipo_propiedad,
+                pais = propiedad.pais,
+                departamento = propiedad.departamento,
+                ciudad = propiedad.ciudad,
+                direccion = propiedad.direccion,
+                latitud = propiedad.latitud,
+                longitud = propiedad.longitud,
+                codigo_postal = propiedad.codigo_postal,
+                area_lote = propiedad.area_lote,
+                estrato_socioeconomico = propiedad.estrato_socioeconomico,
+                valor_venta = propiedad.valor_venta,
+                valor_arriendo_mensual = propiedad.valor_arriendo_mensual,
+                moneda = propiedad.moneda,
+                propietario = propiedad.propietario,
+                arrendatario = propiedad.arrendatario,
+                fecha_ultimo_contrato = propiedad.fecha_ultimo_contrato,
+                fecha_expiracion_contrato_actual = propiedad.fecha_expiracion_contrato_actual,
+                estado = propiedad.estado,
+                id_compania = propiedad.id_compania,
+                id_contrato = propiedad.id_contrato
+            )
             propiedades_dto.append(dto)
 
-        print("=================== ObtenerTodasPropiedadesHandler =========================")
-        print(propiedades_dto)
-        
         return QueryResultado(resultado=propiedades_dto)
 
 @query.register(ObtenerTodasPropiedades)

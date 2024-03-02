@@ -12,56 +12,79 @@ from modulos.propiedades.infraestructura.redis import RedisRepositorio
 @dataclass
 class CrearCachePropiedad(Comando):
     id_propiedad: str = field(default_factory=str)
-    nombre_propiedad: str = field(default_factory=str)
-    representante_legal: str = field(default_factory=str)
-    email_contacto: str = field(default_factory=str)
-    telefono_contacto: str = field(default_factory=str)
-    estado: str = field(default_factory=str)
-    documento_identidad_tipo: str = field(default_factory=str)
-    documento_identidad_numero_identificacion: str = field(default_factory=str)
-    tipo_industria: str = field(default_factory=str)
-    direccion: str = field(default_factory=str)
-    ciudad: str = field(default_factory=str)
+    nombre_propiedad: str = field(default_factory=str)   
+    tipo_propiedad: str = field(default_factory=str)
     pais: str = field(default_factory=str)
-    latitud: str = field(default_factory=str)
+    departamento: str = field(default_factory=str)
+    ciudad: str = field(default_factory=str)
+    direccion: str = field(default_factory=str)   
+    latitud : str = field(default_factory=str)
     longitud: str = field(default_factory=str)
+    codigo_postal: str = field(default_factory=str)
+    area_lote: str = field(default_factory=str)
+    estrato_socioeconomico: str = field(default_factory=str)
+    valor_venta : str = field(default_factory=str)
+    valor_arriendo_mensual : str = field(default_factory=str)
+    moneda : str = field(default_factory=str)
+    propietario : str = field(default_factory=str)
+    arrendatario : str = field(default_factory=str)
+    fecha_ultimo_contrato : str = field(default_factory=str)
+    fecha_expiracion_contrato_actual : str = field(default_factory=str)
+    estado : str = field(default_factory=str)
+    id_compania : str = field(default_factory=str)
+    id_contrato : str = field(default_factory=str)  
 
 class CrearCachePropiedadHandler(CrearPropiedadBaseHandler):
     def handle(self, comando: CrearCachePropiedad):
         propiedad_dto = PropiedadDTO(
             id_propiedad= comando.id_propiedad,
-            nombre_propiedad=comando.nombre_propiedad,
-            representante_legal=comando.representante_legal,
-            email_contacto=comando.email_contacto,
-            telefono_contacto=comando.telefono_contacto,
-            estado=comando.estado,
-            documento_identidad_tipo=comando.documento_identidad_tipo,
-            documento_identidad_numero_identificacion=comando.documento_identidad_numero_identificacion,
-            tipo_industria=comando.tipo_industria,
-            direccion=comando.direccion,
-            ciudad=comando.ciudad,
-            pais=comando.pais,
-            latitud=comando.latitud,
-            longitud=comando.longitud,
-            )
+            nombre_comando = comando.nombre_comando,
+            tipo_comando = comando.tipo_comando,
+            pais = comando.pais,
+            departamento = comando.departamento,
+            ciudad = comando.ciudad,
+            direccion = comando.direccion,
+            latitud = comando.latitud,
+            longitud = comando.longitud,
+            codigo_postal = comando.codigo_postal,
+            area_lote = comando.area_lote,
+            estrato_socioeconomico = comando.estrato_socioeconomico,
+            valor_venta = comando.valor_venta,
+            valor_arriendo_mensual = comando.valor_arriendo_mensual,
+            moneda = comando.moneda,
+            propietario = comando.propietario,
+            arrendatario = comando.arrendatario,
+            fecha_ultimo_contrato = comando.fecha_ultimo_contrato,
+            fecha_expiracion_contrato_actual = comando.fecha_expiracion_contrato_actual,
+            estado = comando.estado,
+            id_compania = comando.id_compania,
+            id_contrato = comando.id_contrato
+        )
         
 
         propiedad_ext = {
             "id_propiedad": comando.id_propiedad,
-            "nombre_propiedad": comando.nombre_propiedad,
-            "representante_legal": comando.representante_legal,
-            "email_contacto": comando.email_contacto,
-            "telefono_contacto": comando.telefono_contacto,
-            "estado": comando.estado,
-            "documento_identidad_tipo": comando.documento_identidad_tipo,
-            "documento_identidad_numero_identificacion": comando.documento_identidad_numero_identificacion,
-            "tipo_industria": comando.tipo_industria,
-            "direccion": comando.direccion,
-            "ciudad": comando.ciudad,
-            "pais": comando.pais,
-            "latitud": comando.latitud,
-            "longitud": comando.longitud
-
+            "nombre_comando" : comando.nombre_comando,
+            "tipo_comando" : comando.tipo_comando,
+            "pais" : comando.pais,
+            "departamento" : comando.departamento,
+            "ciudad" : comando.ciudad,
+            "direccion" : comando.direccion,
+            "latitud" : comando.latitud,
+            "longitud" : comando.longitud,
+            "codigo_postal" : comando.codigo_postal,
+            "area_lote" : comando.area_lote,
+            "estrato_socioeconomico" : comando.estrato_socioeconomico,
+            "valor_venta" : comando.valor_venta,
+            "valor_arriendo_mensual" : comando.valor_arriendo_mensual,
+            "moneda" : comando.moneda,
+            "propietario" : comando.propietario,
+            "arrendatario" : comando.arrendatario,
+            "fecha_ultimo_contrato" : comando.fecha_ultimo_contrato,
+            "fecha_expiracion_contrato_actual" : comando.fecha_expiracion_contrato_actual,
+            "estado" : comando.estado,
+            "id_compania" : comando.id_compania,
+            "id_contrato" : comando.id_contrato
         }
         redis = RedisRepositorio()
         redis.lpush("propiedades", str(propiedad_ext))

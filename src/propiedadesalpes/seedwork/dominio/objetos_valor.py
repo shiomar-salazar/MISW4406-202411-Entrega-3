@@ -39,13 +39,26 @@ class DocumentoIdentidad(ABC, ObjetoValor):
     
     
 #@dataclass(frozen=True)
-class Compania_ov(ABC, ObjetoValor):
-    id_comp: str
-    nombre_compania: str
-    representante_legal: str
-    email_contacto: str
-    telefono_contacto: str
-    estado: str
-    documento_identidad: DocumentoIdentidad
-    tipo_industria: TipoIndustria
-    localizacion: Localizacion
+class Propiedad_ov(ABC, ObjetoValor):
+    id_propiedad: str
+    nombre_propiedad: str      
+    tipo_propiedad: str   
+    pais: str   
+    departamento: str   
+    ciudad: str   
+    direccion: str      
+    latitud : str   
+    longitud: str   
+    codigo_postal: str   
+    area_lote: str   
+    estrato_socioeconomico: str   
+    valor_venta : str   
+    valor_arriendo_mensual : str   
+    moneda : str   
+    propietario : str   
+    arrendatario : str   
+    fecha_ultimo_contrato : str   
+    fecha_expiracion_contrato_actual : str   
+    estado : str   
+    id_compania : str   
+    id_contrato : str
