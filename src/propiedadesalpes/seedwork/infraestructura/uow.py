@@ -5,6 +5,8 @@ from seedwork.dominio.entidades import AgregacionRaiz
 from pydispatch import dispatcher
 
 import pickle
+import logging
+import tracebackf
 
 
 class Lock(Enum):
@@ -64,9 +66,13 @@ class UnidadTrabajo(ABC):
         self._publicar_eventos_dominio(batch)
 
     def _publicar_eventos_dominio(self, batch):
-        for evento in self._obtener_eventos(batches=[batch]):
-            dispatcher.send(signal=f'{type(evento).__name__}Dominio', evento=evento)
-
+        try:
+            for evento in self._obtener_eventos(batches=[batch]):
+                dispatcher.send(signal=f'{type(evento).__name__}Dominio', evento=evento)
+        except:
+            logging.error('ERROR: Suscribiendose al tópico de eventos!')
+            traceback.print_exc()
+        
     def _publicar_eventos_post_commit(self):
         for evento in self._obtener_eventos():
             dispatcher.send(signal=f'{type(evento).__name__}Integracion', evento=evento)
