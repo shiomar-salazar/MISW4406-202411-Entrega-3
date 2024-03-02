@@ -19,7 +19,7 @@ class EventoContratoCreado(EventoIntegracion):
     id = String(default=str(uuid.uuid4()))
     id_propiedad = String()
     id_compania = String()
-    fecha_inicio = String(default=time_millis())
+    fecha_inicio = String()
     telefono_contacto = String()
     fecha_ejecucion = String()
     monto = String()
