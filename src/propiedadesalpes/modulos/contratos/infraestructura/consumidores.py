@@ -1,8 +1,6 @@
 import json
 import pulsar,_pulsar  
 from pulsar.schema import *
-import uuid
-import time
 import logging
 import traceback
 from modulos.contratos.aplicacion.comandos.crear_cache_contrato import CrearCacheContrato
@@ -20,7 +18,7 @@ def suscribirse_a_eventos():
 
         while True:
             mensaje = consumidor.receive()
-            ex = mensaje.value().data
+            ex = mensaje.value()
             print(f'Evento recibido: {ex}')
             ## To-DO implementa Guardado del evento con proyecciones
 
