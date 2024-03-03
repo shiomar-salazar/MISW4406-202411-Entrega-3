@@ -3,7 +3,7 @@ import pulsar,_pulsar
 from pulsar.schema import *
 import logging
 import traceback
-from modulos.companias.aplicacion.comandos.crear_cache_compania import CrearCacheCompania
+from modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
 
 from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada
 from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania

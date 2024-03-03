@@ -22,8 +22,29 @@ class Despachador:
         cliente.close()
 
     def publicar_evento(self, evento, topico):
-        evento = self.mapper.entidad_a_dto(evento)
-        self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
+        payload = CompaniaCreadaPayload(
+            id = evento.id,
+            nombre_compania = evento.nombre_compania,
+            representante_legal = evento.representante_legal,
+            email_contacto = evento.email_contacto,
+            telefono_contacto = evento.telefono_contacto,
+            estado = evento.estado,
+            documento_identidad_numero_identificacion = evento.documento_identidad_numero_identificacion,
+            documento_identidad_tipo = evento.documento_identidad_tipo,
+            tipo_industria = evento.tipo_industria,
+            direccion = evento.direccion,
+            latitud = evento.tipo_industria,
+            longitud = evento.tipo_industria,
+            ciudad = evento.ciudad,
+            pais = evento.pais
+        )
+        evento_integracion = EventoCompaniaCreada(data=payload)
+        self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoCompaniaCreada))
+        
+        # En el tutorial 9 esta asi el metodo publicar_evento
+        # def publicar_evento(self, evento, topico):
+        #     evento = self.mapper.entidad_a_dto(evento)
+        #     self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
 
     def publicar_comando(self, comando, topico):
         payload = ComandoCrearCompaniaPayload(
