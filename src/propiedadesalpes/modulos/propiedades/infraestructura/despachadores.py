@@ -49,6 +49,11 @@ class Despachador:
         
         evento_integracion = EventoPropiedadCreada(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoPropiedadCreada))
+        
+    # En el tutorial 9 esta asi el metodo publicar_evento
+    # def publicar_evento(self, evento, topico):
+    #     evento = self.mapper.entidad_a_dto(evento)
+    #     self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
 
     def publicar_comando(self, comando, topico):
         payload = ComandoCrearPropiedadPayload(
@@ -56,44 +61,3 @@ class Despachador:
         )
         comando_integracion = ComandoCrearPropiedad(data=payload)
         self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearPropiedad))
-
-
-
-    def _publicar_mensaje_rabbit(self, mensaje, topico):
-        credentials = pika.PlainCredentials(username=f'{utils.broker_rabbit_user()}', password=f'{utils.broker_rabbit_password()}')
-        connection = pika.BlockingConnection(pika.ConnectionParameters(f'{utils.broker_rabbit_host()}', port=utils.broker_rabbit_port(), credentials= credentials))
-        channel = connection.channel()
-        channel.exchange_declare(exchange=topico, exchange_type='topic', durable=True)
-        message = mensaje
-        
-        channel.basic_publish(exchange=topico, routing_key=f'{utils.broker_rabbit_password()}', body=message)
-        connection.close()
-
-    def publicar_evento_rabbit(self, evento, topico):
-        payload = {
-            "id" : f"{evento.id}",
-            "nombre_propiedad" : f"{evento.nombre_propiedad}",
-            "tipo_propiedad" : f"{evento.tipo_propiedad}",
-            "pais" : f"{evento.pais}",
-            "departamento" : f"{evento.departamento}",
-            "ciudad" : f"{evento.ciudad}",
-            "direccion" : f"{evento.direccion}",
-            "latitud" : f"{evento.latitud}",
-            "longitud" : f"{evento.longitud}",
-            "codigo_postal" : f"{evento.codigo_postal}",
-            "area_lote" : f"{evento.area_lote}",
-            "estrato_socioeconomico" : f"{evento.estrato_socioeconomico}",
-            "valor_venta" : f"{evento.valor_venta}",
-            "valor_arriendo_mensual" : f"{evento.valor_arriendo_mensual}",
-            "moneda" : f"{evento.moneda}",
-            "propietario" : f"{evento.propietario}",
-            "arrendatario" : f"{evento.arrendatario}",
-            "echa_ultimo_contrato" : f"{evento.fecha_ultimo_contrato}",
-            "echa_expiracion_contrato_actual" : f"{evento.fecha_expiracion_contrato_actual}",
-            "estado" : f"{evento.estado}",
-            "id_compania" : f"{evento.id_compania}",
-            "id_contrato" : f"{evento.id_contrato}"
-        }
-        
-        mensaje = json.dumps(payload)
-        self._publicar_mensaje_rabbit(mensaje, topico)
