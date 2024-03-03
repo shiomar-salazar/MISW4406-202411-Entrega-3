@@ -18,25 +18,11 @@ def suscribirse_a_eventos():
 
         while True:
             mensaje = consumidor.receive()
-            ex = mensaje.value()
-            compania_dto = ex.data
-            comando = CrearCacheCompania(
-                id = compania_dto.id,
-                nombre_compania = compania_dto.nombre_compania,
-                representante_legal = compania_dto.representante_legal,
-                email_contacto = compania_dto.email_contacto,
-                telefono_contacto = compania_dto.telefono_contacto,
-                estado = compania_dto.estado,
-                documento_identidad_numero_identificacion = compania_dto.documento_identidad_numero_identificacion,
-                documento_identidad_tipo = compania_dto.documento_identidad_tipo,
-                tipo_industria = compania_dto.tipo_industria,
-                direccion = compania_dto.direccion,
-                latitud = compania_dto.tipo_industria,
-                longitud = compania_dto.tipo_industria,
-                ciudad = compania_dto.ciudad,
-                pais = compania_dto.pais
-            )
-            ejecutar_commando(comando)
+            datos = mensaje.value()
+            print(f'Evento recibido: {datos}')
+            
+            # En el tutorial 9 va el tema de proyecciones
+
             consumidor.acknowledge(mensaje)     
 
         cliente.close()
@@ -46,7 +32,7 @@ def suscribirse_a_eventos():
         if cliente:
             cliente.close()
 
-def suscribirse_a_comandos():
+def suscribirse_a_comandos(app=None):
     cliente = None
     try:
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
@@ -64,38 +50,3 @@ def suscribirse_a_comandos():
         traceback.print_exc()
         if cliente:
             cliente.close()
-
-import pika
-def suscribirse_a_eventos_rabbit():
-    def callback(ch, method, properties, body):
-            compania_dto = json.loads(body)
-            comando = CrearCacheCompania(
-                id = compania_dto['id'],
-                nombre_compania = compania_dto['nombre_compania'],
-                representante_legal = compania_dto['representante_legal'],
-                email_contacto = compania_dto['email_contacto'],
-                telefono_contacto = compania_dto['telefono_contacto'],
-                estado = compania_dto['estado'],
-                documento_identidad_numero_identificacion = compania_dto['documento_identidad_numero_identificacion'],
-                documento_identidad_tipo = compania_dto['documento_identidad_tipo'],
-                tipo_industria = compania_dto['tipo_industria'],
-                direccion = compania_dto['direccion'],
-                latitud = compania_dto['latitud'],
-                longitud = compania_dto['longitud'],
-                ciudad = compania_dto['ciudad'],
-                pais = compania_dto['pais']
-                
-                )
-            ejecutar_commando(comando)
-
-    topico = 'eventos-compania'
-    credentials = pika.PlainCredentials(username=f'{utils.broker_rabbit_user()}', password=f'{utils.broker_rabbit_password()}')
-    connection = pika.BlockingConnection(pika.ConnectionParameters(f'{utils.broker_rabbit_host()}', port=utils.broker_rabbit_port(), credentials= credentials))
-    channel = connection.channel()
-    channel.exchange_declare(exchange=topico, exchange_type='topic', durable=True)
-    result = channel.queue_declare(queue='', exclusive=True)
-    queue_name = result.method.queue
-    channel.queue_bind(exchange=topico, queue=queue_name, routing_key=f'{utils.broker_rabbit_password()}')
-    print(f" [*] Esperando mensajes en el topico {topico}. Para salir, presiona Ctrl+C")
-    channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=True)
-    channel.start_consuming()
