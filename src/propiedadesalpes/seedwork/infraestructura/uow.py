@@ -6,7 +6,7 @@ from pydispatch import dispatcher
 
 import pickle
 import logging
-import tracebackf
+import traceback
 
 
 class Lock(Enum):
