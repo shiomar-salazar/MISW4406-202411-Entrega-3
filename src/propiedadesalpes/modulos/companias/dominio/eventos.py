@@ -1,5 +1,4 @@
 from __future__ import annotations
-import array
 from dataclasses import dataclass
 import uuid
 from seedwork.dominio.eventos import (EventoDominio)

@@ -1,7 +1,7 @@
 from config.db import db
 Base = db.declarative_base()
 
-# Tabla intermedia para tener la relación de muchos a muchos entre la tabla companias e itinerarios
+# Tabla companias
 class Compania(db.Model):
     __tablename__ = "compania"
     id = db.Column(db.String, primary_key=True, nullable=False)

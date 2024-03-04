@@ -7,7 +7,7 @@ from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
 import json
 from flask import Response
-from flask import redirect, render_template, request, session, url_for
+from flask import request
 
 
 bp = api.crear_blueprint('compania', '/compania')

@@ -78,8 +78,6 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
                     ├── excepciones.py
                     ├── fabricas.py
                     ├── mapeadores.py
-                    ├── redis.py
-                    ├── vistas.py
                     ├── repositorios.py
                     └── schema
                         ├── __init__.py

@@ -25,11 +25,4 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
     def obtener_por_id(self, id: UUID) -> Compania:
         compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id)).one()
         return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())
-    
-class RepositorioCompaniasRedis(RepositorioCompanias):
-    def __init__(self):
-        self._fabrica_companias: FabricaCompanias = FabricaCompanias()
-
-    def agregar(self, compania: Compania):
-        ...
         

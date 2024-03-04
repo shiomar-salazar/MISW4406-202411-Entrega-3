@@ -34,7 +34,7 @@ class CrearContratoHandler(CrearContratoBaseHandler):
             fecha_ejecucion=comando.fecha_ejecucion,
             monto=comando.monto,
             tipo=comando.tipo,
-            )
+        )
         
         contrato : Contrato = self._fabrica_contratos.crear_objeto(contrato_dto, MapeadorContrato())
         contrato.crear_contrato(contrato)

@@ -1,13 +1,9 @@
 import pulsar
 from pulsar.schema import *
-import pika
-
 from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada, CompaniaCreadaPayload
 from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania, ComandoCrearCompaniaPayload
 from seedwork.infraestructura import utils
-
 import datetime
-import json
 
 epoch = datetime.datetime.utcfromtimestamp(0)
 
@@ -38,19 +34,8 @@ class Despachador:
             ciudad = evento.ciudad,
             pais = evento.pais
         )
-        print('<=============== Despachador.publicar_evento [payload] ==================>')
-        print(payload)
-
         evento_integracion = EventoCompaniaCreada(data=payload)
-        print('<=============== Despachador.publicar_evento [evento_integracion] ==================>')
-        print(evento_integracion)
-
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoCompaniaCreada))
-        
-        # En el tutorial 9 esta asi el metodo publicar_evento
-        # def publicar_evento(self, evento, topico):
-        #     evento = self.mapper.entidad_a_dto(evento)
-        #     self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
 
     def publicar_comando(self, comando, topico):
         payload = ComandoCrearCompaniaPayload(

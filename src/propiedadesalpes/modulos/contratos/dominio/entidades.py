@@ -1,14 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import dataclass, field
-import sqlalchemy
 import uuid
-import modulos.contratos.dominio.objetos_valor as ov
 from modulos.contratos.dominio.eventos import ContratoCreado
-from seedwork.dominio.entidades import AgregacionRaiz, Entidad
-import uuid
-
-
+from seedwork.dominio.entidades import AgregacionRaiz
 from .eventos import ContratoCreado
 
 @dataclass

@@ -1,15 +1,33 @@
 version: '3'
-networks:
+# Redes
+networks:  
   pulsar:
     driver: bridge
+  services:
+    driver: bridge    
+
+# Servicios
 services:    
+  # Pulsar stand oalone
+  pulsar:
+    image: apachepulsar/pulsar:3.2.0
+    container_name: pulsar
+    restart: on-failure
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    command: ["bin/pulsar", "standalone"]
+    networks:
+      - pulsar
+
+  # BD postgres
   postgres:
     image: postgres:latest
     container_name: postgres
     ports:
       - "5432:5432"
     networks:
-      - pulsar
+      - services
     environment:
       POSTGRES_DB: propiedadesalpes
       POSTGRES_USER: postgres
@@ -22,218 +40,93 @@ services:
       timeout: 5s
       retries: 5
 
-  redis_prop:
-    container_name: redis_prop
-    hostname: redis_prop
-    image: "redis:latest"
-    ports:
-      - "6379:6379"
-    networks:
-      - pulsar
-    healthcheck:
-      test: ["CMD-SHELL", "redis-cli -h localhost -p 6379 ping"]
-      interval: 10s
-      timeout: 20s
-      retries: 50
-
-  redis-commander:
-    image: "rediscommander/redis-commander:latest"
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-    ports:
-      - "8081:8081"
-    networks:
-      - pulsar
-    depends_on:
-      redis_prop:
-        condition: service_healthy
-
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    container_name: rabbitmq
-    hostname: rabbitmq
-    ports:
-      - "5672:5672"  # Puerto para la comunicación AMQP
-      - "15672:15672"  # Puerto para la interfaz de gestión web (opcional)
-    environment:
-      RABBITMQ_DEFAULT_USER: rabbitmq
-      RABBITMQ_DEFAULT_PASS: propiedadesalpes2024
-    networks:
-      - pulsar
-
-  pulsar:
-    image: apachepulsar/pulsar:3.2.0
-    container_name: pulsar
-    # profiles: ["pulsar", "full"]
+  # Servicios de Propiedades Alpes
+  propiedadesalpes:
+    container_name: propiedadesalpes
+    hostname: propiedadesalpes
     restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - BROKER_HOST=pulsar
+      - POSTGRES_DB=propiedadesalpes
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
     ports:
-      - "6650:6650"
-      - "8080:8080"
-    command: ["bin/pulsar", "standalone"]
+      - "5000:5000"
+    networks:
+      - pulsar
+      - services      
+    depends_on:
+      postgres:
+        condition: service_healthy
+      pulsar:
+        condition: service_started
 
-  # # Servicios de pda_companias
-  # pda_companias:
-  #   container_name: pda_companias
-  #   hostname: pda_companias
+  # # Start zookeeper
+  # zookeeper:
+  #   image: apachepulsar/pulsar:latest
+  #   container_name: zookeeper
   #   restart: on-failure
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./data/zookeeper:/pulsar/data/zookeeper
   #   environment:
-  #     - PDA_COMPANIAS_ADDRESS=pda_companias
-  #     - DATABASE_HOST=postgres
-  #     - REDIS_HOST=redis_prop
-  #     - BROKER_HOST=broker
-  #     - RABBITMQ_HOST=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USER=rabbitmq
-  #     - RABBITMQ_PASS=propiedadesalpes2024
-  #     - POSTGRES_DB=propiedadesalpes
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_HOST=postgres
-  #     - POSTGRES_PORT=5432
-  #   ports:
-  #     - "5000:5000"
+  #     - metadataStoreUrl=zk:zookeeper:2181
+  #     - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
+  #   command: >
+  #     bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
+  #            bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
+  #            exec bin/pulsar zookeeper"
+  #   healthcheck:
+  #     test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 30
   #   networks:
   #     - pulsar
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #     rabbitmq:
-  #       condition: service_started
-  #     redis_prop:
-  #       condition: service_healthy
 
-  # # Servicios de pda_contratos
-  # pda_contratos:
-  #   container_name: pda_contratos
-  #   hostname: pda_contratos
-  #   restart: on-failure
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     - PDA_CONTRATOS_ADDRESS=pda_contratos
-  #     - DATABASE_HOST=postgres
-  #     - REDIS_HOST=redis_prop
-  #     - BROKER_HOST=broker
-  #     - RABBITMQ_HOST=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USER=rabbitmq
-  #     - RABBITMQ_PASS=propiedadesalpes2024
-  #     - POSTGRES_DB=propiedadesalpes
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_HOST=postgres
-  #     - POSTGRES_PORT=5432
-  #   ports:
-  #     - "5001:5000"
+  # # Init cluster metadata
+  # pulsar-init:
+  #   container_name: pulsar-init
+  #   hostname: pulsar-init
+  #   image: apachepulsar/pulsar:latest
+  #   command: >
+  #     bin/pulsar initialize-cluster-metadata \
+  #              --cluster cluster-a \
+  #              --zookeeper zookeeper:2181 \
+  #              --configuration-store zookeeper:2181 \
+  #              --web-service-url http://broker:8080 \
+  #              --broker-service-url pulsar://broker:6650
+  #   depends_on:
+  #     zookeeper:
+  #       condition: service_healthy
   #   networks:
   #     - pulsar
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #     rabbitmq:
-  #       condition: service_started
-  #     redis_prop:
-  #       condition: service_healthy
 
-  # # Servicios de pda_contratos
-  # pda_propiedades:
-  #   container_name: pda_propiedades
-  #   hostname: pda_propiedades
+  # # Start bookie
+  # bookie:
+  #   image: apachepulsar/pulsar:latest
+  #   container_name: bookie
   #   restart: on-failure
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
   #   environment:
-  #     - PDA_CONTRATOS_ADDRESS=pda_propiedades
-  #     - DATABASE_HOST=postgres
-  #     - REDIS_HOST=redis_prop
-  #     - BROKER_HOST=broker
-  #     - RABBITMQ_HOST=rabbitmq
-  #     - RABBITMQ_PORT=5672
-  #     - RABBITMQ_USER=rabbitmq
-  #     - RABBITMQ_PASS=propiedadesalpes2024
-  #     - POSTGRES_DB=propiedadesalpes
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_HOST=postgres
-  #     - POSTGRES_PORT=5432
-  #   ports:
-  #     - "5002:5000"
+  #     - clusterName=cluster-a
+  #     - zkServers=zookeeper:2181
+  #     - metadataServiceUri=metadata-store:zk:zookeeper:2181
+  #     - advertisedAddress=bookie
+  #     - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
+  #   depends_on:
+  #     zookeeper:
+  #       condition: service_healthy
+  #     pulsar-init:
+  #       condition: service_completed_successfully
+  #   volumes:
+  #     - ./data/bookkeeper:/pulsar/data/bookkeeper
+  #   command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
   #   networks:
   #     - pulsar
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #     rabbitmq:
-  #       condition: service_started
-  #     redis_prop:
-  #       condition: service_healthy
-
-# # Start zookeeper
-#   zookeeper:
-#     image: apachepulsar/pulsar:latest
-#     container_name: zookeeper
-#     restart: on-failure
-#     volumes:
-#       - ./data/zookeeper:/pulsar/data/zookeeper
-#     environment:
-#       - metadataStoreUrl=zk:zookeeper:2181
-#       - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
-#     command: >
-#       bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
-#              bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
-#              exec bin/pulsar zookeeper"
-#     healthcheck:
-#       test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 30
-#     networks:
-#       - pulsar
-
-#   # Init cluster metadata
-#   pulsar-init:
-#     container_name: pulsar-init
-#     hostname: pulsar-init
-#     image: apachepulsar/pulsar:latest
-#     command: >
-#       bin/pulsar initialize-cluster-metadata \
-#                --cluster cluster-a \
-#                --zookeeper zookeeper:2181 \
-#                --configuration-store zookeeper:2181 \
-#                --web-service-url http://broker:8080 \
-#                --broker-service-url pulsar://broker:6650
-#     depends_on:
-#       zookeeper:
-#         condition: service_healthy
-#     networks:
-#       - pulsar
-
-#   # Start bookie
-#   bookie:
-#     image: apachepulsar/pulsar:latest
-#     container_name: bookie
-#     restart: on-failure
-#     environment:
-#       - clusterName=cluster-a
-#       - zkServers=zookeeper:2181
-#       - metadataServiceUri=metadata-store:zk:zookeeper:2181
-#       - advertisedAddress=bookie
-#       - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
-#     depends_on:
-#       zookeeper:
-#         condition: service_healthy
-#       pulsar-init:
-#         condition: service_completed_successfully
-#     volumes:
-#       - ./data/bookkeeper:/pulsar/data/bookkeeper
-#     command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
-#     networks:
-#       - pulsar
 
   # # Start broker
   # broker:

@@ -4,10 +4,8 @@ from pulsar.schema import *
 import logging
 import traceback
 from modulos.propiedades.aplicacion.comandos.crear_propiedad import CrearPropiedad
-
 from modulos.propiedades.infraestructura.schema.v1.eventos import EventoPropiedadCreada
 from modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad
-from seedwork.aplicacion.comandos import ejecutar_commando
 from seedwork.infraestructura import utils
 
 def suscribirse_a_eventos():
@@ -21,7 +19,7 @@ def suscribirse_a_eventos():
             datos = mensaje.value()
             print(f'Evento recibido: {datos}')
             
-            # En el tutorial 9 va el tema de proyecciones
+            # TODO Lógica a realizar cuando se recibe el evento
             
             consumidor.acknowledge(mensaje)     
 
@@ -42,14 +40,7 @@ def suscribirse_a_comandos(app=None):
             mensaje = consumidor.receive()
             print(f'Comando recibido: {mensaje.data()}')
 
-            # try:
-            #     with app.app_context():
-            #         comando = CrearPropiedad(fecha_creacion, fecha_creacion, id_reserva, itinerarios)
-            #         ejecutar_commando(comando)
-            # except:
-            #     logging.error('ERROR: Procesando eventos!')
-            #     traceback.print_exc()
-            
+            # TODO Lógica a realizar cuando se recibe el comando
             
             consumidor.acknowledge(mensaje)     
             

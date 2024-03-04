@@ -11,8 +11,6 @@ from seedwork.dominio.repositorios import Repositorio
 from modulos.propiedades.dominio.repositorios import RepositorioPropiedades
 from seedwork.infraestructura.vistas import Vista
 from modulos.propiedades.dominio.entidades import Propiedad
-from modulos.propiedades.infraestructura.vistas import VistaPropiedad
-
 from .repositorios import RepositorioPropiedadesPostgresSQL
 from .excepciones import ExcepcionFabrica
 

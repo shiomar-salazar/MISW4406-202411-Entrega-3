@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from seedwork.aplicacion.queries import Query, QueryHandler, QueryResultado
+from seedwork.aplicacion.queries import Query, QueryResultado
 from seedwork.aplicacion.queries import ejecutar_query as query
 from modulos.companias.dominio.entidades import Compania
 from modulos.companias.aplicacion.dto import CompaniaDTO

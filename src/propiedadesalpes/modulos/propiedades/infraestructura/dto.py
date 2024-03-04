@@ -1,7 +1,7 @@
 from config.db import db
 Base = db.declarative_base()
 
-# Tabla intermedia para tener la relación de muchos a muchos entre la tabla propiedades e itinerarios
+# Tabla propiedad
 class Propiedad(db.Model):
     __tablename__ = "propiedad"
     id = db.Column(db.String, primary_key=True, nullable=False)

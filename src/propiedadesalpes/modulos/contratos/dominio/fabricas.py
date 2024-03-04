@@ -1,6 +1,5 @@
 from .entidades import Contrato
-from .excepciones import TipoObjetoNoExisteEnDominioContratosExcepcion
-from seedwork.dominio.repositorios import Mapeador, Repositorio
+from seedwork.dominio.repositorios import Mapeador
 from seedwork.dominio.fabricas import Fabrica
 from seedwork.dominio.entidades import Entidad
 from dataclasses import dataclass

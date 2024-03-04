@@ -1,4 +1,3 @@
-import uuid
 from seedwork.aplicacion.dto import Mapeador as AppMap
 from seedwork.dominio.repositorios import Mapeador as RepMap
 from modulos.propiedades.dominio.entidades import Propiedad

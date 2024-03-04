@@ -1,13 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import dataclass, field
-import sqlalchemy
 import uuid
-import modulos.propiedades.dominio.objetos_valor as ov
 from modulos.propiedades.dominio.eventos import PropiedadCreada
-from seedwork.dominio.entidades import AgregacionRaiz, Entidad
-
-
+from seedwork.dominio.entidades import AgregacionRaiz
 from .eventos import PropiedadCreada
 
 @dataclass

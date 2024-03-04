@@ -3,8 +3,6 @@ import pulsar,_pulsar
 from pulsar.schema import *
 import logging
 import traceback
-from modulos.contratos.aplicacion.comandos.crear_cache_contrato import CrearCacheContrato
-
 from modulos.contratos.infraestructura.schema.v1.eventos import EventoContratoCreado
 from modulos.contratos.infraestructura.schema.v1.comandos import ComandoCrearContrato
 from seedwork.aplicacion.comandos import ejecutar_commando
@@ -20,7 +18,7 @@ def suscribirse_a_eventos():
             mensaje = consumidor.receive()
             ex = mensaje.value()
             print(f'Evento recibido: {ex}')
-            ## To-DO implementa Guardado del evento con proyecciones
+            # TODO Lógica a realizar cuando se recibe el evento
 
             consumidor.acknowledge(mensaje)     
 
@@ -40,6 +38,8 @@ def suscribirse_a_comandos():
         while True:
             mensaje = consumidor.receive()
             print(f'Comando recibido: {mensaje.data()}')
+            
+            # TODO Lógica a realizar cuando se recibe el comando
 
             consumidor.acknowledge(mensaje)     
             

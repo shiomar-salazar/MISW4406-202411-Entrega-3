@@ -1,13 +1,9 @@
 import pulsar
 from pulsar.schema import *
-import pika
-
 from modulos.propiedades.infraestructura.schema.v1.eventos import EventoPropiedadCreada, PropiedadCreadaPayload
 from modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad, ComandoCrearPropiedadPayload
 from seedwork.infraestructura import utils
-
 import datetime
-import json
 
 epoch = datetime.datetime.utcfromtimestamp(0)
 
@@ -50,11 +46,6 @@ class Despachador:
         evento_integracion = EventoPropiedadCreada(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoPropiedadCreada))
         
-    # En el tutorial 9 esta asi el metodo publicar_evento
-    # def publicar_evento(self, evento, topico):
-    #     evento = self.mapper.entidad_a_dto(evento)
-    #     self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
-
     def publicar_comando(self, comando, topico):
         payload = ComandoCrearPropiedadPayload(
             id_propiedad=str(comando.id_propiedad)

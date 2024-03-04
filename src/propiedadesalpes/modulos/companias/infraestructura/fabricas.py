@@ -11,8 +11,6 @@ from seedwork.dominio.repositorios import Repositorio
 from modulos.companias.dominio.repositorios import RepositorioCompanias
 from seedwork.infraestructura.vistas import Vista
 from modulos.companias.dominio.entidades import Compania
-from modulos.companias.infraestructura.vistas import VistaCompania
-
 from .repositorios import RepositorioCompaniasPostgresSQL
 from .excepciones import ExcepcionFabrica
 

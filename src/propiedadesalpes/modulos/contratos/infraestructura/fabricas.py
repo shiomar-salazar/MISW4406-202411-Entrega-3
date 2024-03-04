@@ -11,8 +11,6 @@ from seedwork.dominio.repositorios import Repositorio
 from modulos.contratos.dominio.repositorios import RepositorioContratos
 from seedwork.infraestructura.vistas import Vista
 from modulos.contratos.dominio.entidades import Contrato
-from modulos.contratos.infraestructura.vistas import VistaContrato
-
 from .repositorios import RepositorioContratosPostgresSQL
 from .excepciones import ExcepcionFabrica
 

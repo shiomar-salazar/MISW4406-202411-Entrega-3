@@ -5,9 +5,7 @@ import sqlalchemy
 import uuid
 import modulos.companias.dominio.objetos_valor as ov
 from modulos.companias.dominio.eventos import CompaniaCreada
-from seedwork.dominio.entidades import AgregacionRaiz, Entidad
-
-
+from seedwork.dominio.entidades import AgregacionRaiz
 from .eventos import CompaniaCreada
 
 @dataclass
