@@ -18,9 +18,6 @@ class ObtenerTodasCompaniasHandler(CompaniaQueryBaseHandler):
         companias_dto = []
         vista = self.fabrica_vista.crear_objeto(Compania)
         companias = vista.obtener_todos()
-        print("=================== ObtenerTodasCompaniasHandler =========================")
-        print(companias)
-
         for compania in companias:
             dto = CompaniaDTO(
                 id_compania = compania.id,
@@ -39,10 +36,6 @@ class ObtenerTodasCompaniasHandler(CompaniaQueryBaseHandler):
                 longitud  = compania.longitud
                 )
             companias_dto.append(dto)
-
-        print("=================== ObtenerTodasCompaniasHandler =========================")
-        print(companias_dto)
-        
         return QueryResultado(resultado=companias_dto)
 
 @query.register(ObtenerTodasCompanias)

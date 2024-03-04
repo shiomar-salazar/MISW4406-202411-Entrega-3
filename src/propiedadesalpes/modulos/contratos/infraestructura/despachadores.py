@@ -28,7 +28,7 @@ class Despachador:
         # evento = self.mapper.entidad_a_dto(evento)
         # self._publicar_mensaje(evento, topico, AvroSchema(evento.__class__))
         payload = ContratoCreadoPayload(
-            id = evento.id,
+            id = str(evento.id),
             id_propiedad = evento.id_propiedad,
             id_compania = evento.id_compania,
             fecha_inicio = evento.fecha_inicio,

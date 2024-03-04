@@ -21,7 +21,7 @@ def suscribirse_a_eventos():
             datos = mensaje.value()
             print(f'Evento recibido: {datos}')
             
-            # En el tutorial 9 va eñ tema de proyecciones
+            # En el tutorial 9 va el tema de proyecciones
             
             consumidor.acknowledge(mensaje)     
 

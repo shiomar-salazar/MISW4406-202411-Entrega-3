@@ -20,6 +20,7 @@ class ObtenerTodasPropiedadesHandler(PropiedadQueryBaseHandler):
         propiedades = vista.obtener_todos()
         for propiedad in propiedades:
             dto = PropiedadDTO(
+                id_propiedad = propiedad.id,
                 nombre_propiedad = propiedad.nombre_propiedad,
                 tipo_propiedad = propiedad.tipo_propiedad,
                 pais = propiedad.pais,

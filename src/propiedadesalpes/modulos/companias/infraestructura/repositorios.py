@@ -17,8 +17,6 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
     
     def obtener_todos(self) -> list[Compania]:
         companias_list = db.session.query(Compania).all()
-        print("=================== obtener_todos =========================")
-        print(companias_list)
         return companias_list
     
     def obtener_tipo(self) -> type:

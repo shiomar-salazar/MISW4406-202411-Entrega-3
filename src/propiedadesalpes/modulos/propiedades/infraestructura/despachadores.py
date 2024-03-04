@@ -23,7 +23,7 @@ class Despachador:
 
     def publicar_evento(self, evento, topico):
         payload = PropiedadCreadaPayload(
-            id = evento.id,
+            id = str(evento.id),
             nombre_propiedad = evento.nombre_propiedad,
             tipo_propiedad = evento.tipo_propiedad,
             pais = evento.pais,

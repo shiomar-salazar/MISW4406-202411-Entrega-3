@@ -23,7 +23,7 @@ class Despachador:
 
     def publicar_evento(self, evento, topico):
         payload = CompaniaCreadaPayload(
-            id = evento.id,
+            id = str(evento.id),
             nombre_compania = evento.nombre_compania,
             representante_legal = evento.representante_legal,
             email_contacto = evento.email_contacto,
@@ -38,7 +38,13 @@ class Despachador:
             ciudad = evento.ciudad,
             pais = evento.pais
         )
+        print('<=============== Despachador.publicar_evento [payload] ==================>')
+        print(payload)
+
         evento_integracion = EventoCompaniaCreada(data=payload)
+        print('<=============== Despachador.publicar_evento [evento_integracion] ==================>')
+        print(evento_integracion)
+
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoCompaniaCreada))
         
         # En el tutorial 9 esta asi el metodo publicar_evento
