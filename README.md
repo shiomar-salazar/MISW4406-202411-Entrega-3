@@ -284,6 +284,15 @@ Otro beneficio de evento sourcing es que almacena el historial completo de cada 
 #### 3. Proporciona a los desarrolladores una máquina del tiempo:
 Event sourcing almacena un historial de todo lo que sucedió durante la vida útil de una aplicación.
 
+## Planeación de actividades:
+
+|   Integrante                         |   Actividad                      | 
+|----------------------------------|-------------------------------|
+| Jhon Fredy Guzmán Caicedo        | Entrega 3 implementación capa de comandos microservicio Companias y .<\br> Entrega 4 Microservicio Cotratos (CQRS - Eventos)|
+| Haiber Humberto Galindo Sanchez  | Entrega 3 implementación capa de infraestructura microservicio Companias.<\br> Entrega 4 Microservicio Propiedades (CQRS - Eventos)    |
+| Jorge M. Carrillo                | Entrega 3 implementación capa de dominio microservicio Companias.<\br> Entrega 4 Microservicio Propiedades (CQRS - Eventos)    |
+| Shiomar Alberto Salazar Castillo | Entrega 3 implementación capa de Apis microservicio Companias.<\br> Entrega 4 Microservicio Cotratos (CQRS - Eventos)   |
+
 
 ### Video de la Entrega 4
 
