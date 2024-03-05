@@ -216,25 +216,31 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 #### Esceneario de Calidad #2: Seguridad
 ![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/42f7a336-0f69-44de-a43c-f2adaed72240)
 
-### Pasos para la Ejecucion de la Aplicación
+## Pre-requisitos para el despliegue en Local con docker-compose
 
-Para desplegar toda la arquitectura en un solo comando, usamos `docker-compose`. Para ello, desde el directorio principal, ejecute el siguiente comando:
+### Docker:
+- En primera instancia se debe tener instalado **Docker**. Para esto se comparten los siguientes enlaces:
+  - **Instalación de docker en Windows**: https://docs.docker.com/desktop/install/windows-install
+  - **Instalación de docker en Linux Ubuntu**: https://docs.docker.com/engine/install/ubuntu
+  - **Instalación de docker en Mac**: https://docs.docker.com/desktop/install/mac-install/.
+
+### Postman:
+
+- Para realizar las pruebas del servicio, se debe instalar **Postman**.Para esto se comparten los siguientes enlaces:
+  - **Instalación de docker en Windows**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-windows
+  - **Instalación de docker en Linux Ubuntu**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-linux
+  - **Instalación de docker en Mac**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-mac
+
+## Despliegue del Proyecto con docker-compose
+
+Para el despliegue del proyecto utilizamos docker-compose que nos permitirá realizar el lanzamiento de cada uno de los contenedores de nuestro proyecto. Para ejecutar docker-compose, utilizamos el siguiente comando:
+```bash
+docker-compose -f "<RUTA_DEL_ARCHIVO_DOCKER_COMPOSE>" up -d
+```
+Ejemplo
 
 ```bash
-docker-compose up
-```
-
-Si desea detener el ambiente ejecute:
-
-```bash
-docker-compose stop
-```
-
-En caso de querer desplegar dicha topología en el background puede usar el parametro `-d`.
-
-```bash
-docker-compose up -d
-```
+docker-compose -f "docker-compose.yml" up -d
 
 ## Decisiones de arquitectura
 
