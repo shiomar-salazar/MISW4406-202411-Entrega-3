@@ -241,6 +241,7 @@ Ejemplo
 
 ```bash
 docker-compose -f "docker-compose.yml" up -d
+```
 
 ## Decisiones de arquitectura
 
