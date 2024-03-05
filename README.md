@@ -244,6 +244,15 @@ docker-compose -f "docker-compose.yml" up -d
 ```
 
 ## Decisiones de arquitectura
+Acorde al problema planteado por propiedades de los Alpes se ha diseñado una arquitectura que cumpla con las características necesarias para su operación, a continuación, se detallan las decisiones de arquitectura más relevantes. 
+
+* **Arquitectura Hexagonal:**  también conocida como arquitectura de puertos y adaptadores permite aislar la lógica de negocio de las conexiones externas con otros componentes mediante la separación en componentes con bajo acoplamiento. 
+
+* **CQRS:** Es un patrón de diseño que nos permite separar las lecturas y los comandos, tanto a nivel de código e incluso llegar hasta el escalamiento independiente, para propiedades de los Alpes cada componente tiene independiente la lógica de consulta de la lógica de los comandos de creación. 
+
+* **Estilo de Arquitectura Microservicios:** El estilo de arquitectura basada en microservicios nos permite generar servicios independientes con responsabilidades claramente definidas acorde a su contexto acotado, cada microservicio tiene la posibilidad de escalar horizontalmente independientemente acorde a la carga que su funcionalidad requiera, así como su despliegue. El estilo de arquitectura de microservicios aumenta la dificultad de implementación y monitoreo. 
+
+* **Comunicación basada en Eventos:** para favorecer la flexibilidad y bajo acoplamiento del sistema, se busca una comunicación basada en eventos, lo que permite realizar llamadas asíncronas, mejoras tiempos de respuesta añadiendo respuestas simuladas y permitiendo que otros componentes puedan escalar acorde a la carga que sea inyectada.  
 
 ### AVRO
 
