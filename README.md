@@ -247,7 +247,7 @@ docker-compose -f "docker-compose.yml" up -d
 
 #### Collection Postman:
 
-- La coleccion de pruebas de los diferentes servicios se encuentra [aqui](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/blob/main/collections/MISW4406-2024-11-PDA.postman_collection.json), descar e importar a Postman.
+- La coleccion de pruebas de los diferentes servicios se encuentra [aqui](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/blob/main/collections/MISW4406-2024-11-PDA.postman_collection.json), descargar e importar a Postman.
 
 ### Pruebas del servicio con Postman
 
