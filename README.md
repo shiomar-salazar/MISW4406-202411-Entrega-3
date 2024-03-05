@@ -216,22 +216,15 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 #### Esceneario de Calidad #2: Seguridad
 ![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/42f7a336-0f69-44de-a43c-f2adaed72240)
 
-## Pre-requisitos para el despliegue en Local con docker-compose
+### Pre-requisitos para el despliegue con docker-compose
 
-### Docker:
+#### Docker:
 - En primera instancia se debe tener instalado **Docker**. Para esto se comparten los siguientes enlaces:
   - **Instalación de docker en Windows**: https://docs.docker.com/desktop/install/windows-install
   - **Instalación de docker en Linux Ubuntu**: https://docs.docker.com/engine/install/ubuntu
   - **Instalación de docker en Mac**: https://docs.docker.com/desktop/install/mac-install/.
 
-### Postman:
-
-- Para realizar las pruebas del servicio, se debe instalar **Postman**.Para esto se comparten los siguientes enlaces:
-  - **Instalación de docker en Windows**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-windows
-  - **Instalación de docker en Linux Ubuntu**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-linux
-  - **Instalación de docker en Mac**: https://learning.postman.com/docs/getting-started/installation/installation-and-updates/#installing-postman-on-mac
-
-## Despliegue del Proyecto con docker-compose
+### Despliegue del Proyecto con docker-compose
 
 Para el despliegue del proyecto utilizamos docker-compose que nos permitirá realizar el lanzamiento de cada uno de los contenedores de nuestro proyecto. Para ejecutar docker-compose, utilizamos el siguiente comando:
 ```bash
@@ -242,6 +235,29 @@ Ejemplo
 ```bash
 docker-compose -f "docker-compose.yml" up -d
 ```
+
+### Pre-requisitos para probar el servicio
+
+#### Postman:
+
+- Para realizar las pruebas del servicio, se debe instalar **Postman**.Para esto se comparten los siguientes enlaces:
+  - **Instalación de docker en Windows**: https://dl.pstmn.io/download/latest/win64
+  - **Instalación de docker en Linux Ubuntu**: https://dl.pstmn.io/download/latest/linux_64
+  - **Instalación de docker en Mac**: https://dl.pstmn.io/download/latest/osx_arm64
+
+#### Collection Postman:
+
+- La coleccion de pruebas de los diferentes servicios se encuentra [aqui](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/blob/main/collections/MISW4406-2024-11-PDA.postman_collection.json), descar e importar a Postman.
+
+### Pruebas del servicio con Postman
+
+- Se debe realizar el cambio de las variables HOST_COMPANIAS, HOST_CONTRATOS y HOST_PROPIEDADES, con los apuntamientos obtenidos del despliegue realizado con anterioridad.
+
+![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/assets/110913673/69a5c7ca-940d-496a-a368-164d20dd4761)
+
+- Una vez se realice el cambio, ejecutar pruebas del servicio
+
+![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/assets/110913673/64930eac-0d51-4326-a3ce-b19fc73eb44d)
 
 ## Decisiones de arquitectura
 Acorde al problema planteado por propiedades de los Alpes se ha diseñado una arquitectura que cumpla con las características necesarias para su operación, a continuación, se detallan las decisiones de arquitectura más relevantes. 
