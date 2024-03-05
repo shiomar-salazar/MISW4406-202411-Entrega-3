@@ -290,6 +290,6 @@ Cuando creamos APIs, queremos que nuestros modelos proporcionen estos cuatro tip
 
 ### Video de la Entrega 4
 
-[Video entrega 4](https://uniandes-my.sharepoint.com/:v:/r/personal/s_salazarc_uniandes_edu_co/Documents/Apps-No-Monoliticas/Entrega4/video1518578765.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=UIKfWM )https://uniandes-my.sharepoint.com/:v:/r/personal/s_salazarc_uniandes_edu_co/Documents/Apps-No-Monoliticas/Entrega4/video1518578765.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=UIKfWM 
+[Video entrega 4](https://uniandes-my.sharepoint.com/:v:/r/personal/s_salazarc_uniandes_edu_co/Documents/Apps-No-Monoliticas/Entrega4/video1518578765.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=UIKfWM )
 
 
