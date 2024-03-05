@@ -274,15 +274,9 @@ Acorde al problema planteado por propiedades de los Alpes se ha diseñado una ar
 Decidicmos usar Avro porque es un proyecto de código abierto que proporciona servicios de serialización e intercambio de datos. Estos servicios se pueden utilizar juntos o separados. Avro facilita el intercambio de big data entre programas escritos en cualquier lenguaje. Con el servicio de serialización, los programas pueden serializar datos de manera eficiente en archivos o mensajes. El almacenamiento de datos es compacto y eficiente. Avro almacena tanto la definición de datos como los datos juntos en un mensaje o archivo.\
 Avro almacena la definición de datos en formato JSON, lo que facilita su lectura e interpretación. Los datos en sí se almacenan en formato binario, lo que los hace compactos y eficientes.\
 Una de las características principales de Avro es su sólida compatibilidad con esquemas de datos que cambian con el tiempo, lo que a menudo se denomina evolución de esquema. Avro gestiona cambios de esquema como campos faltantes, campos agregados y campos modificados; como resultado, los programas antiguos pueden leer datos nuevos y los programas nuevos pueden leer datos antiguos.
-### Event Sourcing
-En la arquitectura propuesta, se implementó event sourcing como patrón de almacenamiento, pues este es un patrón que permite almacenar los eventos de forma indefinida, proporcionando a la aplicación un registro de auditoría de cambios que garantiza su precisión. También permite que una aplicación reconstruya el estado histórico de un agregado. Por otro lado, crea un desafío, porque la estructura de los eventos a menudo cambia con el tiempo.
-#### Ventajas que nos proporciona event sourcing:
-#### 1. Publica de manera confiable eventos de dominio:
-Un beneficio importante de evento sourcing es que publica eventos de manera confiable cada vez que cambia el estado de un agregado. Esa es una buena base para una arquitectura de microservicios basada en eventos. Además, debido a que cada evento puede almacenar la identidad del usuario que realizó el cambio, evento sourcing proporciona un registro de auditoría cuya exactitud se garantiza. El flujo de eventos se puede utilizar para una variedad de otros fines, incluida la notificación a los usuarios, la integración de aplicaciones, el análisis y la supervisión.
-#### 2. Preserva la historia de los agregados:
-Otro beneficio de evento sourcing es que almacena el historial completo de cada agregado. Puede implementar fácilmente consultas temporales que recuperen el estado pasado de un agregado. Para determinar el estado de un agregado en un momento dado, se suman los eventos que ocurrieron hasta ese momento.
-#### 3. Proporciona a los desarrolladores una máquina del tiempo:
-Event sourcing almacena un historial de todo lo que sucedió durante la vida útil de una aplicación.
+### CRUD
+En la arquitectura propuesta, se implementó CRUD como patrón del almacenamiento. Crear, leer, actualizar y eliminar (CRUD) son las cuatro operaciones básicas del almacenamiento persistente. \
+Cuando creamos APIs, queremos que nuestros modelos proporcionen estos cuatro tipos básicos de funcionalidad. El modelo debe poder crear, leer, actualizar y eliminar recursos. 
 
 ## Planeación de actividades:
 
