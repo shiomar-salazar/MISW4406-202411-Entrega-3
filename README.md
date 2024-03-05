@@ -271,7 +271,9 @@ Acorde al problema planteado por propiedades de los Alpes se ha diseñado una ar
 * **Comunicación basada en Eventos:** para favorecer la flexibilidad y bajo acoplamiento del sistema, se busca una comunicación basada en eventos, lo que permite realizar llamadas asíncronas, mejoras tiempos de respuesta añadiendo respuestas simuladas y permitiendo que otros componentes puedan escalar acorde a la carga que sea inyectada.  
 
 ### AVRO
-
+Decidicmos usar Avro porque es un proyecto de código abierto que proporciona servicios de serialización e intercambio de datos. Estos servicios se pueden utilizar juntos o separados. Avro facilita el intercambio de big data entre programas escritos en cualquier lenguaje. Con el servicio de serialización, los programas pueden serializar datos de manera eficiente en archivos o mensajes. El almacenamiento de datos es compacto y eficiente. Avro almacena tanto la definición de datos como los datos juntos en un mensaje o archivo.\
+Avro almacena la definición de datos en formato JSON, lo que facilita su lectura e interpretación. Los datos en sí se almacenan en formato binario, lo que los hace compactos y eficientes.\
+Una de las características principales de Avro es su sólida compatibilidad con esquemas de datos que cambian con el tiempo, lo que a menudo se denomina evolución de esquema. Avro gestiona cambios de esquema como campos faltantes, campos agregados y campos modificados; como resultado, los programas antiguos pueden leer datos nuevos y los programas nuevos pueden leer datos antiguos.
 ### Event Sourcing
 En la arquitectura propuesta, se implementó event sourcing como patrón de almacenamiento, pues este es un patrón que permite almacenar los eventos de forma indefinida, proporcionando a la aplicación un registro de auditoría de cambios que garantiza su precisión. También permite que una aplicación reconstruya el estado histórico de un agregado. Por otro lado, crea un desafío, porque la estructura de los eventos a menudo cambia con el tiempo.
 #### Ventajas que nos proporciona event sourcing:
