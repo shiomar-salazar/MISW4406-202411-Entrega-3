@@ -16,7 +16,7 @@
 	-> Imagen de Usuarios:
 		docker build -t us-central1-docker.pkg.dev/proyecto1-experimentos/misw4406-propiedadesalpes/propiedadesalpes:1.0 .
 		docker build -t us-central1-docker.pkg.dev/proyecto1-experimentos/misw4406-propiedadesalpes/pulsar:1.0 .
-		docker image tag apachepulsar/pulsar us-central1-docker.pkg.dev/proyecto1-experimentos/misw4406-propiedadesalpes/pulsar:1.0
+		docker image tag apachepulsar/pulsar:3.2.0 us-central1-docker.pkg.dev/proyecto1-experimentos/misw4406-propiedadesalpes/pulsar:1.0
 
 -> Publicar imagenes en Artifact Registry:
 	

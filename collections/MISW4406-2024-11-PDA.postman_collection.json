@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a12f4ef9-4632-4197-a7eb-2c0c7c00f569",
+		"_postman_id": "55fc3154-3497-46cd-8b7d-ec5322fb4ada",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5238096",
-		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-a12f4ef9-4632-4197-a7eb-2c0c7c00f569?action=share&source=collection_link&creator=5238096"
+		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-55fc3154-3497-46cd-8b7d-ec5322fb4ada?action=share&source=collection_link&creator=5238096"
 	},
 	"item": [
 		{
@@ -83,7 +83,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"raw": "{\r\n    \"id_compania\": \"4444209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,7 +132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega\",\r\n    \"pais\": \"Colombia\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"ciudad\": \"Bogotá D.C\",\r\n    \"direccion\": \"Calle 132 # 39-50\",\r\n    \"latitud\": 123.456,\r\n    \"longitud\": -78.910,\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"fecha_ultimo_contrato\": \"2024-02-20\",\r\n    \"fecha_expiracion_contrato_actual\": \"2025-02-20\",\r\n    \"estado\": \"Activo\",\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_contrato\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\"   \r\n}",
+							"raw": "{\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega\",\r\n    \"pais\": \"Colombia\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"ciudad\": \"Bogotá D.C\",\r\n    \"direccion\": \"Calle 132 # 39-50\",\r\n    \"latitud\": 123.456,\r\n    \"longitud\": -78.910,\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"fecha_ultimo_contrato\": \"2024-02-20\",\r\n    \"fecha_expiracion_contrato_actual\": \"2025-02-20\",\r\n    \"estado\": \"Activo\",\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_contrato\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\"   \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
