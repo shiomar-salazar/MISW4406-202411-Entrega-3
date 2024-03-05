@@ -290,5 +290,4 @@ Cuando creamos APIs, queremos que nuestros modelos proporcionen estos cuatro tip
 
 ### Video de la Entrega 4
 
-https://uniandes-edu-co.zoom.us/rec/share/IWswfiKii2DxWzs8H6L3M90EuNwA6qchW7-xLRrwtpHHQiDFobSPQils02o7Rivi.1keraYaOW53Z-Tuh
-Código de acceso:  aKE1%41^
+https://uniandes-my.sharepoint.com/:v:/r/personal/s_salazarc_uniandes_edu_co/Documents/Apps-No-Monoliticas/Entrega4/video1518578765.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=UIKfWM 
