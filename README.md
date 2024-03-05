@@ -155,7 +155,14 @@ En caso de querer desplegar dicha topología en el background puede usar el para
 docker-compose up -d
 ```
 
-### Video de la Entrega 3
+## Decisiones de arquitectura
+
+### AVRO
+
+### Event Sourcing
+
+
+### Video de la Entrega 4
 
 https://uniandes-edu-co.zoom.us/rec/share/IWswfiKii2DxWzs8H6L3M90EuNwA6qchW7-xLRrwtpHHQiDFobSPQils02o7Rivi.1keraYaOW53Z-Tuh
 Código de acceso:  aKE1%41^
