@@ -280,12 +280,12 @@ Cuando creamos APIs, queremos que nuestros modelos proporcionen estos cuatro tip
 
 ## Planeación de actividades:
 
-|   Integrante                         |   Actividad                      | 
-|----------------------------------|-------------------------------|
-| Jhon Fredy Guzmán Caicedo        | Entrega 3 implementación capa de comandos microservicio Companias y . Entrega 4 Microservicio Cotratos (CQRS - Eventos)|
-| Haiber Humberto Galindo Sanchez  | Entrega 3 implementación capa de infraestructura microservicio Companias. Entrega 4 Microservicio Propiedades (CQRS - Eventos)    |
-| Jorge M. Carrillo                | Entrega 3 implementación capa de dominio microservicio Companias. Entrega 4 Microservicio Propiedades (CQRS - Eventos)    |
-| Shiomar Alberto Salazar Castillo | Entrega 3 implementación capa de Apis microservicio Companias. Entrega 4 Microservicio Cotratos (CQRS - Eventos)   |
+|   Integrante                     | Entrega 3  |  Entrega 4  |  Entrega 5  | 
+|----------------------------------|------------|-------------|-------------|
+| Jhon Fredy Guzmán Caicedo        | Implementación capa de comandos microservicio Companias. | Microservicio Cotratos (CQRS - Eventos) |  |
+| Haiber Humberto Galindo Sanchez  | Implementación capa de infraestructura microservicio Companias. | Microservicio Propiedades (CQRS - Eventos) |  |
+| Jorge M. Carrillo                | Implementación capa de dominio microservicio Companias. | Microservicio Propiedades (CQRS - Eventos) |  |
+| Shiomar Alberto Salazar Castillo | Implementación capa de Apis microservicio Companias. | Microservicio Cotratos (CQRS - Eventos) |  |
 
 
 ### Video de la Entrega 4
