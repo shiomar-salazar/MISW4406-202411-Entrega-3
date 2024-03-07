@@ -1,16 +1,3 @@
-# Entrega 4: 
-
-Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
-
-## Integrantes:
-
-|   Nombre                         |   Correo                      | Codigo    | 
-|----------------------------------|-------------------------------|-----------|
-| Jhon Fredy Guzmán Caicedo        | jf.guzmanc1@uniandes.edu.co   | 202216872 |
-| Haiber Humberto Galindo Sanchez  | h.galindos@uniandes.edu.co    | 202216850 |
-| Jorge M. Carrillo                | jm.carrillo@uniandes.edu.co   | 200426097 |
-| Shiomar Alberto Salazar Castillo | s.salazarc@uniandes.edu.co    | 202213359 |
-
 ## Lanzar Gitpod
 
 <a href="https://shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io/" style="padding: 10px;">
