@@ -26,9 +26,9 @@ class Repositorio(ABC):
     # def actualizar(self, entity: Entidad):
     #     ...
 
-    # @abstractmethod
-    # def eliminar(self, entity_id: UUID):
-    #     ...
+    @abstractmethod
+    def eliminar_por_id(self, entity_id: UUID):
+        ...
 
 
 class Mapeador(ABC):

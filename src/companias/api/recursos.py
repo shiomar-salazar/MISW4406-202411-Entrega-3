@@ -3,6 +3,7 @@ from seedwork.dominio.excepciones import ExcepcionDominio
 from modulos.companias.aplicacion.mapeadores import MapeadorCompaniaDTOJson
 from modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
 from modulos.companias.aplicacion.queries.obtener_todas_companias import ObtenerTodasCompanias
+from modulos.companias.aplicacion.comandos.rollback import RollbackCompania
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
 import json
@@ -51,3 +52,15 @@ def dar_compania_usando_query():
     
     return resultados
     
+@bp.route('/rollback', methods=('POST',))
+def rollback_creacion():
+    try:
+        rollback_id = request.json.get("id")
+
+        comando = RollbackCompania(
+            id_compania= rollback_id
+        )
+        ejecutar_commando(comando)
+        return Response('{}', status=202, mimetype='application/json')
+    except ExcepcionDominio as e:
+        return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')

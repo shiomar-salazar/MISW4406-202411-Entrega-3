@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 import sqlalchemy
 import uuid
 import modulos.companias.dominio.objetos_valor as ov
-from modulos.companias.dominio.eventos import CompaniaCreada
+from modulos.companias.dominio.eventos import CompaniaCreada, CompaniaEliminada
 from seedwork.dominio.entidades import AgregacionRaiz
 from .eventos import CompaniaCreada
 
@@ -56,6 +56,14 @@ class Compania(AgregacionRaiz):
             pais = str(self.pais),
             latitud = str(self.latitud),
             longitud = str(self.longitud)
+        )
+    )
+        
+    def eliminar_compania(self, compania: "Compania"):
+        self.nombre_compania = compania.nombre_compania
+
+        self.agregar_evento(CompaniaEliminada(
+            id_compania=str(self.id_compania)
         )
     )
 

@@ -21,3 +21,7 @@ class CompaniaCreada(EventoDominio):
     latitud: str = None
     longitud: str = None   
     fecha_creacion: datetime = None
+
+@dataclass
+class CompaniaEliminada(EventoDominio):
+    id_compania: uuid.UUID = None
