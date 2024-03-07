@@ -12,178 +12,268 @@
 2. El codigo fuente del servicio implementado puede verse en la siguiente estructura:
 
 ```
-├── .gitignore
-├── .gitpod.yml
-├── docker-compose.Dockerfile
-├── Dockerfile
-├── pyproject.toml
-├── README.md
-├── requirements.txt
-└── src
-	└── companias
-	└── api
-	    ├── __init__.py
-	    └── recursos.py
-	└── config
-	    ├── __init__.py
-	    ├── db.py
-	    ├── config.py
-	    └── uow.py
-	└── aplicacion
-	    ├── __init__.py
-	    ├── dto.py
-	    ├── handlers.py
-	    ├── mapeadores.py
-	    ├── servicios.py
-	    ├── comandos
-		├── __init__.py
-		├── base.py
-		├── rollback.py
-		└── crear_companias.py
-	    └── queries
-		├── __init__.py
-		├── base.py
-		└── obtener_todas_companias.py
-	└── dominio
-	    ├── __init__.py
-	    ├── entidades.py
-	    ├── eventos.py
-	    ├── excepciones.py
-	    ├── fabricas.py
-	    ├── objetos_valor.py
-	    └── repositorios.py
-	└── infraestructura
-	    ├── __init__.py
-	    ├── consumidores.py
-	    ├── despachadores.py
-	    ├── dto.py
-	    ├── excepciones.py
-	    ├── fabricas.py
-	    ├── mapeadores.py
-	    ├── repositorios.py
-	    └── schema
-		├── __init__.py
-		└── v1
-		    ├── __init__.py
-		    ├── comandos.py
-		    ├── mensajes.py
-		    └── eventos.py          
-            └── contratos
-                ├── __init__.py
-                └── aplicacion
-                    ├── __init__.py
-                    ├── dto.py
-                    ├── handlers.py
-                    ├── mapeadores.py
-                    ├── servicios.py
-                    └── comandos
-                        ├── __init__.py
-                        ├── base.py
-                        └── crear_contrato.py
-                    └── queries
-                        ├── __init__.py
-                        ├── base.py
-                        └── obtener_todos_contratos.py
-                └── dominio
-                    ├── __init__.py
-                    ├── entidades.py
-                    ├── eventos.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── objetos_valor.py
-                    └── repositorios.py
-                └── infraestructura
-                    ├── __init__.py
-                    ├── consumidores.py
-                    ├── despachadores.py
-                    ├── dto.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── mapeadores.py
-                    ├── repositorios.py
-                    └── schema
-                        ├── __init__.py
-                        └── v1
-                            ├── __init__.py
-                            ├── comandos.py
-                            ├── mensajes.py
-                            └── eventos.py  
-            └── propiedades
-                ├── __init__.py
-                └── aplicacion
-                    ├── __init__.py
-                    ├── dto.py
-                    ├── handlers.py
-                    ├── mapeadores.py
-                    ├── servicios.py
-                    ├── comandos
-                        ├── __init__.py
-                        ├── base.py
-                        └── crear_propiedad.py
-                    └── queries
-                        ├── __init__.py
-                        ├── base.py
-                        └── obtener_todas_propiedades.py
-                └── dominio
-                    ├── __init__.py
-                    ├── entidades.py
-                    ├── eventos.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── objetos_valor.py
-                    └── repositorios.py
-                └── infraestructura
-                    ├── __init__.py
-                    ├── consumidores.py
-                    ├── despachadores.py
-                    ├── dto.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── mapeadores.py
-                    ├── repositorios.py
-                    └── schema
-                        ├── __init__.py
-                        └── v1
-                            ├── __init__.py
-                            ├── comandos.py
-                            ├── mensajes.py
-                            └── eventos.py  
-        └── seedwork
-            ├── __init__.py
-            └── aplicacion
-                ├── __init__.py
-                ├── comandos.py
-                ├── dto.py
-                ├── hablder.py
-                ├── queries.py
-                ├── comandos.py
-                └── servicios.py
-            └── dominio
-                ├── __init__.py
-                ├── entidades.py
-                ├── eventos.py
-                ├── excepciones.py
-                ├── fabricas.py
-                ├── mixins.py
-                ├── objetos_valor.py
-                ├── reglas.py
-                ├── repositorios.py
-                └── servicios.py
-            └── infraestructura
-                ├── __init__.py
-                ├── uow.py
-                ├── utils.py
-                ├── vistas.py
-                └── schema
-                    ├── __init__.py
-                    └── v1
-                        ├── __init__.py
-                        ├── comandos.py
-                        ├── mensajes.py
-                        └── eventos.py       
-            └── presentacion
-                ├── __init__.py
-                └── api.py
+├─ .gitignore
+├─ .gitpod.yml
+├─ collections
+│  └─ MISW4406-2024-11-PDA.postman_collection.json
+├─ companias.Dockerfile
+├─ config.sh
+├─ contratos.Dockerfile
+├─ deployment-steps-gcp
+├─ docker-compose.yml
+├─ propiedades.Dockerfile
+├─ pyproject.toml
+├─ README.md
+├─ requirements.txt
+└─ src
+   ├─ companias
+   │  ├─ api
+   │  │  ├─ recursos.py
+   │  │  └─ __init__.py
+   │  ├─ config
+   │  │  ├─ config.py
+   │  │  ├─ db.py
+   │  │  ├─ uow.py
+   │  │  └─ __init__.py
+   │  ├─ modulos
+   │  │  └─ companias
+   │  │     ├─ aplicacion
+   │  │     │  ├─ comandos
+   │  │     │  │  ├─ base.py
+   │  │     │  │  ├─ crear_compania.py
+   │  │     │  │  └─ rollback.py
+   │  │     │  ├─ dto.py
+   │  │     │  ├─ handlers.py
+   │  │     │  ├─ mapeadores.py
+   │  │     │  ├─ queries
+   │  │     │  │  ├─ base.py
+   │  │     │  │  └─ obtener_todas_companias.py
+   │  │     │  ├─ servicios.py
+   │  │     │  └─ __init__.py
+   │  │     ├─ dominio
+   │  │     │  ├─ entidades.py
+   │  │     │  ├─ eventos.py
+   │  │     │  ├─ excepciones.py
+   │  │     │  ├─ fabricas.py
+   │  │     │  ├─ objetos_valor.py
+   │  │     │  ├─ repositorios.py
+   │  │     │  └─ __init__.py
+   │  │     ├─ infraestructura
+   │  │     │  ├─ consumidores.py
+   │  │     │  ├─ despachadores.py
+   │  │     │  ├─ dto.py
+   │  │     │  ├─ excepciones.py
+   │  │     │  ├─ fabricas.py
+   │  │     │  ├─ mapeadores.py
+   │  │     │  ├─ repositorios.py
+   │  │     │  ├─ schema
+   │  │     │  │  ├─ v1
+   │  │     │  │  │  ├─ comandos.py
+   │  │     │  │  │  ├─ eventos.py
+   │  │     │  │  │  └─ __init__.py
+   │  │     │  │  └─ __init__.py
+   │  │     │  └─ __init__.py
+   │  │     └─ __init__.py
+   │  └─ seedwork
+   │     ├─ aplicacion
+   │     │  ├─ comandos.py
+   │     │  ├─ dto.py
+   │     │  ├─ handlers.py
+   │     │  ├─ queries.py
+   │     │  ├─ servicios.py
+   │     │  └─ __init__.py
+   │     ├─ dominio
+   │     │  ├─ entidades.py
+   │     │  ├─ eventos.py
+   │     │  ├─ excepciones.py
+   │     │  ├─ fabricas.py
+   │     │  ├─ mixins.py
+   │     │  ├─ objetos_valor.py
+   │     │  ├─ reglas.py
+   │     │  ├─ repositorios.py
+   │     │  ├─ servicios.py
+   │     │  └─ __init__.py
+   │     ├─ infraestructura
+   │     │  ├─ schema
+   │     │  │  ├─ v1
+   │     │  │  │  ├─ comandos.py
+   │     │  │  │  ├─ eventos.py
+   │     │  │  │  ├─ mensajes.py
+   │     │  │  │  └─ __init__.py
+   │     │  │  └─ __init__.py
+   │     │  ├─ uow.py
+   │     │  ├─ utils.py
+   │     │  ├─ vistas.py
+   │     │  └─ __init__.py
+   │     ├─ presentacion
+   │     │  ├─ api.py
+   │     │  └─ __init__.py
+   │     └─ __init__.py
+   ├─ contratos
+   │  ├─ api
+   │  │  ├─ recursos.py
+   │  │  └─ __init__.py
+   │  ├─ config
+   │  │  ├─ config.py
+   │  │  ├─ db.py
+   │  │  ├─ uow.py
+   │  │  └─ __init__.py
+   │  ├─ modulos
+   │  │  └─ contratos
+   │  │     ├─ aplicacion
+   │  │     │  ├─ comandos
+   │  │     │  │  ├─ base.py
+   │  │     │  │  ├─ crear_contrato.py
+   │  │     │  │  └─ __init__.py
+   │  │     │  ├─ dto.py
+   │  │     │  ├─ handlers.py
+   │  │     │  ├─ mapeadores.py
+   │  │     │  ├─ queries
+   │  │     │  │  ├─ base.py
+   │  │     │  │  └─ obtener_todos_contratos.py
+   │  │     │  ├─ servicios.py
+   │  │     │  └─ __init__.py
+   │  │     ├─ dominio
+   │  │     │  ├─ entidades.py
+   │  │     │  ├─ eventos.py
+   │  │     │  ├─ excepciones.py
+   │  │     │  ├─ fabricas.py
+   │  │     │  ├─ objetos_valor.py
+   │  │     │  ├─ repositorios.py
+   │  │     │  └─ __init__.py
+   │  │     ├─ infraestructura
+   │  │     │  ├─ consumidores.py
+   │  │     │  ├─ despachadores.py
+   │  │     │  ├─ dto.py
+   │  │     │  ├─ excepciones.py
+   │  │     │  ├─ fabricas.py
+   │  │     │  ├─ mapeadores.py
+   │  │     │  ├─ repositorios.py
+   │  │     │  ├─ schema
+   │  │     │  │  ├─ v1
+   │  │     │  │  │  ├─ comandos.py
+   │  │     │  │  │  ├─ eventos.py
+   │  │     │  │  │  └─ __init__.py
+   │  │     │  │  └─ __init__.py
+   │  │     │  └─ __init__.py
+   │  │     └─ __init__.py
+   │  └─ seedwork
+   │     ├─ aplicacion
+   │     │  ├─ comandos.py
+   │     │  ├─ dto.py
+   │     │  ├─ handlers.py
+   │     │  ├─ queries.py
+   │     │  ├─ servicios.py
+   │     │  └─ __init__.py
+   │     ├─ dominio
+   │     │  ├─ entidades.py
+   │     │  ├─ eventos.py
+   │     │  ├─ excepciones.py
+   │     │  ├─ fabricas.py
+   │     │  ├─ mixins.py
+   │     │  ├─ objetos_valor.py
+   │     │  ├─ reglas.py
+   │     │  ├─ repositorios.py
+   │     │  ├─ servicios.py
+   │     │  └─ __init__.py
+   │     ├─ infraestructura
+   │     │  ├─ schema
+   │     │  │  ├─ v1
+   │     │  │  │  ├─ comandos.py
+   │     │  │  │  ├─ eventos.py
+   │     │  │  │  ├─ mensajes.py
+   │     │  │  │  └─ __init__.py
+   │     │  │  └─ __init__.py
+   │     │  ├─ uow.py
+   │     │  ├─ utils.py
+   │     │  ├─ vistas.py
+   │     │  └─ __init__.py
+   │     ├─ presentacion
+   │     │  ├─ api.py
+   │     │  └─ __init__.py
+   │     └─ __init__.py
+   └─ propiedades
+      ├─ api
+      │  ├─ recursos.py
+      │  └─ __init__.py
+      ├─ config
+      │  ├─ config.py
+      │  ├─ db.py
+      │  ├─ uow.py
+      │  └─ __init__.py
+      ├─ modulos
+      │  └─ propiedades
+      │     ├─ aplicacion
+      │     │  ├─ comandos
+      │     │  │  ├─ base.py
+      │     │  │  └─ crear_propiedad.py
+      │     │  ├─ dto.py
+      │     │  ├─ handlers.py
+      │     │  ├─ mapeadores.py
+      │     │  ├─ queries
+      │     │  │  ├─ base.py
+      │     │  │  └─ obtener_todas_propiedades.py
+      │     │  ├─ servicios.py
+      │     │  └─ __init__.py
+      │     ├─ dominio
+      │     │  ├─ entidades.py
+      │     │  ├─ eventos.py
+      │     │  ├─ excepciones.py
+      │     │  ├─ fabricas.py
+      │     │  ├─ objetos_valor.py
+      │     │  ├─ repositorios.py
+      │     │  └─ __init__.py
+      │     ├─ infraestructura
+      │     │  ├─ consumidores.py
+      │     │  ├─ despachadores.py
+      │     │  ├─ dto.py
+      │     │  ├─ excepciones.py
+      │     │  ├─ fabricas.py
+      │     │  ├─ mapeadores.py
+      │     │  ├─ repositorios.py
+      │     │  ├─ schema
+      │     │  │  ├─ v1
+      │     │  │  │  ├─ comandos.py
+      │     │  │  │  ├─ eventos.py
+      │     │  │  │  └─ __init__.py
+      │     │  │  └─ __init__.py
+      │     │  └─ __init__.py
+      │     └─ __init__.py
+      └─ seedwork
+         ├─ aplicacion
+         │  ├─ comandos.py
+         │  ├─ dto.py
+         │  ├─ handlers.py
+         │  ├─ queries.py
+         │  ├─ servicios.py
+         │  └─ __init__.py
+         ├─ dominio
+         │  ├─ entidades.py
+         │  ├─ eventos.py
+         │  ├─ excepciones.py
+         │  ├─ fabricas.py
+         │  ├─ mixins.py
+         │  ├─ objetos_valor.py
+         │  ├─ reglas.py
+         │  ├─ repositorios.py
+         │  ├─ servicios.py
+         │  └─ __init__.py
+         ├─ infraestructura
+         │  ├─ schema
+         │  │  ├─ v1
+         │  │  │  ├─ comandos.py
+         │  │  │  ├─ eventos.py
+         │  │  │  ├─ mensajes.py
+         │  │  │  └─ __init__.py
+         │  │  └─ __init__.py
+         │  ├─ uow.py
+         │  ├─ utils.py
+         │  ├─ vistas.py
+         │  └─ __init__.py
+         ├─ presentacion
+         │  ├─ api.py
+         │  └─ __init__.py
+         └─ __init__.py
 ```
 
 ### Pre-requisitos para el despliegue con docker-compose
