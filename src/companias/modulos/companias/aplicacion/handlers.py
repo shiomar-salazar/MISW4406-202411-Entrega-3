@@ -13,4 +13,12 @@ class HandlerCompaniaDominio(Handler):
             despachador.publicar_evento(evento, 'eventos-compania')
         except Exception as e:
             print(f"ERROR AL PUBLICAR {e}")
+
+    @staticmethod
+    def handle_compania_eliminada(evento):
+        try:
+            despachador = Despachador()
+            despachador.publicar_evento(evento, 'eventos-compania_eliminada')
+        except Exception as e:
+            print(f"ERROR AL PUBLICAR {e}")
         

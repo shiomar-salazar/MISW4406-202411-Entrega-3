@@ -7,3 +7,9 @@ class ComandoCrearCompaniaPayload(ComandoIntegracion):
 
 class ComandoCrearCompania(ComandoIntegracion):
     data = ComandoCrearCompaniaPayload()
+
+class ComandoRollbackCompaniaPayload(ComandoIntegracion):
+    id_compania = String()
+
+class ComandoRollbackCompania(ComandoIntegracion):
+    data = ComandoRollbackCompaniaPayload()
