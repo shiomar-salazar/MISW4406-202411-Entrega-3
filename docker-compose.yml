@@ -3,12 +3,18 @@ version: '3'
 networks:  
   pulsar:
     driver: bridge
-  services:
+  companiasnet:
+    driver: bridge  
+  contratosnet:
+    driver: bridge  
+  propiedadesnet:
+    driver: bridge              
+  servicesnet:
     driver: bridge    
 
 # Servicios
 services:    
-  # Pulsar stand oalone
+  # Pulsar stand alone
   pulsar:
     image: apachepulsar/pulsar:3.2.0
     container_name: pulsar
@@ -20,16 +26,16 @@ services:
     networks:
       - pulsar
 
-  # BD postgres
-  postgres:
+  # Bases de datos de Compañias
+  companiasdb:
     image: postgres:latest
-    container_name: postgres
+    container_name: companiasdb
     ports:
       - "5432:5432"
     networks:
-      - services
+      - companiasnet
     environment:
-      POSTGRES_DB: propiedadesalpes
+      POSTGRES_DB: companiasdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost
@@ -40,28 +46,123 @@ services:
       timeout: 5s
       retries: 5
 
-  # Servicios de Propiedades Alpes
-  propiedadesalpes:
-    container_name: propiedadesalpes
-    hostname: propiedadesalpes
+  # Bases de datos de Contratos
+  contratosdb:
+    image: postgres:latest
+    container_name: contratosdb
+    ports:
+      - "5433:5432"
+    networks:
+      - contratosnet
+    environment:
+      POSTGRES_DB: contratosdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5      
+
+  # Bases de datos de Propiedades
+  propiedadesdb:
+    image: postgres:latest
+    container_name: propiedadesdb
+    ports:
+      - "5434:5432"
+    networks:
+      - propiedadesnet
+    environment:
+      POSTGRES_DB: propiedadesdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5   
+
+  # Servicio de Compañias - Propiedades Alpes
+  companias:
+    container_name: companias
+    hostname: companias
     restart: on-failure
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: companias.Dockerfile
     environment:
       - BROKER_HOST=pulsar
-      - POSTGRES_DB=propiedadesalpes
+      - POSTGRES_DB=companiasdb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=companiasdb
       - POSTGRES_PORT=5432
     ports:
       - "5000:5000"
     networks:
       - pulsar
-      - services      
+      - companiasnet
+      - servicesnet      
     depends_on:
-      postgres:
+      companiasdb:
+        condition: service_healthy
+      pulsar:
+        condition: service_started
+
+# Servicio de Contratos - Propiedades Alpes
+  contratos:
+    container_name: contratos
+    hostname: contratos
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: contratos.Dockerfile
+    environment:
+      - BROKER_HOST=pulsar
+      - POSTGRES_DB=contratosdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=contratosdb
+      - POSTGRES_PORT=5432
+    ports:
+      - "5001:5000"
+    networks:
+      - pulsar
+      - contratosnet
+      - servicesnet      
+    depends_on:
+      contratosdb:
+        condition: service_healthy
+      pulsar:
+        condition: service_started
+
+# Servicio de Contratos - Propiedades Alpes
+  propiedades:
+    container_name: propiedades
+    hostname: propiedades
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: propiedades.Dockerfile
+    environment:
+      - BROKER_HOST=pulsar
+      - POSTGRES_DB=propiedadesdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=propiedadesdb
+      - POSTGRES_PORT=5432
+    ports:
+      - "5002:5000"
+    networks:
+      - pulsar
+      - propiedadesnet
+      - servicesnet      
+    depends_on:
+      propiedadesdb:
         condition: service_healthy
       pulsar:
         condition: service_started
