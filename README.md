@@ -33,60 +33,54 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
 ├── README.md
 ├── requirements.txt
 └── src
-    └── propiedadesalpes
-        ├── __init__.py
-        └── api
-            ├── __init__.py
-			├── compania.py
-			├── contrato.py
-            └── propiedad.py
-        └── config
-            ├── __init__.py
-            ├── db.py
-            ├── config.py
-            └── uow.py
-        └── modulos
-            ├── __init__.py
-            └── companias
-                ├── __init__.py
-                └── aplicacion
-                    ├── __init__.py
-                    ├── dto.py
-                    ├── handlers.py
-                    ├── mapeadores.py
-                    ├── servicios.py
-                    ├── comandos
-                        ├── __init__.py
-                        ├── base.py
-                        └── crear_companias.py
-                    └── queries
-                        ├── __init__.py
-                        ├── base.py
-                        └── obtener_todas_companias.py
-                └── dominio
-                    ├── __init__.py
-                    ├── entidades.py
-                    ├── eventos.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── objetos_valor.py
-                    └── repositorios.py
-                └── infraestructura
-                    ├── __init__.py
-                    ├── consumidores.py
-                    ├── despachadores.py
-                    ├── dto.py
-                    ├── excepciones.py
-                    ├── fabricas.py
-                    ├── mapeadores.py
-                    ├── repositorios.py
-                    └── schema
-                        ├── __init__.py
-                        └── v1
-                            ├── __init__.py
-                            ├── comandos.py
-                            ├── mensajes.py
-                            └── eventos.py          
+	└── companias
+	└── api
+	    ├── __init__.py
+	    └── recursos.py
+	└── config
+	    ├── __init__.py
+	    ├── db.py
+	    ├── config.py
+	    └── uow.py
+	└── aplicacion
+	    ├── __init__.py
+	    ├── dto.py
+	    ├── handlers.py
+	    ├── mapeadores.py
+	    ├── servicios.py
+	    ├── comandos
+		├── __init__.py
+		├── base.py
+		├── rollback.py
+		└── crear_companias.py
+	    └── queries
+		├── __init__.py
+		├── base.py
+		└── obtener_todas_companias.py
+	└── dominio
+	    ├── __init__.py
+	    ├── entidades.py
+	    ├── eventos.py
+	    ├── excepciones.py
+	    ├── fabricas.py
+	    ├── objetos_valor.py
+	    └── repositorios.py
+	└── infraestructura
+	    ├── __init__.py
+	    ├── consumidores.py
+	    ├── despachadores.py
+	    ├── dto.py
+	    ├── excepciones.py
+	    ├── fabricas.py
+	    ├── mapeadores.py
+	    ├── repositorios.py
+	    └── schema
+		├── __init__.py
+		└── v1
+		    ├── __init__.py
+		    ├── comandos.py
+		    ├── mensajes.py
+		    └── eventos.py          
             └── contratos
                 ├── __init__.py
                 └── aplicacion
@@ -205,17 +199,6 @@ Repositorio del equipo Optimizers de la Materia MISW4406-2024-11
                 └── api.py
 ```
 
-### Escenarios de Calidad Seleccionados
-
-#### Esceneario de Calidad #1: Desempeño
-![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/52eff4a1-20c8-40da-85b9-d627c5c3b4f9)
-
-#### Esceneario de Calidad #2: Disponibilidad
-![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/c6d25f10-3638-4dbf-9768-8f69655add90)
-
-#### Esceneario de Calidad #2: Seguridad
-![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3/assets/111320185/42f7a336-0f69-44de-a43c-f2adaed72240)
-
 ### Pre-requisitos para el despliegue con docker-compose
 
 #### Docker:
@@ -259,37 +242,11 @@ docker-compose -f "docker-compose.yml" up -d
 
 ![image](https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/assets/110913673/64930eac-0d51-4326-a3ce-b19fc73eb44d)
 
-## Decisiones de arquitectura
-Acorde al problema planteado por propiedades de los Alpes se ha diseñado una arquitectura que cumpla con las características necesarias para su operación, a continuación, se detallan las decisiones de arquitectura más relevantes. 
-
-* **Arquitectura Hexagonal:**  también conocida como arquitectura de puertos y adaptadores permite aislar la lógica de negocio de las conexiones externas con otros componentes mediante la separación en componentes con bajo acoplamiento. 
-
-* **CQRS:** Es un patrón de diseño que nos permite separar las lecturas y los comandos, tanto a nivel de código e incluso llegar hasta el escalamiento independiente, para propiedades de los Alpes cada componente tiene independiente la lógica de consulta de la lógica de los comandos de creación. 
-
-* **Estilo de Arquitectura Microservicios:** El estilo de arquitectura basada en microservicios nos permite generar servicios independientes con responsabilidades claramente definidas acorde a su contexto acotado, cada microservicio tiene la posibilidad de escalar horizontalmente independientemente acorde a la carga que su funcionalidad requiera, así como su despliegue. El estilo de arquitectura de microservicios aumenta la dificultad de implementación y monitoreo. 
-
-* **Comunicación basada en Eventos:** para favorecer la flexibilidad y bajo acoplamiento del sistema, se busca una comunicación basada en eventos, lo que permite realizar llamadas asíncronas, mejoras tiempos de respuesta añadiendo respuestas simuladas y permitiendo que otros componentes puedan escalar acorde a la carga que sea inyectada.  
-
-### AVRO
-Decidicmos usar Avro porque es un proyecto de código abierto que proporciona servicios de serialización e intercambio de datos. Estos servicios se pueden utilizar juntos o separados. Avro facilita el intercambio de big data entre programas escritos en cualquier lenguaje. Con el servicio de serialización, los programas pueden serializar datos de manera eficiente en archivos o mensajes. El almacenamiento de datos es compacto y eficiente. Avro almacena tanto la definición de datos como los datos juntos en un mensaje o archivo.\
-Avro almacena la definición de datos en formato JSON, lo que facilita su lectura e interpretación. Los datos en sí se almacenan en formato binario, lo que los hace compactos y eficientes.\
-Una de las características principales de Avro es su sólida compatibilidad con esquemas de datos que cambian con el tiempo, lo que a menudo se denomina evolución de esquema. Avro gestiona cambios de esquema como campos faltantes, campos agregados y campos modificados; como resultado, los programas antiguos pueden leer datos nuevos y los programas nuevos pueden leer datos antiguos.
-### CRUD
-En la arquitectura propuesta, se implementó CRUD como patrón del almacenamiento. Crear, leer, actualizar y eliminar (CRUD) son las cuatro operaciones básicas del almacenamiento persistente. \
-Cuando creamos APIs, queremos que nuestros modelos proporcionen estos cuatro tipos básicos de funcionalidad. El modelo debe poder crear, leer, actualizar y eliminar recursos. 
-
-## Planeación de actividades:
-
-|   Integrante                     | Entrega 3  |  Entrega 4  |  Entrega 5  | 
-|----------------------------------|------------|-------------|-------------|
-| Jhon Fredy Guzmán Caicedo        | Implementación capa de comandos microservicio Companias. | Microservicio Cotratos (CQRS - Eventos) |  |
-| Haiber Humberto Galindo Sanchez  | Implementación capa de infraestructura microservicio Companias. | Microservicio Propiedades (CQRS - Eventos) |  |
-| Jorge M. Carrillo                | Implementación capa de dominio microservicio Companias. | Microservicio Propiedades (CQRS - Eventos) |  |
-| Shiomar Alberto Salazar Castillo | Implementación capa de Apis microservicio Companias. | Microservicio Cotratos (CQRS - Eventos) |  |
-
-
-### Video de la Entrega 4
-
-[Video entrega 4](https://uniandes-my.sharepoint.com/:v:/r/personal/s_salazarc_uniandes_edu_co/Documents/Apps-No-Monoliticas/Entrega4/video1518578765.mp4?csf=1&web=1&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=UIKfWM )
-
-
+### Entregables
+Los entregables se movieron a Wiki para tener mejor control de los mismos:
+#### Entrega Semana 3
+https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/wiki/Entrega3
+#### Entrega Semana 4
+https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/wiki/Entrega4
+#### Entrega Semana 5
+https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5/wiki/Entrega5
