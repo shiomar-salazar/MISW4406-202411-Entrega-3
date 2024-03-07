@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "55fc3154-3497-46cd-8b7d-ec5322fb4ada",
+		"_postman_id": "147c6975-5b9a-473b-bee5-a1be91223ed6",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5238096",
-		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-55fc3154-3497-46cd-8b7d-ec5322fb4ada?action=share&source=collection_link&creator=5238096"
+		"_exporter_id": "24449657",
+		"_collection_link": "https://planetary-water-212881.postman.co/workspace/MISW4304-DevOps~d3c8a8af-f51c-4b53-91e5-7c70c6ef1744/collection/24449657-147c6975-5b9a-473b-bee5-a1be91223ed6?action=share&source=collection_link&creator=24449657"
 	},
 	"item": [
 		{
@@ -28,7 +28,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Compania",
+					"name": "Crear Compañia",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -49,6 +49,33 @@
 							"path": [
 								"compania",
 								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rollback Compañia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"5be8f5a7-2fa1-4ce3-a0f9-e7b9fc5ce9b2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_COMPANIAS}}/compania/rollback",
+							"host": [
+								"{{HOST_COMPANIAS}}"
+							],
+							"path": [
+								"compania",
+								"rollback"
 							]
 						}
 					},
