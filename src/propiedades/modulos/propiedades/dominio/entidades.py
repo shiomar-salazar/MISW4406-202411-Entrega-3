@@ -33,27 +33,27 @@ class Propiedad(AgregacionRaiz):
     id_contrato : str = field(default_factory=str)  
 
     def crear_propiedad(self, propiedad: "Propiedad"):
-        self.id_propiedad = propiedad.id_propiedad,
-        self.nombre_propiedad = propiedad.nombre_propiedad,
-        self.tipo_propiedad = propiedad.tipo_propiedad,
-        self.pais = propiedad.pais,
-        self.departamento = propiedad.departamento,
-        self.ciudad = propiedad.ciudad,
-        self.direccion = propiedad.direccion,
-        self.latitud = propiedad.latitud,
-        self.longitud = propiedad.longitud,
-        self.codigo_postal = propiedad.codigo_postal,
-        self.area_lote = propiedad.area_lote,
-        self.estrato_socioeconomico = propiedad.estrato_socioeconomico,
-        self.valor_venta = propiedad.valor_venta,
-        self.valor_arriendo_mensual = propiedad.valor_arriendo_mensual,
-        self.moneda = propiedad.moneda,
-        self.propietario = propiedad.propietario,
-        self.arrendatario = propiedad.arrendatario,
-        self.fecha_ultimo_contrato = propiedad.fecha_ultimo_contrato,
-        self.fecha_expiracion_contrato_actual = propiedad.fecha_expiracion_contrato_actual,
-        self.estado = propiedad.estado,
-        self.id_compania = propiedad.id_compania,
+        self.id_propiedad = propiedad.id_propiedad
+        self.nombre_propiedad = propiedad.nombre_propiedad
+        self.tipo_propiedad = propiedad.tipo_propiedad
+        self.pais = propiedad.pais
+        self.departamento = propiedad.departamento
+        self.ciudad = propiedad.ciudad
+        self.direccion = propiedad.direccion
+        self.latitud = propiedad.latitud
+        self.longitud = propiedad.longitud
+        self.codigo_postal = propiedad.codigo_postal
+        self.area_lote = propiedad.area_lote
+        self.estrato_socioeconomico = propiedad.estrato_socioeconomico
+        self.valor_venta = propiedad.valor_venta
+        self.valor_arriendo_mensual = propiedad.valor_arriendo_mensual
+        self.moneda = propiedad.moneda
+        self.propietario = propiedad.propietario
+        self.arrendatario = propiedad.arrendatario
+        self.fecha_ultimo_contrato = propiedad.fecha_ultimo_contrato
+        self.fecha_expiracion_contrato_actual = propiedad.fecha_expiracion_contrato_actual
+        self.estado = propiedad.estado
+        self.id_compania = propiedad.id_compania
         self.id_contrato = propiedad.id_contrato
 
         self.agregar_evento(PropiedadCreada(

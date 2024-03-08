@@ -53,8 +53,6 @@ def crear():
 @bp.route('/eliminar/<id_propiedad>', methods=['DELETE'])
 def eliminar(id_propiedad):
     try:
-        print(f'INFO: Llega hasta eliminar')
-        print(f'INFO: id_propiedad => [{id_propiedad}]')
         comando = EliminarPropiedad(
             id_propiedad = id_propiedad
         )
