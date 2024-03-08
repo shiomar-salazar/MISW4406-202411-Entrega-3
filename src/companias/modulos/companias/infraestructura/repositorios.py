@@ -13,7 +13,6 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
     def agregar(self, compania: Compania):
             compania_dto = self._fabrica_companias.crear_objeto(compania, MappeadorCompania())
             db.session.add(compania_dto)
-
     
     def obtener_todos(self) -> list[Compania]:
         companias_list = db.session.query(Compania).all()
@@ -26,5 +25,5 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
         compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id)).one()
         return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())
     
-    def eliminar_por_id(self, id: UUID):
-        db.session.query(CompaniaDTO).filter_by(id=str(id)).delete()        
+    def eliminar(self, compania: Compania):
+        db.session.query(CompaniaDTO).filter_by(id=str(compania.id_compania)).delete() 

@@ -15,7 +15,7 @@ class CrearCompaniaBaseHandler(ComandoHandler):
     def fabrica_companias(self):
         return self._fabrica_companias    
     
-class RollbackCompaniaBaseHandler(ComandoHandler):
+class EliminarCompaniaBaseHandler(ComandoHandler):
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()
         self._fabrica_companias: FabricaCompanias = FabricaCompanias()

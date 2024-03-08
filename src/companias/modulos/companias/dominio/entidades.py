@@ -6,11 +6,12 @@ import uuid
 import modulos.companias.dominio.objetos_valor as ov
 from modulos.companias.dominio.eventos import CompaniaCreada, CompaniaEliminada
 from seedwork.dominio.entidades import AgregacionRaiz
-from .eventos import CompaniaCreada
+from .eventos import CompaniaCreada, CompaniaEliminada
 
 @dataclass
 class Compania(AgregacionRaiz):
-    id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    #id_compania: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_compania:str = field(default_factory=str)   
     nombre_compania:str = field(default_factory=str)       
     representante_legal:str = field(default_factory=str)
     email_contacto:str = field(default_factory=str)      
@@ -27,6 +28,7 @@ class Compania(AgregacionRaiz):
     
 
     def crear_compania(self, compania: "Compania"):
+        self.id_compania = compania.id_compania
         self.nombre_compania = compania.nombre_compania
         self.representante_legal = compania.representante_legal
         self.email_contacto = compania.email_contacto
@@ -60,7 +62,7 @@ class Compania(AgregacionRaiz):
     )
         
     def eliminar_compania(self, compania: "Compania"):
-        self.nombre_compania = compania.nombre_compania
+        self.id_compania = compania.id_compania
 
         self.agregar_evento(CompaniaEliminada(
             id_compania=str(self.id_compania)

@@ -5,3 +5,9 @@ class NoExisteImplementacionParaTipoFabricaExcepcion(ExcepcionFabrica):
         self.__mensaje = mensaje
     def __str__(self):
         return str(self.__mensaje)
+
+class CompaniaNoEncontradaExcepcion(ExcepcionFabrica):
+    def __init__(self, mensaje='No se encontró ningúna compania con los valores especificados.'):
+        self.__mensaje = mensaje
+    def __str__(self):
+        return str(self.__mensaje) 

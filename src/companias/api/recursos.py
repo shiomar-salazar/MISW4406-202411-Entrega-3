@@ -3,7 +3,7 @@ from seedwork.dominio.excepciones import ExcepcionDominio
 from modulos.companias.aplicacion.mapeadores import MapeadorCompaniaDTOJson
 from modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
 from modulos.companias.aplicacion.queries.obtener_todas_companias import ObtenerTodasCompanias
-from modulos.companias.aplicacion.comandos.rollback import RollbackCompania
+from modulos.companias.aplicacion.comandos.eliminar_compania import EliminarCompania
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
 import json
@@ -52,13 +52,12 @@ def dar_compania_usando_query():
     
     return resultados
     
-@bp.route('/rollback', methods=('POST',))
-def rollback_creacion():
+@bp.route('/eliminar/<id_compania>', methods=('DELETE',))
+def eliminar(id_compania):
     try:
-        rollback_id = request.json.get("id")
 
-        comando = RollbackCompania(
-            id_compania= rollback_id
+        comando = EliminarCompania(
+            id_compania= id_compania
         )
         ejecutar_commando(comando)
         return Response('{}', status=202, mimetype='application/json')

@@ -5,7 +5,6 @@ from seedwork.dominio.entidades import AgregacionRaiz
 from pydispatch import dispatcher
 
 import pickle
-import logging
 import traceback
 
 
@@ -70,7 +69,7 @@ class UnidadTrabajo(ABC):
             for evento in self._obtener_eventos(batches=[batch]):
                 dispatcher.send(signal=f'{type(evento).__name__}Dominio', evento=evento)
         except:
-            logging.error('ERROR: Suscribiendose al tópico de eventos!')
+            print('ERROR: Suscribiendose al tópico de eventos!')
             traceback.print_exc()
         
     def _publicar_eventos_post_commit(self):

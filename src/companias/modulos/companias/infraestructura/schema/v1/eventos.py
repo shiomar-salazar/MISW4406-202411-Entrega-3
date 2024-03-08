@@ -22,7 +22,7 @@ class EventoCompaniaCreada(EventoIntegracion):
     data = CompaniaCreadaPayload()
 
 class CompaniaEliminadaPayload(Record):
-    id = String()
+    id_compania = String()
 
 class EventoCompaniaEliminada(EventoIntegracion):
     data = CompaniaEliminadaPayload()

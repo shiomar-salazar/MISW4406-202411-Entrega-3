@@ -27,7 +27,7 @@ class Repositorio(ABC):
     #     ...
 
     @abstractmethod
-    def eliminar_por_id(self, entity_id: UUID):
+    def eliminar(self, entity: Entidad):
         ...
 
 
