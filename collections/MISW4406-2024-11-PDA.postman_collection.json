@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3084d68b-b494-47a4-bd7c-664f7e4588c3",
+		"_postman_id": "694e421d-1439-4fd7-928f-ef179d1816d4",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "5238096",
-		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-3084d68b-b494-47a4-bd7c-664f7e4588c3?action=share&source=collection_link&creator=5238096"
+		"_exporter_id": "24449657",
+		"_collection_link": "https://planetary-water-212881.postman.co/workspace/MISW4304-DevOps~d3c8a8af-f51c-4b53-91e5-7c70c6ef1744/collection/24449657-694e421d-1439-4fd7-928f-ef179d1816d4?action=share&source=collection_link&creator=24449657"
 	},
 	"item": [
 		{
@@ -55,27 +55,19 @@
 					"response": []
 				},
 				{
-					"name": "Rollback Compañia",
+					"name": "Eliminar Compañia por ID",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"57fd3aec-2102-4cc3-bef1-ee5a8c2d78b5\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{HOST_COMPANIAS}}/compania/rollback",
+							"raw": "{{HOST_COMPANIAS}}/compania/eliminar/74507aa9-1a58-4db5-802d-f33fd630c5e2",
 							"host": [
 								"{{HOST_COMPANIAS}}"
 							],
 							"path": [
 								"compania",
-								"rollback"
+								"eliminar",
+								"74507aa9-1a58-4db5-802d-f33fd630c5e2"
 							]
 						}
 					},
@@ -155,7 +147,7 @@
 			"name": "Propiedades",
 			"item": [
 				{
-					"name": "Eliminar Propiedad por Direccion",
+					"name": "Eliminar Propiedad por ID",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -243,17 +235,17 @@
 	"variable": [
 		{
 			"key": "HOST_COMPANIAS",
-			"value": "https://5000-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"value": "https://5000-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
 			"type": "string"
 		},
 		{
 			"key": "HOST_CONTRATOS",
-			"value": "https://5001-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"value": "https://5001-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
 			"type": "string"
 		},
 		{
 			"key": "HOST_PROPIEDADES",
-			"value": "https://5002-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"value": "https://5002-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
 			"type": "string"
 		}
 	]
