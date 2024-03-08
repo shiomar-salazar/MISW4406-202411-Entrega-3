@@ -4,10 +4,11 @@ from sagas.seedwork.dominio.eventos import EventoDominio
 
 from companias.modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
 from companias.modulos.companias.dominio.eventos import CompaniaCreada, CompaniaCreadaFallida
-from companias.modulos.companias.aplicacion.comandos.rollback import RollbackCompania
+from companias.modulos.companias.aplicacion.comandos.eliminar_compania import EliminarCompania
 
 from propiedades.modulos.propiedades.aplicacion.comandos.crear_propiedad import CrearPropiedad
 from propiedades.modulos.propiedades.dominio.eventos import PropiedadCreada
+from propiedades.modulos.propiedades.aplicacion.comandos.eliminar_propiedad import EliminarPropiedad
 
 from contratos.modulos.contratos.aplicacion.comandos.crear_contrato import CrearContrato
 from contratos.modulos.contratos.dominio.eventos import ContratoCreado
@@ -18,9 +19,9 @@ class CoordiandorContratos(CoordinadorOrquestacion):
         self.pasos = [
             Inicio(index=0),
             Transaccion(index=1, comando=CrearCompania, evento=CompaniaCreada, error=None, compensacion=None),
-            #Transaccion(index=2, comando=, evento=, error=CompaniaCreadaFallida, compensacion=RollbackCompania),
+            #Transaccion(index=2, comando=, evento=, error=CompaniaCreadaFallida, compensacion=EliminarCompania),
             Transaccion(index=3, comando=CrearPropiedad, evento=PropiedadCreada, error=None, compensacion=None),
-            #Transaccion(index=4, comando=, evento=, error=PropiedadCreadaFallida, compensacion=None),
+            #Transaccion(index=4, comando=, evento=, error=PropiedadCreadaFallida, compensacion=EliminarPropiedad),
             Transaccion(index=5, comando=CrearContrato, evento=ContratoCreado, error=None, compensacion=None),
             #Transaccion(index=6, comando=, evento=, error=ContratoCreadoFallido, compensacion=None),
             Fin(index=7)

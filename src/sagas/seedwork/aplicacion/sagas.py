@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from aeroalpes.seedwork.aplicacion.comandos import Comando
-from aeroalpes.seedwork.dominio.eventos import EventoDominio
+from aplicacion.comandos import Comando
+from dominio.eventos import EventoDominio
 from dataclasses import dataclass
 from .comandos import ejecutar_commando
 import uuid
