@@ -11,3 +11,8 @@ class Contrato(db.Model):
     fecha_ejecucion = db.Column(db.String, nullable=True)
     monto = db.Column(db.DECIMAL, nullable=True)
     tipo = db.Column(db.String, nullable=True)
+
+    # Indices de la tabla
+    idx_id_propiedad = db.Index('idx_id_propiedad', 'id_propiedad')
+    idx_id_compania = db.Index('idx_id_compania', 'id_compania')
+    idx_propiedad_compania = db.Index('idx_propiedad_compania', 'id_propiedad', 'id_compania')

@@ -25,6 +25,11 @@ class PropiedadCreadaPayload(Record):
     id_compania  = String()       
     id_contrato  = String()  
 
-
 class EventoPropiedadCreada(EventoIntegracion):
     data = PropiedadCreadaPayload()
+    
+class PropiedadEliminadaPayload(Record):
+    id_propiedad = String()    
+
+class EventoPropiedadEliminada(EventoIntegracion):
+    data = PropiedadEliminadaPayload()    

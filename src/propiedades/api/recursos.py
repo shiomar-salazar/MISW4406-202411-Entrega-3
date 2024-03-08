@@ -2,6 +2,7 @@ import seedwork.presentacion.api as api
 from seedwork.dominio.excepciones import ExcepcionDominio
 from modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
 from modulos.propiedades.aplicacion.comandos.crear_propiedad import CrearPropiedad
+from modulos.propiedades.aplicacion.comandos.eliminar_propiedad import EliminarPropiedad
 from modulos.propiedades.aplicacion.queries.obtener_todas_propiedades import ObtenerTodasPropiedades
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
@@ -12,7 +13,7 @@ from flask import request
 
 bp = api.crear_blueprint('propiedad', '/propiedad')
 
-@bp.route('/crear', methods=['POST',])
+@bp.route('/crear', methods=['POST'])
 def crear():
     try:
         propiedad_dict = request.json
@@ -48,15 +49,26 @@ def crear():
         return Response('{}', status=202, mimetype='application/json')
     except ExcepcionDominio as e:
         return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
+
+@bp.route('/eliminar/<id_propiedad>', methods=['DELETE'])
+def eliminar(id_propiedad):
+    try:
+        print(f'INFO: Llega hasta eliminar')
+        print(f'INFO: id_propiedad => [{id_propiedad}]')
+        comando = EliminarPropiedad(
+            id_propiedad = id_propiedad
+        )
+        ejecutar_commando(comando)
+        return Response('{}', status=202, mimetype='application/json')
+    except ExcepcionDominio as e:
+       return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
     
-@bp.route('', methods=('GET',))
+@bp.route('', methods=['GET'])
 def dar_propiedad_usando_query():
     map_propiedad = MapeadorPropiedadDTOJson()
     query_resultado = ejecutar_query(ObtenerTodasPropiedades())
     resultados = []
-    
     for propiedad in query_resultado.resultado:
         resultados.append(map_propiedad.dto_a_externo(propiedad))
-    
     return resultados
     

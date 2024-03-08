@@ -13,12 +13,10 @@ class MapeadorContratoDTOJson(AppMap):
         contrato_dto.fecha_ejecucion  = externo.get("fecha_ejecucion")
         contrato_dto.monto  = externo.get("monto")
         contrato_dto.tipo  = externo.get("tipo")
-
         return contrato_dto
     
     def dto_a_externo(self, dto: ContratoDTO) -> dict:
         return dto.__dict__
-
 
 class MapeadorContrato(RepMap):
     _FORMATO_FECHA = "%Y-%m-%dT%H:%M:%SZ"
@@ -35,7 +33,6 @@ class MapeadorContrato(RepMap):
         contrato_dto.fecha_ejecucion  = entidad.fecha_ejecucion
         contrato_dto.monto  = entidad.monto
         contrato_dto.tipo  = entidad.tipo
-        
         return contrato_dto
     
     def dto_a_entidad(self, dto: ContratoDTO) -> Contrato:
@@ -47,7 +44,6 @@ class MapeadorContrato(RepMap):
         contrato.fecha_ejecucion  = dto.fecha_ejecucion
         contrato.monto  = dto.monto
         contrato.tipo  = dto.tipo
-
         return contrato
     
     def entidad_a_externo(self, dto: Contrato) -> dict:
@@ -59,5 +55,4 @@ class MapeadorContrato(RepMap):
         dto.fecha_ejecucion  = str(dto.fecha_ejecucion)
         dto.monto  = str(dto.monto)
         dto.tipo  = str(dto.tipo)
-
         return dto.__dict__

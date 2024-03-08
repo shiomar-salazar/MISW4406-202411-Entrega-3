@@ -27,3 +27,7 @@ class PropiedadCreada(EventoDominio):
     estado : str = None    
     id_compania : str = None    
     id_contrato : str = None      
+
+@dataclass
+class PropiedadEliminada(EventoDominio):
+    id_propiedad: uuid.UUID = None

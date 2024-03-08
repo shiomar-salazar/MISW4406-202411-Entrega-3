@@ -13,7 +13,6 @@ class RepositorioContratosPostgresSQL(RepositorioContratos):
     def agregar(self, contrato: Contrato):
             contrato_dto = self._fabrica_contratos.crear_objeto(contrato, MappeadorContrato())
             db.session.add(contrato_dto)
-
     
     def obtener_todos(self) -> list[Contrato]:
         contratos_list = db.session.query(Contrato).all()
@@ -25,11 +24,7 @@ class RepositorioContratosPostgresSQL(RepositorioContratos):
     def obtener_por_id(self, id: UUID) -> Contrato:
         contrato_dto = db.session.query(ContratoDTO).filter_by(id=str(id)).one()
         return self._fabrica_contratos.crear_objeto(contrato_dto, MappeadorContrato())
-    
-class RepositorioContratosRedis(RepositorioContratos):
-    def __init__(self):
-        self._fabrica_contratos: FabricaContratos = FabricaContratos()
 
-    def agregar(self, contrato: Contrato):
-        ...
-        
+    def obtener_por_ids(self, id_compania: UUID, id_propiedad: UUID) -> Contrato:
+        contrato_dto = db.session.query(ContratoDTO).filter_by(id_compania=str(id_compania), id_propiedad=str(id_propiedad)).first()
+        return self._fabrica_contratos.crear_objeto(contrato_dto, MappeadorContrato())

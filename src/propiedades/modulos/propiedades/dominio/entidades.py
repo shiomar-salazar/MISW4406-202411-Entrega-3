@@ -2,13 +2,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from dataclasses import dataclass, field
 import uuid
-from modulos.propiedades.dominio.eventos import PropiedadCreada
+from modulos.propiedades.dominio.eventos import PropiedadCreada, PropiedadEliminada
 from seedwork.dominio.entidades import AgregacionRaiz
-from .eventos import PropiedadCreada
+from .eventos import PropiedadCreada, PropiedadEliminada
 
 @dataclass
 class Propiedad(AgregacionRaiz):
-    id_propiedad: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    # id_propiedad: uuid.UUID = field(hash=True, default=uuid.uuid4())
+    id_propiedad:  str = field(default_factory=str)   
     nombre_propiedad: str = field(default_factory=str)   
     tipo_propiedad: str = field(default_factory=str)
     pais: str = field(default_factory=str)
@@ -30,9 +31,9 @@ class Propiedad(AgregacionRaiz):
     estado : str = field(default_factory=str)
     id_compania : str = field(default_factory=str)
     id_contrato : str = field(default_factory=str)  
-    
 
     def crear_propiedad(self, propiedad: "Propiedad"):
+        self.id_propiedad = propiedad.id_propiedad,
         self.nombre_propiedad = propiedad.nombre_propiedad,
         self.tipo_propiedad = propiedad.tipo_propiedad,
         self.pais = propiedad.pais,
@@ -56,6 +57,7 @@ class Propiedad(AgregacionRaiz):
         self.id_contrato = propiedad.id_contrato
 
         self.agregar_evento(PropiedadCreada(
+            id_propiedad = str(self.id_propiedad),
             nombre_propiedad = str(self.nombre_propiedad),   
             tipo_propiedad = str(self.tipo_propiedad),
             pais = str(self.pais),
@@ -80,3 +82,9 @@ class Propiedad(AgregacionRaiz):
         )
     )
 
+    def eliminar_propiedad(self, propiedad: "Propiedad"):
+        self.id_propiedad = propiedad.id_propiedad
+        self.agregar_evento(PropiedadEliminada(
+            id_propiedad=str(self.id_propiedad)
+        )
+    )

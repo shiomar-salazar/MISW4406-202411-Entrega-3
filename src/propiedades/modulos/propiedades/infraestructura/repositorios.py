@@ -1,7 +1,9 @@
+import traceback
 from config.db import db
 from modulos.propiedades.dominio.repositorios import RepositorioPropiedades
 from modulos.propiedades.infraestructura.dto import Propiedad
 from modulos.propiedades.dominio.fabricas import FabricaPropiedades
+from modulos.propiedades.infraestructura.excepciones import ContratoNoEncontradoExcepcion
 from .dto import Propiedad as PropiedadDTO
 from .mapeadores import MappeadorPropiedad
 from uuid import UUID
@@ -13,7 +15,6 @@ class RepositorioPropiedadesPostgresSQL(RepositorioPropiedades):
     def agregar(self, propiedad: Propiedad):
             propiedad_dto = self._fabrica_propiedades.crear_objeto(propiedad, MappeadorPropiedad())
             db.session.add(propiedad_dto)
-
     
     def obtener_todos(self) -> list[Propiedad]:
         propiedades_list = db.session.query(Propiedad).all()
@@ -26,10 +27,5 @@ class RepositorioPropiedadesPostgresSQL(RepositorioPropiedades):
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
         return self._fabrica_propiedades.crear_objeto(propiedad_dto, MappeadorPropiedad())
     
-class RepositorioPropiedadesRedis(RepositorioPropiedades):
-    def __init__(self):
-        self._fabrica_propiedades: FabricaPropiedades = FabricaPropiedades()
-
-    def agregar(self, propiedad: Propiedad):
-        ...
-        
+    def eliminar(self, propiedad: Propiedad):
+        db.session.query(PropiedadDTO).filter_by(id=str(propiedad.id_propiedad)).delete()

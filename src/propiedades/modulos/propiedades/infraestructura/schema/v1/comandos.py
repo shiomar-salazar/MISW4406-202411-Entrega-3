@@ -4,7 +4,12 @@ from seedwork.infraestructura.schema.v1.comandos import (ComandoIntegracion)
 
 class ComandoCrearPropiedadPayload(ComandoIntegracion):
     id_propiedad = String()
-    # TODO Cree los records para itinerarios
 
 class ComandoCrearPropiedad(ComandoIntegracion):
     data = ComandoCrearPropiedadPayload()
+    
+class ComandoEliminarPropiedadPayload(ComandoIntegracion):
+    id_propiedad = String()
+
+class ComandoEliminarPropiedad(ComandoIntegracion):
+    data = ComandoEliminarPropiedadPayload()    

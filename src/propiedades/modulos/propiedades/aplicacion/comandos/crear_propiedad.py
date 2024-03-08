@@ -61,10 +61,9 @@ class CrearPropiedadHandler(CrearPropiedadBaseHandler):
             id_compania = comando.id_compania,
             id_contrato = comando.id_contrato
         )
-        
         propiedad : Propiedad = self._fabrica_propiedades.crear_objeto(propiedad_dto, MapeadorPropiedad())
         propiedad.crear_propiedad(propiedad)
-
+    
         repositorio = self._fabrica_repositorio.crear_objeto(RepositorioPropiedades.__class__)
 
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, propiedad)

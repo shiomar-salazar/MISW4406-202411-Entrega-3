@@ -12,5 +12,5 @@ class ContratoQueryBaseHandler(QueryHandler):
         return self._fabrica_vista
     
     @property
-    def fabrica_vuelos(self):
+    def fabrica_contratos(self):
         return self._fabrica_contratos    

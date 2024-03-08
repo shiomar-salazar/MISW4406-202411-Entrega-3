@@ -26,45 +26,45 @@ services:
     networks:
       - pulsar
 
-  # Bases de datos de Compañias
-  companiasdb:
-    image: postgres:latest
-    container_name: companiasdb
-    ports:
-      - "5432:5432"
-    networks:
-      - companiasnet
-    environment:
-      POSTGRES_DB: companiasdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 2s
-      timeout: 5s
-      retries: 5
+  # # Bases de datos de Compañias
+  # companiasdb:
+  #   image: postgres:latest
+  #   container_name: companiasdb
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - companiasnet
+  #   environment:
+  #     POSTGRES_DB: companiasdb
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_HOST: localhost
+  #     POSTGRES_PORT: 5432
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+  #     interval: 2s
+  #     timeout: 5s
+  #     retries: 5
 
-  # Bases de datos de Contratos
-  contratosdb:
-    image: postgres:latest
-    container_name: contratosdb
-    ports:
-      - "5433:5432"
-    networks:
-      - contratosnet
-    environment:
-      POSTGRES_DB: contratosdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 2s
-      timeout: 5s
-      retries: 5      
+  # # Bases de datos de Contratos
+  # contratosdb:
+  #   image: postgres:latest
+  #   container_name: contratosdb
+  #   ports:
+  #     - "5433:5432"
+  #   networks:
+  #     - contratosnet
+  #   environment:
+  #     POSTGRES_DB: contratosdb
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_HOST: localhost
+  #     POSTGRES_PORT: 5432
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+  #     interval: 2s
+  #     timeout: 5s
+  #     retries: 5      
 
   # Bases de datos de Propiedades
   propiedadesdb:
@@ -86,61 +86,61 @@ services:
       timeout: 5s
       retries: 5   
 
-  # Servicio de Compañias - Propiedades Alpes
-  companias:
-    container_name: companias
-    hostname: companias
-    restart: on-failure
-    build:
-      context: .
-      dockerfile: companias.Dockerfile
-    environment:
-      - BROKER_HOST=pulsar
-      - POSTGRES_DB=companiasdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=companiasdb
-      - POSTGRES_PORT=5432
-    ports:
-      - "5000:5000"
-    networks:
-      - pulsar
-      - companiasnet
-      - servicesnet      
-    depends_on:
-      companiasdb:
-        condition: service_healthy
-      pulsar:
-        condition: service_started
+  # # Servicio de Compañias - Propiedades Alpes
+  # companias:
+  #   container_name: companias
+  #   hostname: companias
+  #   restart: on-failure
+  #   build:
+  #     context: .
+  #     dockerfile: companias.Dockerfile
+  #   environment:
+  #     - BROKER_HOST=pulsar
+  #     - POSTGRES_DB=companiasdb
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_HOST=companiasdb
+  #     - POSTGRES_PORT=5432
+  #   ports:
+  #     - "5000:5000"
+  #   networks:
+  #     - pulsar
+  #     - companiasnet
+  #     - servicesnet      
+  #   depends_on:
+  #     companiasdb:
+  #       condition: service_healthy
+  #     pulsar:
+  #       condition: service_started
 
-# Servicio de Contratos - Propiedades Alpes
-  contratos:
-    container_name: contratos
-    hostname: contratos
-    restart: on-failure
-    build:
-      context: .
-      dockerfile: contratos.Dockerfile
-    environment:
-      - BROKER_HOST=pulsar
-      - POSTGRES_DB=contratosdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=contratosdb
-      - POSTGRES_PORT=5432
-    ports:
-      - "5001:5000"
-    networks:
-      - pulsar
-      - contratosnet
-      - servicesnet      
-    depends_on:
-      contratosdb:
-        condition: service_healthy
-      pulsar:
-        condition: service_started
+  # # Servicio de Contratos - Propiedades Alpes
+  # contratos:
+  #   container_name: contratos
+  #   hostname: contratos
+  #   restart: on-failure
+  #   build:
+  #     context: .
+  #     dockerfile: contratos.Dockerfile
+  #   environment:
+  #     - BROKER_HOST=pulsar
+  #     - POSTGRES_DB=contratosdb
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_HOST=contratosdb
+  #     - POSTGRES_PORT=5432
+  #   ports:
+  #     - "5001:5000"
+  #   networks:
+  #     - pulsar
+  #     - contratosnet
+  #     - servicesnet      
+  #   depends_on:
+  #     contratosdb:
+  #       condition: service_healthy
+  #     pulsar:
+  #       condition: service_started
 
-# Servicio de Contratos - Propiedades Alpes
+# Servicio de propiedades - Propiedades Alpes
   propiedades:
     container_name: propiedades
     hostname: propiedades

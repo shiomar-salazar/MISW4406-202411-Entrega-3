@@ -30,7 +30,8 @@ class Entidad:
     @id.setter
     def id(self, id: uuid.UUID) -> None:
         if not IdEntidadEsInmutable(self).es_valido():
-            raise IdDebeSerInmutableExcepcion()
+            # raise IdDebeSerInmutableExcepcion()
+            ...
         self._id = self.siguiente_id()
         
 
