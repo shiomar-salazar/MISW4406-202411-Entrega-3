@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "147c6975-5b9a-473b-bee5-a1be91223ed6",
+		"_postman_id": "3084d68b-b494-47a4-bd7c-664f7e4588c3",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24449657",
-		"_collection_link": "https://planetary-water-212881.postman.co/workspace/MISW4304-DevOps~d3c8a8af-f51c-4b53-91e5-7c70c6ef1744/collection/24449657-147c6975-5b9a-473b-bee5-a1be91223ed6?action=share&source=collection_link&creator=24449657"
+		"_exporter_id": "5238096",
+		"_collection_link": "https://planetary-water-212881.postman.co/workspace/NeorisWorksapce~9bbcffd1-3c84-4e9a-8798-11122e25b222/collection/5238096-3084d68b-b494-47a4-bd7c-664f7e4588c3?action=share&source=collection_link&creator=5238096"
 	},
 	"item": [
 		{
@@ -61,7 +61,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"5be8f5a7-2fa1-4ce3-a0f9-e7b9fc5ce9b2\"\r\n}",
+							"raw": "{\r\n    \"id\":\"57fd3aec-2102-4cc3-bef1-ee5a8c2d78b5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,6 +86,25 @@
 		{
 			"name": "Contratos",
 			"item": [
+				{
+					"name": "Obtener Contrato por IdCompania y IdPropiedad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_CONTRATOS}}/contrato/4444209e-4977-481c-b4f1-710695320898/c8b92934-ce19-49c1-b384-609ce7a506b2",
+							"host": [
+								"{{HOST_CONTRATOS}}"
+							],
+							"path": [
+								"contrato",
+								"4444209e-4977-481c-b4f1-710695320898",
+								"c8b92934-ce19-49c1-b384-609ce7a506b2"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Obtener todos los Contratos",
 					"request": {
@@ -135,6 +154,25 @@
 		{
 			"name": "Propiedades",
 			"item": [
+				{
+					"name": "Eliminar Propiedad por Direccion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_PROPIEDADES}}/propiedad/eliminar/67acd8ad-efe8-482d-a971-0186add7b4f4",
+							"host": [
+								"{{HOST_PROPIEDADES}}"
+							],
+							"path": [
+								"propiedad",
+								"eliminar",
+								"67acd8ad-efe8-482d-a971-0186add7b4f4"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Obtener todas las Propiedades",
 					"request": {
