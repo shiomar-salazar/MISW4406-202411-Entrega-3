@@ -18,7 +18,7 @@ class HandlerCompaniaDominio(Handler):
     def handle_compania_eliminada(evento):
         try:
             despachador = Despachador()
-            despachador.publicar_evento(evento, 'eventos-compania_eliminada')
+            despachador.publicar_evento(evento, 'eventos-compania-eliminada')
         except Exception as e:
             print(f"ERROR AL PUBLICAR {e}")
         

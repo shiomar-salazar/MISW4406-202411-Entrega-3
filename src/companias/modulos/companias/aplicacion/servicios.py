@@ -34,3 +34,9 @@ class ServicioCompania(Servicio):
     def obtener_compania_por_id(self, id) -> CompaniaDTO:
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
         return self._fabrica_companias.crear_objeto(repositorio.obtener_por_id(id), MapeadorCompania())
+    
+    def eliminar_compania_por_id(self, id):
+        repositorio = self._fabrica_repositorio.crear_objeto(RepositorioCompanias.__class__)
+        UnidadTrabajoPuerto.registrar_batch(repositorio.eliminar_por_id, id)
+        UnidadTrabajoPuerto.commit()
+        

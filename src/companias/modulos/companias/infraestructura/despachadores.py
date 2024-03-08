@@ -1,7 +1,7 @@
 import pulsar
 from pulsar.schema import *
-from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada, CompaniaCreadaPayload
-from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania, ComandoCrearCompaniaPayload
+from modulos.companias.infraestructura.schema.v1.eventos import EventoCompaniaCreada, CompaniaCreadaPayload, CompaniaEliminadaPayload, EventoCompaniaEliminada 
+from modulos.companias.infraestructura.schema.v1.comandos import ComandoCrearCompania, ComandoCrearCompaniaPayload, ComandoRollbackCompaniaPayload, ComandoRollbackCompania
 from seedwork.infraestructura import utils
 import datetime
 
@@ -43,3 +43,17 @@ class Despachador:
         )
         comando_integracion = ComandoCrearCompania(data=payload)
         self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearCompania))
+
+    def publicar_evento_eliminar(self, evento, topico):
+        payload = CompaniaEliminadaPayload(
+            id = str(evento.id),
+        )
+        evento_integracion = EventoCompaniaEliminada(data=payload)
+        self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoCompaniaEliminada))
+
+    def publicar_comando_eliminar(self, comando, topico):
+        payload = ComandoRollbackCompaniaPayload(
+            id_compania=str(comando.id_compania)
+        )
+        comando_integracion = ComandoRollbackCompania(data=payload)
+        self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoRollbackCompania))

@@ -20,3 +20,9 @@ class CompaniaCreadaPayload(Record):
 
 class EventoCompaniaCreada(EventoIntegracion):
     data = CompaniaCreadaPayload()
+
+class CompaniaEliminadaPayload(Record):
+    id = String()
+
+class EventoCompaniaEliminada(EventoIntegracion):
+    data = CompaniaEliminadaPayload()
