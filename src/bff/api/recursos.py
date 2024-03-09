@@ -58,8 +58,9 @@ bp = api.crear_blueprint('propiedad', '/propiedad')
 @bp.route('/direccion', methods=['GET'])
 def dar_propiedad_por_direccion_usando_query():
     print('Inicial consulta propiedad')
-    direccion = request.args.get('direccion')     
-    print('direccion' + direccion.replace(" ","&nbsp;"))
+    direccion = request.args.get('direccion') 
+    direccion.replace(" ","&nbsp;")    
+    print('direccion' + direccion)
     try:
         return ConsultarDatos(direccion).execute()      
     except exceptions as e:
