@@ -12,5 +12,5 @@ class CompaniaQueryBaseHandler(QueryHandler):
         return self._fabrica_vista
     
     @property
-    def fabrica_vuelos(self):
+    def fabrica_companias(self):
         return self._fabrica_companias    

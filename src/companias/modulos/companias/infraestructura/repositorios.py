@@ -21,8 +21,8 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
     def obtener_tipo(self) -> type:
         return Compania.__class__
     
-    def obtener_por_id(self, id: UUID) -> Compania:
-        compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id)).one()
+    def obtener_por_id(self, id_compania: UUID) -> Compania:
+        compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id_compania)).first()
         return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())
     
     def eliminar(self, compania: Compania):
