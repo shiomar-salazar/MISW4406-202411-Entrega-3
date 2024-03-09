@@ -23,7 +23,7 @@ class RepositorioPropiedadesPostgresSQL(RepositorioPropiedades):
     def obtener_tipo(self) -> type:
         return Propiedad.__class__
     
-    def obtener_por_id(self, id: UUID) -> Propiedad:
+    def obtener_por_id(self, id: str) -> Propiedad:
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
         return self._fabrica_propiedades.crear_objeto(propiedad_dto, MappeadorPropiedad())
     

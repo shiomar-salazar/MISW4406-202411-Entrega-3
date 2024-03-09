@@ -4,6 +4,7 @@ from modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
 from modulos.propiedades.aplicacion.comandos.crear_propiedad import CrearPropiedad
 from modulos.propiedades.aplicacion.comandos.eliminar_propiedad import EliminarPropiedad
 from modulos.propiedades.aplicacion.queries.obtener_todas_propiedades import ObtenerTodasPropiedades
+from modulos.propiedades.aplicacion.queries.obtener_propiedad import ObtenerPropiedad
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
 import json
@@ -69,4 +70,12 @@ def dar_propiedad_usando_query():
     for propiedad in query_resultado.resultado:
         resultados.append(map_propiedad.dto_a_externo(propiedad))
     return resultados
-    
+
+
+@bp.route('<id_propiedad>', methods=['GET'])
+def dar_propiedad_por_id_usando_query(id_propiedad):
+    id_propiedad = id_propiedad
+    map_propiedad = MapeadorPropiedadDTOJson()
+    query_resultado = ejecutar_query(ObtenerPropiedad())
+    propiedad = map_propiedad.dto_a_externo(query_resultado.resultado)
+    return propiedad
