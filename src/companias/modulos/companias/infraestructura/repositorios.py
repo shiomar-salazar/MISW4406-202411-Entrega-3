@@ -25,5 +25,9 @@ class RepositorioCompaniasPostgresSQL(RepositorioCompanias):
         compania_dto = db.session.query(CompaniaDTO).filter_by(id=str(id_compania)).first()
         return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())
     
+    def obtener_por_direccion(self, direccion: str) -> Compania:
+        compania_dto = db.session.query(CompaniaDTO).filter_by(direccion=direccion).first()
+        return self._fabrica_companias.crear_objeto(compania_dto, MappeadorCompania())    
+    
     def eliminar(self, compania: Compania):
         db.session.query(CompaniaDTO).filter_by(id=str(compania.id_compania)).delete() 

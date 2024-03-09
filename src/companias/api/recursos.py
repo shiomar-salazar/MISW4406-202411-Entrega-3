@@ -4,6 +4,7 @@ from modulos.companias.aplicacion.mapeadores import MapeadorCompaniaDTOJson
 from modulos.companias.aplicacion.comandos.crear_compania import CrearCompania
 from modulos.companias.aplicacion.queries.obtener_todas_companias import ObtenerTodasCompanias
 from modulos.companias.aplicacion.queries.obtener_compania import ObtenerCompania
+from modulos.companias.aplicacion.queries.obtener_compania_por_direccion import ObtenerCompaniaPorDireccion
 from modulos.companias.aplicacion.comandos.eliminar_compania import EliminarCompania
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
@@ -75,3 +76,12 @@ def dar_compania_por_id_usando_query(id_compania):
     except ExcepcionDominio as e:
        return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')        
     
+@bp.route('/direccion/<direccion>', methods=['GET'])
+def dar_compania_por_direccion_usando_query(direccion):
+    try:
+        map_compania = MapeadorCompaniaDTOJson()
+        query_resultado = ejecutar_query(ObtenerCompaniaPorDireccion(direccion))
+        compania = map_compania.dto_a_externo(query_resultado.resultado)
+        return compania
+    except ExcepcionDominio as e:
+       return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')
