@@ -8,6 +8,8 @@ networks:
   contratosnet:
     driver: bridge  
   propiedadesnet:
+    driver: bridge    
+  bffnet:
     driver: bridge              
   servicesnet:
     driver: bridge    
@@ -166,6 +168,35 @@ services:
         condition: service_healthy
       pulsar:
         condition: service_started
+
+  bff:
+    container_name: bff
+    hostname: bff
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: bff.Dockerfile
+    environment:
+      - HOST_PROPIEDADES=http://propiedades:5000
+      - HOST_COMPANIAS=companias
+      - HOST_CONTRATOS=contratos
+      - API_CONSULTA_PROPIEDADES=/propiedad/direccion
+      - API_CONSULTA_COMPANIAS=/propiedad/direccion
+      - API_CONSULTA_CONTRATOS=/propiedad/direccion
+    ports:
+      - "5003:5000"
+    networks:
+      - pulsar
+      - propiedadesnet
+      - companiasnet
+      - contratosnet
+      - bffnet
+      - servicesnet      
+    # depends_on:
+    #   propiedadesdb:
+    #     condition: service_healthy
+    #   pulsar:
+    #     condition: service_started
 
   # # Start zookeeper
   # zookeeper:
