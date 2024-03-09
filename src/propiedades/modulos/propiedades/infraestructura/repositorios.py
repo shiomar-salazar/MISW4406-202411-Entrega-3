@@ -24,9 +24,11 @@ class RepositorioPropiedadesPostgresSQL(RepositorioPropiedades):
         return Propiedad.__class__
     
     def obtener_por_id(self, id_propiedad: str) -> Propiedad:
-        print('Inicia Repositorio Obtener propiedad')
-        print('id' + str(id_propiedad))
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id_propiedad)).first()  
+        return self._fabrica_propiedades.crear_objeto(propiedad_dto, MappeadorPropiedad())
+    
+    def obtener_por_direccion(self, direccion: str) -> Propiedad:
+        propiedad_dto = db.session.query(PropiedadDTO).filter_by(direccion=str(direccion)).first()  
         return self._fabrica_propiedades.crear_objeto(propiedad_dto, MappeadorPropiedad())
     
     def eliminar(self, propiedad: Propiedad):

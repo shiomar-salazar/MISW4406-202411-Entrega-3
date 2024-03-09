@@ -56,7 +56,7 @@ class MapeadorPropiedadDTOJson(AppMap):
         dto.estado = dto.estado
         dto.id_compania = dto.id_compania
         dto.id_contrato = dto.id_contrato
-        return dto
+        return dto.__dict__
 
 
 class MapeadorPropiedad(RepMap):

@@ -4,6 +4,7 @@ from modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
 from modulos.propiedades.aplicacion.comandos.crear_propiedad import CrearPropiedad
 from modulos.propiedades.aplicacion.comandos.eliminar_propiedad import EliminarPropiedad
 from modulos.propiedades.aplicacion.queries.obtener_todas_propiedades import ObtenerTodasPropiedades
+from modulos.propiedades.aplicacion.queries.obtener_propiedad_direccion import ObtenerPropiedadDireccion
 from modulos.propiedades.aplicacion.queries.obtener_propiedad import ObtenerPropiedad
 from seedwork.aplicacion.queries import ejecutar_query
 from seedwork.aplicacion.comandos import ejecutar_commando
@@ -80,6 +81,19 @@ def dar_propiedad_por_id_usando_query(id_propiedad):
     try:
         map_propiedad = MapeadorPropiedadDTOJson()
         query_resultado = ejecutar_query(ObtenerPropiedad(id_propiedad))
+        return map_propiedad.dto_sigle_a_externo(query_resultado.resultado)      
+    except ExcepcionDominio as e:
+       return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')
+
+
+@bp.route('/direccion', methods=['GET'])
+def dar_propiedad_por_direccion_usando_query():
+    print('Inicial consulta propiedad')
+    direccion = request.args.get('direccion')     
+    print('direccion' + direccion)
+    try:
+        map_propiedad = MapeadorPropiedadDTOJson()
+        query_resultado = ejecutar_query(ObtenerPropiedadDireccion(direccion))
         return map_propiedad.dto_sigle_a_externo(query_resultado.resultado)      
     except ExcepcionDominio as e:
        return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')
