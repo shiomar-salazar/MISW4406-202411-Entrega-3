@@ -13,6 +13,10 @@ from propiedades.modulos.propiedades.aplicacion.comandos.eliminar_propiedad impo
 from contratos.modulos.contratos.aplicacion.comandos.crear_contrato import CrearContrato
 from contratos.modulos.contratos.dominio.eventos import ContratoCreado
 
+from config.db import db
+from aplicacion.dto import SagaLogDTO
+import json
+
 
 class CoordiandorContratos(CoordinadorOrquestacion):
     def inicializar_pasos(self):
@@ -34,7 +38,13 @@ class CoordiandorContratos(CoordinadorOrquestacion):
         self.persistir_en_saga_log(self.pasos[-1])
 
     def persistir_en_saga_log(self, mensaje):
-        ...
+        mensaje_decodificado = json.loads(mensaje)
+        saga_dto = SagaLogDTO(
+            id_saga= mensaje_decodificado['id'],
+            source= mensaje_decodificado['source'],
+            status= mensaje_decodificado['status']
+        )
+        db.session.add(saga_dto)
 
     def construir_comando(self, evento: EventoDominio, tipo_comando: type):
         ...
