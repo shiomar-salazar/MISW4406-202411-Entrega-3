@@ -32,6 +32,31 @@ class MapeadorPropiedadDTOJson(AppMap):
     
     def dto_a_externo(self, dto: PropiedadDTO) -> dict:
         return dto.__dict__
+    
+    def dto_sigle_a_externo(self, dto: Propiedad):
+        dto.id_propiedad = dto.id_propiedad
+        dto.nombre_propiedad = dto.nombre_propiedad
+        dto.tipo_propiedad = dto.tipo_propiedad
+        dto.pais = dto.pais
+        dto.departamento = dto.departamento
+        dto.ciudad = dto.ciudad
+        dto.direccion = dto.direccion
+        dto.latitud = dto.latitud
+        dto.longitud = dto.longitud
+        dto.codigo_postal = dto.codigo_postal
+        dto.area_lote = dto.area_lote
+        dto.estrato_socioeconomico = dto.estrato_socioeconomico
+        dto.valor_venta = dto.valor_venta
+        dto.valor_arriendo_mensual = dto.valor_arriendo_mensual
+        dto.moneda = dto.moneda
+        dto.propietario = dto.propietario
+        dto.arrendatario = dto.arrendatario
+        dto.fecha_ultimo_contrato = dto.fecha_ultimo_contrato
+        dto.fecha_expiracion_contrato_actual = dto.fecha_expiracion_contrato_actual
+        dto.estado = dto.estado
+        dto.id_compania = dto.id_compania
+        dto.id_contrato = dto.id_contrato
+        return dto.__dict__
 
 
 class MapeadorPropiedad(RepMap):
