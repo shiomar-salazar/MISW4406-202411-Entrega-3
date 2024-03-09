@@ -74,8 +74,12 @@ def dar_propiedad_usando_query():
 
 @bp.route('<id_propiedad>', methods=['GET'])
 def dar_propiedad_por_id_usando_query(id_propiedad):
+    print('Inicial consulta propiedad')
     id_propiedad = id_propiedad
-    map_propiedad = MapeadorPropiedadDTOJson()
-    query_resultado = ejecutar_query(ObtenerPropiedad())
-    propiedad = map_propiedad.dto_a_externo(query_resultado.resultado)
-    return propiedad
+    print('propiedad' + id_propiedad)
+    try:
+        map_propiedad = MapeadorPropiedadDTOJson()
+        query_resultado = ejecutar_query(ObtenerPropiedad(id_propiedad))
+        return map_propiedad.dto_sigle_a_externo(query_resultado.resultado)      
+    except ExcepcionDominio as e:
+       return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')

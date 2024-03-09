@@ -6,12 +6,14 @@ encargados de la transformación entre formatos de dominio y DTOs
 """
 
 from seedwork.dominio.repositorios import Mapeador
+from modulos.propiedades.infraestructura.excepciones import PropiedadNoEncontradoExcepcion
 from modulos.propiedades.dominio.entidades import Propiedad
 from .dto import Propiedad as PropiedadDTO
     
 class MappeadorPropiedad(Mapeador):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
     def entidad_a_dto(self, entidad: Propiedad) -> PropiedadDTO:
+        print('Mapeador entidad_a_dto')
         propiedad_dto = PropiedadDTO()
         propiedad_dto.id = entidad.id,
         propiedad_dto.nombre_propiedad = entidad.nombre_propiedad,
@@ -38,30 +40,35 @@ class MappeadorPropiedad(Mapeador):
         return propiedad_dto 
     
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
-        propiedad = Propiedad()
-        propiedad.id = dto.id,
-        propiedad.nombre_propiedad = dto.nombre_propiedad,
-        propiedad.tipo_propiedad = dto.tipo_propiedad,
-        propiedad.pais = dto.pais,
-        propiedad.departamento = dto.departamento,
-        propiedad.ciudad = dto.ciudad,
-        propiedad.direccion = dto.direccion,
-        propiedad.latitud = dto.latitud,
-        propiedad.longitud = dto.longitud,
-        propiedad.codigo_postal = dto.codigo_postal,
-        propiedad.area_lote = dto.area_lote,
-        propiedad.estrato_socioeconomico = dto.estrato_socioeconomico,
-        propiedad.valor_venta = dto.valor_venta,
-        propiedad.valor_arriendo_mensual = dto.valor_arriendo_mensual,
-        propiedad.moneda = dto.moneda,
-        propiedad.propietario = dto.propietario,
-        propiedad.arrendatario = dto.arrendatario,
-        propiedad.fecha_ultimo_contrato = dto.fecha_ultimo_contrato,
-        propiedad.fecha_expiracion_contrato_actual = dto.fecha_expiracion_contrato_actual,
-        propiedad.estado = dto.estado,
-        propiedad.id_compania = dto.id_compania,
-        propiedad.id_contrato = dto.id_contrato
-        return propiedad
+        print('Mapeador dto_a_entidad')
+        print(str(dto))
+        try:
+            propiedad = Propiedad()
+            propiedad.id_propiedad = dto.id,
+            propiedad.nombre_propiedad = dto.nombre_propiedad,
+            propiedad.tipo_propiedad = dto.tipo_propiedad,
+            propiedad.pais = dto.pais,
+            propiedad.departamento = dto.departamento,
+            propiedad.ciudad = dto.ciudad,
+            propiedad.direccion = dto.direccion,
+            propiedad.latitud = dto.latitud,
+            propiedad.longitud = dto.longitud,
+            propiedad.codigo_postal = dto.codigo_postal,
+            propiedad.area_lote = dto.area_lote,
+            propiedad.estrato_socioeconomico = dto.estrato_socioeconomico,
+            propiedad.valor_venta = dto.valor_venta,
+            propiedad.valor_arriendo_mensual = dto.valor_arriendo_mensual,
+            propiedad.moneda = dto.moneda,
+            propiedad.propietario = dto.propietario,
+            propiedad.arrendatario = dto.arrendatario,
+            propiedad.fecha_ultimo_contrato = dto.fecha_ultimo_contrato,
+            propiedad.fecha_expiracion_contrato_actual = dto.fecha_expiracion_contrato_actual,
+            propiedad.estado = dto.estado,
+            propiedad.id_compania = dto.id_compania,
+            propiedad.id_contrato = dto.id_contrato
+            return propiedad
+        except:
+            raise PropiedadNoEncontradoExcepcion
     
     def obtener_tipo(self) -> type:
         return Propiedad.__class__
