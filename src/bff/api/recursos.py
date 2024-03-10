@@ -65,3 +65,5 @@ def dar_propiedad_por_direccion_usando_query():
         return ConsultarDatos(direccion).execute()      
     except exceptions as e:
        return Response(json.dumps(dict(error=str(e))), status=404, mimetype='application/json')
+    
+

@@ -2,6 +2,8 @@ import os
 
 from flask import Flask, jsonify
 from flask_swagger import swagger
+from flask_graphql import GraphQLView
+from modulos.schema.v1 import schema
 
 # Identifica el directorio base
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -71,6 +73,7 @@ def create_app(configuracion={}):
 
     # Registro de Blueprints
     app.register_blueprint(recursos.bp)
+    app.add_url_rule('/propiedad', view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
 
     @app.route("/spec")
     def spec():

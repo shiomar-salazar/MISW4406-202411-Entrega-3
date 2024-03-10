@@ -21,7 +21,12 @@ PyYAML==6.0
 SQLAlchemy==1.4.44
 tomli==2.0.1
 Werkzeug==2.2.2
+flask-graphql==2.0.1
+graphene==2.1.9
+graphene-sqlalchemy==2.3.0
 psycopg2
 python-dotenv
 aiohttp
-asyncio
+asyncio 
+requests
+graphql-core
