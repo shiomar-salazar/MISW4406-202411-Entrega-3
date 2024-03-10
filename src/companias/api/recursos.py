@@ -32,8 +32,8 @@ def crear():
             documento_identidad_tipo = compania_dto.documento_identidad_tipo,
             tipo_industria = compania_dto.tipo_industria,
             direccion = compania_dto.direccion,
-            latitud = compania_dto.tipo_industria,
-            longitud = compania_dto.tipo_industria,
+            latitud = compania_dto.latitud,
+            longitud = compania_dto.latitud,
             ciudad = compania_dto.ciudad,
             pais = compania_dto.pais
         )

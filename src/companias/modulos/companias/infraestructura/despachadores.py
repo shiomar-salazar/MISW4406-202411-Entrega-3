@@ -31,8 +31,8 @@ class Despachador:
             documento_identidad_tipo = evento.documento_identidad_tipo,
             tipo_industria = evento.tipo_industria,
             direccion = evento.direccion,
-            latitud = evento.tipo_industria,
-            longitud = evento.tipo_industria,
+            latitud = evento.latitud,
+            longitud = evento.longitud,
             ciudad = evento.ciudad,
             pais = evento.pais
         )

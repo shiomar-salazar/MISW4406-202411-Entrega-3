@@ -26,8 +26,8 @@ class MappeadorCompania(Mapeador):
         compania_dto.documento_identidad_tipo = entidad.documento_identidad_tipo
         compania_dto.tipo_industria = entidad.tipo_industria
         compania_dto.direccion = entidad.direccion
-        compania_dto.latitud = entidad.tipo_industria
-        compania_dto.longitud = entidad.tipo_industria
+        compania_dto.latitud = entidad.latitud
+        compania_dto.longitud = entidad.longitud
         compania_dto.ciudad = entidad.ciudad
         compania_dto.pais = entidad.pais
         return compania_dto 
