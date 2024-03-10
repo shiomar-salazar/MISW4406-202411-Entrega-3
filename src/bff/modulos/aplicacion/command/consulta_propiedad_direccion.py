@@ -54,19 +54,19 @@ class ConsultarDatos(BaseCommannd):
         try:
             # Logica de negocio
             resultado = self.ejecutar_batch_servicios()
-            resultado_contrato = self.ejecutar_batch_contratos(resultado[1].get("_id"),resultado[0].get("_id"))
+            #resultado_contrato = self.ejecutar_batch_contratos(resultado[1].get("id_compania"),resultado[0].get("_id"))
             print('propiedad')            
             print(resultado[0])            
             print('compania')            
             print(resultado[1])   
             print('contratos')            
-            print(resultado_contrato[0])   
+            #print(resultado_contrato[0])   
 
 
             propiedadAlpes=PropiedadAlpes(
                 propiedad=resultado[0],
                 compania=resultado[1],
-                contrato=resultado_contrato[0]
+                #contrato=resultado_contrato[0]
             )
             print(propiedadAlpes)
             return propiedadAlpes.__dict__

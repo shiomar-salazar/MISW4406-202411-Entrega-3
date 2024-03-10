@@ -32,7 +32,7 @@ class MapeadorCompania(RepMap):
     
     def entidad_a_dto(self, entidad: Compania) -> CompaniaDTO:
         compania_dto = CompaniaDTO()
-        compania_dto.id_compania = str(entidad.id_compania)
+        compania_dto.id_compania = entidad.id_compania
         compania_dto.nombre_compania  = entidad.nombre_compania
         compania_dto.representante_legal  = entidad.representante_legal
         compania_dto.email_contacto  = entidad.email_contacto

@@ -20,7 +20,7 @@ def obtener_endpoint_companias(direccion):
     return url
 
 def obtener_endpoint_contratos(id_compania,id_propiedad):
-    url= os.getenv('HOST_CONTRATOS')+os.getenv('API_CONSULTA_CONTRATOS')+'/'+id_compania+'/'+id_propiedad
+    url= os.getenv('HOST_CONTRATOS')+os.getenv('API_CONSULTA_CONTRATOS')+id_compania+'/'+id_propiedad
     print(url)
     return url
 
