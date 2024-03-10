@@ -73,7 +73,6 @@ def create_app(configuracion={}):
 
     # Registro de Blueprints
     app.register_blueprint(recursos.bp)
-    app.add_url_rule('/propiedad', view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
 
     @app.route("/spec")
     def spec():

@@ -1,4 +1,5 @@
 import graphene
+from graphene import ObjectType, String
 import traceback
 from modulos.aplicacion.errors.errors import ApiError
 
@@ -76,3 +77,5 @@ class Query(graphene.ObjectType):
             return None
 
 schema = graphene.Schema(query=Query)
+result = schema.execute(Propiedad)
+print(result) # "Hello World"

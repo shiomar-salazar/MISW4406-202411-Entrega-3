@@ -24,9 +24,11 @@ Werkzeug==2.2.2
 flask-graphql==2.0.1
 graphene==2.1.9
 graphene-sqlalchemy==2.3.0
+graphql-core==2.2
+graphql-relay==2
+graphql-server-core==1.1.1
 psycopg2
 python-dotenv
 aiohttp
 asyncio 
 requests
-graphql-core

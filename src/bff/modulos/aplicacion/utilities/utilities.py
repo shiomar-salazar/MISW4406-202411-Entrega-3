@@ -14,6 +14,17 @@ def obtener_endpoint_propiedades():
     print(url)
     return url
 
+def obtener_endpoint_companias(direccion):
+    url= os.getenv('HOST_COMPANIAS')+os.getenv('API_CONSULTA_COMPANIAS')+'/'+direccion
+    print(url)
+    return url
+
+def obtener_endpoint_contratos(id_compania,id_propiedad):
+    url= os.getenv('HOST_CONTRATOS')+os.getenv('API_CONSULTA_CONTRATOS')+'/'+id_compania+'/'+id_propiedad
+    print(url)
+    return url
+
+
 
 # Función que agregar un nuevo  endpoint de la API a llamar
 def agregar_servicio_a_batch(servicio):

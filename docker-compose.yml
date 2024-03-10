@@ -178,11 +178,11 @@ services:
       dockerfile: bff.Dockerfile
     environment:
       - HOST_PROPIEDADES=http://propiedades:5000
-      - HOST_COMPANIAS=companias
-      - HOST_CONTRATOS=contratos
+      - HOST_COMPANIAS=http://companias:5000
+      - HOST_CONTRATOS=http://contratos:5000
       - API_CONSULTA_PROPIEDADES=/propiedad/direccion
-      - API_CONSULTA_COMPANIAS=/propiedad/direccion
-      - API_CONSULTA_CONTRATOS=/propiedad/direccion
+      - API_CONSULTA_COMPANIAS=/compania/direccion
+      - API_CONSULTA_CONTRATOS=/contrato/
     ports:
       - "5003:5000"
     networks:
