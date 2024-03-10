@@ -87,3 +87,49 @@
 
 -> Borrar ingress:
 	kubectl delete ingress k8s-ingress-propiedadesalpes.yaml
+
+
+----------------------------------------------------------------------------------------
+ISNTALACIÓN COMPUTE ENGINE
+----------------------------------------------------------------------------------------
+Instancia VM
+
+Nombre: instancia-vm-propiedadesalpes
+Regiión: us-central1 (Iowa)
+Zona: us-central1-a
+
+Comandos:
+
+Actualizar el sistema:
+	-> sudo apt-get update
+
+Instalar docker-compose plugin:
+	-> sudo apt-get install docker-compose
+
+Validar version de docker-compose:
+	-> docker-compose version
+	
+Validar version de git:
+	-> git --version	
+
+Clonar proyecto git:
+	-> git clone https://github.com/shiomar-salazar/MISW4406-202411-Entrega-3-4-5.git
+
+Acceder a la carpeta del proyecto:
+	-> cd MISW4406-202411-Entrega-3-4-5
+
+Lanzar docker-compose del proyecto:
+	-> sudo docker-compose up	
+
+
+Regla de firewall:
+
+Nombre: external-full-access
+Descripción: Regla de firewall para permitir el acceso  externo completo a todos los usuarios
+
+
+
+Nombre: rf-servicios-propiedades-alpes	
+Descripción: Regla de firewall para exponer los servicios de Propiedades los Alpes
+
+Rangos de IPv4 de origen: 0.0.0.0/0

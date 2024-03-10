@@ -35,7 +35,7 @@ class MappeadorCompania(Mapeador):
     def dto_a_entidad(self, dto: CompaniaDTO) -> Compania:
         try:
             compania = Compania()
-            compania.id = dto.id,
+            compania.id_compania = str(dto.id)
             compania.nombre_compania = dto.nombre_compania
             compania.representante_legal = dto.representante_legal
             compania.email_contacto = dto.email_contacto
