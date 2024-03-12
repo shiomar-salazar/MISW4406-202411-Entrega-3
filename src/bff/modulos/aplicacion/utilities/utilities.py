@@ -24,6 +24,10 @@ def obtener_endpoint_contratos(id_compania,id_propiedad):
     print(url)
     return url
 
+def obtener_endpoint_contrato_saga():
+    url= os.getenv('HOST_SAGA')+os.getenv('API_CREAR_SAGA')
+    print(url)
+    return url
 
 
 # Función que agregar un nuevo  endpoint de la API a llamar

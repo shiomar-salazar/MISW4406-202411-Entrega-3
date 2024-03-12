@@ -222,9 +222,11 @@ services:
       - HOST_PROPIEDADES=http://propiedades:5000
       - HOST_COMPANIAS=http://companias:5000
       - HOST_CONTRATOS=http://contratos:5000
+      - HOST_SAGA=http://saga:5000
       - API_CONSULTA_PROPIEDADES=/propiedad/direccion
       - API_CONSULTA_COMPANIAS=/compania/direccion
       - API_CONSULTA_CONTRATOS=/contrato/
+      - API_CREAR_SAGA=/saga-contratos/crear-contrato
     ports:
       - "5004:5000"
     networks:

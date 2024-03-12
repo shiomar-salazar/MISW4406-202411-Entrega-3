@@ -7,7 +7,7 @@ from modulos.aplicacion.errors.errors import ApiError
 from modulos.schema.modelo import PropiedadAlpes, DatosAdicionales
 from modulos.aplicacion.utilities.utilities import  obtener_endpoint_propiedades, obtener_endpoint_companias,obtener_endpoint_contratos, agregar_servicio_a_batch, limpiar_batch_de_servicios, ejecucion_batch_en_paralelo
 
-# Clase que contiene la logica de creción de Alerta
+# Clase que contiene la logica de consulta de propiedades
 class ConsultarDatos(BaseCommannd):
     direccion: str
     def __init__(self, direccion):
