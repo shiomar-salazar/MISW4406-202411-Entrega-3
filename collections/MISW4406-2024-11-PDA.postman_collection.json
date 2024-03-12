@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a441d1e7-03ce-4b66-a862-59cdd2720ef9",
+		"_postman_id": "55b90e2f-9fde-4223-8e7c-0c3c11afd5a2",
 		"name": "MISW4406-2024-11-PDA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "3605691"
+		"_exporter_id": "24763581"
 	},
 	"item": [
 		{
@@ -27,7 +27,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Compania",
+					"name": "Crear Compañia",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -52,12 +52,50 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Eliminar Compañia por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_COMPANIAS}}/compania/eliminar/74507aa9-1a58-4db5-802d-f33fd630c5e2",
+							"host": [
+								"{{HOST_COMPANIAS}}"
+							],
+							"path": [
+								"compania",
+								"eliminar",
+								"74507aa9-1a58-4db5-802d-f33fd630c5e2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Contratos",
 			"item": [
+				{
+					"name": "Obtener Contrato por IdCompania y IdPropiedad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_CONTRATOS}}/contrato/4444209e-4977-481c-b4f1-710695320898/c8b92934-ce19-49c1-b384-609ce7a506b2",
+							"host": [
+								"{{HOST_CONTRATOS}}"
+							],
+							"path": [
+								"contrato",
+								"4444209e-4977-481c-b4f1-710695320898",
+								"c8b92934-ce19-49c1-b384-609ce7a506b2"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Obtener todos los Contratos",
 					"request": {
@@ -82,7 +120,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"raw": "{\r\n    \"id_compania\": \"4444209e-4977-481c-b4f1-710695320898\",\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -108,6 +146,25 @@
 			"name": "Propiedades",
 			"item": [
 				{
+					"name": "Eliminar Propiedad por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_PROPIEDADES}}/propiedad/eliminar/67acd8ad-efe8-482d-a971-0186add7b4f4",
+							"host": [
+								"{{HOST_PROPIEDADES}}"
+							],
+							"path": [
+								"propiedad",
+								"eliminar",
+								"67acd8ad-efe8-482d-a971-0186add7b4f4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Obtener todas las Propiedades",
 					"request": {
 						"method": "GET",
@@ -125,55 +182,13 @@
 					"response": []
 				},
 				{
-					"name": "Obtener  Propiedades id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST_PROPIEDADES}}/propiedad/9c94e011-b076-4cbf-bb7c-798344f071ac",
-							"host": [
-								"{{HOST_PROPIEDADES}}"
-							],
-							"path": [
-								"propiedad",
-								"9c94e011-b076-4cbf-bb7c-798344f071ac"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener  Propiedades direccion",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST_PROPIEDADES}}/propiedad/direccion?direccion=Calle 132 41-50",
-							"host": [
-								"{{HOST_PROPIEDADES}}"
-							],
-							"path": [
-								"propiedad",
-								"direccion"
-							],
-							"query": [
-								{
-									"key": "direccion",
-									"value": "Calle 132 41-50"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Crear Propiedad",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_propiedad\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega\",\r\n    \"pais\": \"Colombia\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"ciudad\": \"Bogotá D.C\",\r\n    \"direccion\": \"Calle 132 # 39-50\",\r\n    \"latitud\": 123.456,\r\n    \"longitud\": -78.910,\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"fecha_ultimo_contrato\": \"2024-02-20\",\r\n    \"fecha_expiracion_contrato_actual\": \"2025-02-20\",\r\n    \"estado\": \"Activo\",\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_contrato\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\"   \r\n}",
+							"raw": "{\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega\",\r\n    \"pais\": \"Colombia\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"ciudad\": \"Bogotá D.C\",\r\n    \"direccion\": \"Calle 132 # 39-50\",\r\n    \"latitud\": 123.456,\r\n    \"longitud\": -78.910,\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"fecha_ultimo_contrato\": \"2024-02-20\",\r\n    \"fecha_expiracion_contrato_actual\": \"2025-02-20\",\r\n    \"estado\": \"Activo\",\r\n    \"id_compania\": \"da1c209e-4977-481c-b4f1-710695320898\",\r\n    \"id_contrato\": \"c8b92934-ce19-49c1-b384-609ce7a506b2\"   \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,6 +203,153 @@
 							"path": [
 								"propiedad",
 								"crear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BFF",
+			"item": [
+				{
+					"name": "bff crear contrato - nube",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ciudad\": \"Bogota\",\r\n    \"direccion\": \"calle 350 - test\",\r\n    \"documento_identidad_numero_identificacion\": \"10189832943\",\r\n    \"documento_identidad_tipo\": \"NIT\",\r\n    \"email_contacto\": \"pepito@gmail.com\",\r\n    \"estado_compania\": \"Registrado\",\r\n    \"latitud\": 4.60971,\r\n    \"longitud\": -74.08175,\r\n    \"nombre_compania\": \"Starbucks 122\",\r\n    \"pais\": \"Colombia\",\r\n    \"representante_legal\": \"Pepito Peleaz\",\r\n    \"telefono_contacto\": \"695587569\",\r\n    \"tipo_industria\": \"Laboratorio\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega - test\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"estado\": \"Activo\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://34.71.141.223:5004/bff-propiedad",
+							"protocol": "http",
+							"host": [
+								"34",
+								"71",
+								"141",
+								"223"
+							],
+							"port": "5004",
+							"path": [
+								"bff-propiedad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bff consultar contrato - nube",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://34.71.141.223:5004/bff-propiedad/direccion?direccion=calle 350 - test",
+							"protocol": "http",
+							"host": [
+								"34",
+								"71",
+								"141",
+								"223"
+							],
+							"port": "5004",
+							"path": [
+								"bff-propiedad",
+								"direccion"
+							],
+							"query": [
+								{
+									"key": "direccion",
+									"value": "calle 350 - test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bff consultar contratos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST_BFF}}/bff-propiedad/direccion?direccion=calle 280 - test",
+							"host": [
+								"{{HOST_BFF}}"
+							],
+							"path": [
+								"bff-propiedad",
+								"direccion"
+							],
+							"query": [
+								{
+									"key": "direccion",
+									"value": "calle 280 - test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bff crear contrato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ciudad\": \"Bogota\",\r\n    \"direccion\": \"calle 200 - test\",\r\n    \"documento_identidad_numero_identificacion\": \"10189832943\",\r\n    \"documento_identidad_tipo\": \"NIT\",\r\n    \"email_contacto\": \"pepito@gmail.com\",\r\n    \"estado_compania\": \"Registrado\",\r\n    \"latitud\": 4.60971,\r\n    \"longitud\": -74.08175,\r\n    \"nombre_compania\": \"Starbucks 122\",\r\n    \"pais\": \"Colombia\",\r\n    \"representante_legal\": \"Pepito Peleaz\",\r\n    \"telefono_contacto\": \"695587569\",\r\n    \"tipo_industria\": \"Laboratorio\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega - test\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"estado\": \"Activo\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_BFF}}/bff-propiedad",
+							"host": [
+								"{{HOST_BFF}}"
+							],
+							"path": [
+								"bff-propiedad"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SAGAS",
+			"item": [
+				{
+					"name": "sagas crear contrato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ciudad\": \"Bogota\",\r\n    \"direccion\": \"calle 300 - test\",\r\n    \"documento_identidad_numero_identificacion\": \"10189832943\",\r\n    \"documento_identidad_tipo\": \"NIT\",\r\n    \"email_contacto\": \"pepito@gmail.com\",\r\n    \"estado_compania\": \"Registrado\",\r\n    \"latitud\": 4.60971,\r\n    \"longitud\": -74.08175,\r\n    \"nombre_compania\": \"Starbucks 122\",\r\n    \"pais\": \"Colombia\",\r\n    \"representante_legal\": \"Pepito Peleaz\",\r\n    \"telefono_contacto\": \"695587569\",\r\n    \"tipo_industria\": \"Laboratorio\",\r\n    \"nombre_propiedad\": \"Bodegas las Palmas\",\r\n    \"tipo_propiedad\": \"Bodega - test\",\r\n    \"departamento\": \"Cundinamarca\",\r\n    \"codigo_postal\": \"110110\",\r\n    \"area_lote\": 500,\r\n    \"estrato_socioeconomico\": 3,\r\n    \"valor_venta\": 740000000.00,\r\n    \"valor_arriendo_mensual\": 5500000.00,\r\n    \"moneda\": \"COL\",\r\n    \"propietario\": \"Carlos Enrique Morales\",\r\n    \"arrendatario\": \"Nestor Guillermo Salcedo\",\r\n    \"estado\": \"Activo\",\r\n    \"fecha_inicio\": \"2024-02-29\",\r\n    \"fecha_fin\": \"2028-02-29\",\r\n    \"fecha_ejecucion\": \"2024-02-20\",\r\n    \"monto\": 12500,\r\n    \"tipo\": \"Arrendamiento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_SAGAS}}/saga-contratos/crear-contrato",
+							"host": [
+								"{{HOST_SAGAS}}"
+							],
+							"path": [
+								"saga-contratos",
+								"crear-contrato"
 							]
 						}
 					},
@@ -219,17 +381,27 @@
 	"variable": [
 		{
 			"key": "HOST_COMPANIAS",
-			"value": "https://5000-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"value": "https://5000-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
 			"type": "string"
 		},
 		{
 			"key": "HOST_CONTRATOS",
-			"value": "https://5001-shiomarsala-misw4406202-j32zbu6sb2p.ws-us108.gitpod.io",
+			"value": "https://5001-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
 			"type": "string"
 		},
 		{
 			"key": "HOST_PROPIEDADES",
-			"value": "http://localhost:5002",
+			"value": "https://5002-shiomarsala-misw4406202-66bie0pf72e.ws-us108.gitpod.io",
+			"type": "string"
+		},
+		{
+			"key": "HOST_SAGAS",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "HOST_BFF",
+			"value": "",
 			"type": "string"
 		}
 	]
