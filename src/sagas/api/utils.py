@@ -22,17 +22,21 @@ def crear_compania(dto):
         "tipo_industria": dto.tipo_industria
     }
     headers = {"Content-Type": "application/json"}
-    requests.post(url, data=json.dumps(data), headers=headers)
-    
+    try:
+        requests.post(url, data=json.dumps(data), headers=headers)
+    except Exception:
+        return False    
+
     
 
 def obtener_compania(direccion):
-    url= f"{os.getenv('HOST_COMPANIAS')}/compania/direccion/{direccion}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['id_compania']
-    else:
-        return None     
+    try:
+        url= f"{os.getenv('HOST_COMPANIAS')}/compania/direccion/{direccion}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()['id_compania']
+    except Exception:
+        return False     
 
 
 def crear_propiedad(dto):
@@ -59,7 +63,10 @@ def crear_propiedad(dto):
         "estado": dto.estado
     }
     headers = {"Content-Type": "application/json"}
-    requests.post(url, data=json.dumps(data), headers=headers)
+    try:
+        requests.post(url, data=json.dumps(data), headers=headers)
+    except Exception:
+        return False    
    
 
 def obtener_propiedad(direccion):
@@ -83,16 +90,36 @@ def crear_contrato(dto, id_compania, id_propiedad):
         "tipo": dto.tipo
     }
     headers = {"Content-Type": "application/json"}
-    requests.post(url, data=json.dumps(data), headers=headers)
-    
+    try:
+        requests.post(url, data=json.dumps(data), headers=headers)
+    except Exception:
+        return False    
     
     
 
 def obtener_contrato(id_compania, id_propiedad):
-    url= f"{os.getenv('HOST_CONTRATOS')}/contrato/{id_compania}/{id_propiedad}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
+    try:
+        url= f"{os.getenv('HOST_CONTRATOS')}/contrato/{id_compania}/{id_propiedad}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()
+    except Exception:
+        return False   
+
+
+def eliminar_compania(id_compania):
+    url= f"{os.getenv('HOST_COMPANIAS')}/compania/eliminar/{id_compania}"
+    resp = requests.delete(url)
+    if resp.status_code == 202:
+        return True
+    else:
+        return None     
+    
+
+def eliminar_propiedad(id_propiedad):
+    url= f"{os.getenv('HOST_PROPIEDADES')}/propiedad/eliminar/{id_propiedad}"
+    resp = requests.delete(url)
+    if resp.status_code == 202:
+        return True
     else:
         return None   
-
