@@ -48,11 +48,9 @@ async def consumo_servicio_asincrono(url, metodo, data=None, params=None, header
     async with aiohttp.ClientSession() as session:
         if metodo == "POST":
             async with session.post(url, json=data, headers=headers) as resultado:                
-                validar_resultado_consumo_servicio(resultado)
                 return await resultado.json()
         elif metodo == "GET":
             async with session.get(url,params=params, headers=headers) as resultado:                
-                validar_resultado_consumo_servicio(resultado)
                 return await resultado.json()
         else:
             raise ErrorMetodoNoPermitido 
