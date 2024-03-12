@@ -38,8 +38,7 @@ def create_app(configuracion={}):
     with app.app_context():
         db.create_all()
         
-
-    
+   
     from . import recursos    
     app.register_blueprint(recursos.bp)
 
