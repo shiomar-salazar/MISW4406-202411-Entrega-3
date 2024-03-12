@@ -1,21 +1,22 @@
 version: '3'
 # Redes
-networks:  
+networks:
   pulsar:
     driver: bridge
   companiasnet:
-    driver: bridge  
+    driver: bridge
   contratosnet:
-    driver: bridge  
+    driver: bridge
   propiedadesnet:
-    driver: bridge    
+    driver: bridge
+  saganet:
+    driver: bridge
   bffnet:
-    driver: bridge              
+    driver: bridge
   servicesnet:
-    driver: bridge    
-
+    driver: bridge
 # Servicios
-services:    
+services:
   # Pulsar stand alone
   pulsar:
     image: apachepulsar/pulsar:3.2.0
@@ -27,7 +28,6 @@ services:
     command: ["bin/pulsar", "standalone"]
     networks:
       - pulsar
-
   # Bases de datos de Compañias
   companiasdb:
     image: postgres:latest
@@ -47,7 +47,6 @@ services:
       interval: 2s
       timeout: 5s
       retries: 5
-
   # Bases de datos de Contratos
   contratosdb:
     image: postgres:latest
@@ -66,8 +65,7 @@ services:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 2s
       timeout: 5s
-      retries: 5      
-
+      retries: 5
   # Bases de datos de Propiedades
   propiedadesdb:
     image: postgres:latest
@@ -86,8 +84,26 @@ services:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 2s
       timeout: 5s
-      retries: 5   
-
+      retries: 5
+  # Bases de datos de la saga
+  sagadb:
+    image: postgres:latest
+    container_name: sagadb
+    ports:
+      - "5435:5432"
+    networks:
+      - saganet
+    environment:
+      POSTGRES_DB: sagadb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
   # Servicio de Compañias - Propiedades Alpes
   companias:
     container_name: companias
@@ -108,13 +124,12 @@ services:
     networks:
       - pulsar
       - companiasnet
-      - servicesnet      
+      - servicesnet
     depends_on:
       companiasdb:
         condition: service_healthy
       pulsar:
         condition: service_started
-
   # Servicio de Contratos - Propiedades Alpes
   contratos:
     container_name: contratos
@@ -135,13 +150,12 @@ services:
     networks:
       - pulsar
       - contratosnet
-      - servicesnet      
+      - servicesnet
     depends_on:
       contratosdb:
         condition: service_healthy
       pulsar:
         condition: service_started
-
 # Servicio de propiedades - Propiedades Alpes
   propiedades:
     container_name: propiedades
@@ -162,13 +176,41 @@ services:
     networks:
       - pulsar
       - propiedadesnet
-      - servicesnet      
+      - servicesnet
     depends_on:
       propiedadesdb:
         condition: service_healthy
       pulsar:
         condition: service_started
-
+# Servicio de propiedades - Propiedades Alpes
+  saga:
+    container_name: saga
+    hostname: saga
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: saga.Dockerfile
+    environment:
+      - BROKER_HOST=pulsar
+      - POSTGRES_DB=sagadb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=sagadb
+      - POSTGRES_PORT=5432
+      - HOST_PROPIEDADES=http://propiedades:5000
+      - HOST_COMPANIAS=http://companias:5000
+      - HOST_CONTRATOS=http://contratos:5000      
+    ports:
+      - "5003:5000"
+    networks:
+      - pulsar
+      - saganet
+      - servicesnet
+    depends_on:
+      sagadb:
+        condition: service_healthy
+      pulsar:
+        condition: service_started
   bff:
     container_name: bff
     hostname: bff
@@ -184,20 +226,19 @@ services:
       - API_CONSULTA_COMPANIAS=/compania/direccion
       - API_CONSULTA_CONTRATOS=/contrato/
     ports:
-      - "5003:5000"
+      - "5004:5000"
     networks:
       - pulsar
       - propiedadesnet
       - companiasnet
       - contratosnet
       - bffnet
-      - servicesnet      
+      - servicesnet
     # depends_on:
     #   propiedadesdb:
     #     condition: service_healthy
     #   pulsar:
     #     condition: service_started
-
   # # Start zookeeper
   # zookeeper:
   #   image: apachepulsar/pulsar:latest
@@ -219,7 +260,6 @@ services:
   #     retries: 30
   #   networks:
   #     - pulsar
-
   # # Init cluster metadata
   # pulsar-init:
   #   container_name: pulsar-init
@@ -237,7 +277,6 @@ services:
   #       condition: service_healthy
   #   networks:
   #     - pulsar
-
   # # Start bookie
   # bookie:
   #   image: apachepulsar/pulsar:latest
@@ -259,7 +298,6 @@ services:
   #   command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
   #   networks:
   #     - pulsar
-
   # # Start broker
   # broker:
   #   image: apachepulsar/pulsar:latest

@@ -11,9 +11,6 @@ DB_HOST = os.environ["POSTGRES_HOST"]
 DB_PORT = os.environ["POSTGRES_PORT"]
 DB_NAME =  os.environ["POSTGRES_DB"]
 
-def registrar_handlers():
-    import aplicacion
-
 
 def importar_modelos_alchemy():
     import infraestructura.dto
@@ -37,19 +34,14 @@ def create_app(configuracion={}):
     from config.db import db
 
     importar_modelos_alchemy()
-    registrar_handlers()
-
+    
     with app.app_context():
         db.create_all()
+        
 
-        from sagas.aplicacion.orquestadores.sagas_contrato import CoordiandorContratos
-        CoordiandorContratos()
-
-     # Importa Blueprints
-    # from . import recursos
-
-    # Registro de Blueprints
-    # app.register_blueprint(recursos.bp)
+    
+    from . import recursos    
+    app.register_blueprint(recursos.bp)
 
     @app.route("/spec")
     def spec():
