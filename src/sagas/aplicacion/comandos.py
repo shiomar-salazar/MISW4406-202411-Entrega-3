@@ -26,8 +26,7 @@ class CrearSagas:
             return Response(json.dumps({'msg':'No se pudo realizar la crecion del contrato'}), status=409, mimetype='application/json')
         else:
             return contrato
-        # except Exception as e:
-        #     return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
+        
 
 
 

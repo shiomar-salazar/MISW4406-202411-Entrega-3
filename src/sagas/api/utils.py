@@ -70,11 +70,12 @@ def crear_propiedad(dto):
    
 
 def obtener_propiedad(direccion):
-    url= f"{os.getenv('HOST_PROPIEDADES')}/propiedad/direccion?direccion={direccion}"    
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['id_propiedad']
-    else:
+    try:
+        url= f"{os.getenv('HOST_PROPIEDADES')}/propiedad/direccion?direccion={direccion}"    
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.json()['id_propiedad']
+    except Exception:
         return False  
 
 
