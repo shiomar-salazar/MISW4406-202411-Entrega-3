@@ -1,0 +1,38 @@
+from dataclasses import field
+from seedwork.aplicacion.dto import DTO
+import uuid
+
+
+class ContratoDTO(DTO):
+    ciudad: str = field(default_factory=str)   
+    departamento: str = field(default_factory=str)   
+    direccion: str = field(default_factory=str)
+    email_contacto: str = field(default_factory=str)      
+    documento_identidad_numero_identificacion: str = field(default_factory=str)   
+    documento_identidad_tipo: str = field(default_factory=str)
+    estado_compania: str = field(default_factory=str)
+    estado: str = field(default_factory=str)   
+    latitud: str = field(default_factory=str) 
+    longitud: int = field(default_factory=int)
+    nombre_compania: str = field(default_factory=str)
+    pais: str = field(default_factory=str)
+    representante_legal: str = field(default_factory=str)
+    telefono_contacto: str = field(default_factory=str)
+    tipo_industria: str = field(default_factory=str)
+    nombre_propiedad: str = field(default_factory=str)
+    tipo_propiedad: str = field(default_factory=str)
+    codigo_postal: str = field(default_factory=str)
+    area_lote: str = field(default_factory=str)
+    estrato_socioeconomico: str = field(default_factory=str)
+    valor_venta: str = field(default_factory=str)
+    valor_arriendo_mensual: str = field(default_factory=str)
+    moneda: str = field(default_factory=str)
+    propietario: str = field(default_factory=str)
+    arrendatario: str = field(default_factory=str)
+    fecha_ultimo_contrato: str = field(default_factory=str)
+    fecha_expiracion_contrato_actual: str = field(default_factory=str)
+    fecha_inicio: str = field(default_factory=str)
+    fecha_fin: str = field(default_factory=str)
+    fecha_ejecucion: str = field(default_factory=str)
+    monto: str = field(default_factory=str)
+    tipo: str = field(default_factory=str)

@@ -4,22 +4,22 @@ import os
 import json
   
 
-def crear_compania():
+def crear_compania(dto):
     url= f"{os.getenv('HOST_COMPANIAS')}/compania/crear"
     data = {
-        "ciudad": "Bogota",
-        "direccion": "calle 25",
-        "documento_identidad_numero_identificacion": "10189832943",
-        "documento_identidad_tipo": "NIT",
-        "email_contacto": "pepito@gmail.com",
-        "estado": "Registrado",
-        "latitud": None,
-        "longitud": None,
-        "nombre_compania": "Starbuks 122",
-        "pais": "Colombia",
-        "representante_legal": "Pepit Peleaz",
-        "telefono_contacto": "695587569",
-        "tipo_industria": "Laboratorio"
+        "ciudad": dto.ciudad,
+        "direccion": dto.direccion,
+        "documento_identidad_numero_identificacion": dto.documento_identidad_numero_identificacion,
+        "documento_identidad_tipo": dto.documento_identidad_tipo,
+        "email_contacto": dto.email_contacto,
+        "estado": dto.estado,
+        "latitud": dto.latitud,
+        "longitud": dto.longitud,
+        "nombre_compania": dto.nombre_compania,
+        "pais": dto.pais,
+        "representante_legal": dto.representante_legal,
+        "telefono_contacto": dto.telefono_contacto,
+        "tipo_industria": dto.tipo_industria
     }
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
@@ -35,28 +35,28 @@ def obtener_compania(direccion):
         return None     
 
 
-def crear_propiedad():
-    url= f"{os.getenv('HOST_PROPIEDADES')}/propiedad/crear"  
+def crear_propiedad(dto):
+    url= f"{os.getenv('HOST_PROPIEDADES')}/propiedad/crear"
     data = {
-        "nombre_propiedad": "Bodegas las Palmas",
-        "tipo_propiedad": "Bodega",
-        "pais": "Colombia",
-        "departamento": "Cundinamarca",
-        "ciudad": "Bogotá D.C",
-        "direccion": "calle 25",
-        "latitud": 123.456,
-        "longitud": -78.910,
-        "codigo_postal": "110110",
-        "area_lote": 500,
-        "estrato_socioeconomico": 3,
-        "valor_venta": 740000000.00,
-        "valor_arriendo_mensual": 5500000.00,
-        "moneda": "COL",
-        "propietario": "Carlos Enrique Morales",
-        "arrendatario": "Nestor Guillermo Salcedo",
-        "fecha_ultimo_contrato": "2024-02-20",
-        "fecha_expiracion_contrato_actual": "2025-02-20",
-        "estado": "Activo"
+        "nombre_propiedad": dto.nombre_propiedad,
+        "tipo_propiedad": dto.tipo_propiedad,
+        "pais": dto.pais,
+        "departamento": dto.departamento,
+        "ciudad": dto.ciudad,
+        "direccion": dto.direccion,
+        "latitud": dto.latitud,
+        "longitud": dto.longitud,
+        "codigo_postal": dto.codigo_postal,
+        "area_lote": dto.area_lote,
+        "estrato_socioeconomico": dto.estrato_socioeconomico,
+        "valor_venta": dto.valor_venta,
+        "valor_arriendo_mensual": dto.valor_arriendo_mensual,
+        "moneda": dto.moneda,
+        "propietario": dto.propietario,
+        "arrendatario": dto.arrendatario,
+        "fecha_ultimo_contrato": dto.fecha_ultimo_contrato,
+        "fecha_expiracion_contrato_actual": dto.fecha_expiracion_contrato_actual,
+        "estado": dto.estado
     }
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
@@ -71,16 +71,16 @@ def obtener_propiedad(direccion):
         return False  
 
 
-def crear_contrato(id_compania, id_propiedad):
+def crear_contrato(dto, id_compania, id_propiedad):
     url= f"{os.getenv('HOST_CONTRATOS')}/contrato/crear" 
     data = {
         "id_compania": id_compania,
         "id_propiedad": id_propiedad,
-        "fecha_inicio": "2024-02-29",
-        "fecha_fin": "2028-02-29",
-        "fecha_ejecucion": "2024-02-20",
-        "monto": 12500,
-        "tipo": "Arrendamiento"
+        "fecha_inicio": dto.fecha_inicio,
+        "fecha_fin": dto.fecha_fin,
+        "fecha_ejecucion": dto.fecha_ejecucion,
+        "monto": dto.monto,
+        "tipo": dto.tipo
     }
     headers = {"Content-Type": "application/json"}
     requests.post(url, data=json.dumps(data), headers=headers)
