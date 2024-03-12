@@ -4,7 +4,7 @@ import traceback
 import aiohttp
 from modulos.aplicacion.command.base_command import BaseCommannd
 from modulos.aplicacion.errors.errors import ApiError
-from modulos.schema.modelo import PropiedadAlpes
+from modulos.schema.modelo import PropiedadAlpes, DatosAdicionales
 from modulos.aplicacion.utilities.utilities import  obtener_endpoint_propiedades, obtener_endpoint_companias,obtener_endpoint_contratos, agregar_servicio_a_batch, limpiar_batch_de_servicios, ejecucion_batch_en_paralelo
 
 # Clase que contiene la logica de creción de Alerta
@@ -58,14 +58,22 @@ class ConsultarDatos(BaseCommannd):
             print(resultado[0])            
             print('compania')            
             print(resultado[1])   
+            print("================ID Compañia")
+            print(resultado[1].get("id_compania"))
+            print("================ID propiedad")
+            print(resultado[0].get("id_propiedad"))
             resultado_contrato = self.ejecutar_batch_contratos(resultado[1].get("id_compania"),resultado[0].get("id_propiedad"))
             print('contratos')     
             print(resultado_contrato[0])
-            propiedadAlpes=PropiedadAlpes(
+            datos=DatosAdicionales(               
                 propiedad=resultado[0],
-                compania=resultado[1],
-                contrato=resultado_contrato[0]
+                compania=resultado[1]
             )
+            propiedadAlpes=PropiedadAlpes(              
+                contrato=resultado_contrato[0],
+                datos_dicionales=datos
+            )
+            print("================Response final")
             print(propiedadAlpes)
             return propiedadAlpes.__dict__
         except Exception as e:# pragma: no cover
