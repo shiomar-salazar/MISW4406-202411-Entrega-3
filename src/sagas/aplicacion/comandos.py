@@ -3,6 +3,8 @@ from flask import Response
 from api.utils import crear_compania, crear_contrato, crear_propiedad, obtener_compania, obtener_contrato, obtener_propiedad, eliminar_compania, eliminar_propiedad
 import json
 from aplicacion.mapeadores import MapeadorContratoDTOJson
+
+
 class CrearSagas:
     def __init__(self, post_request):
         self.post_request = post_request
